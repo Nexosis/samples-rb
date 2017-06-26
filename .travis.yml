@@ -7,3 +7,4 @@ env:
 
 before_script: 
   - cd ruby_forecast_app
+  - bundle install
