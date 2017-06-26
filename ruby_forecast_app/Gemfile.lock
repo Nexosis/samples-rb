@@ -185,6 +185,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  activesupport (>= 5.1.1)
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
