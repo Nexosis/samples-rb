@@ -1,4 +1,8 @@
 language: ruby
 rvm:
   - 2.2
-before_script: cd ruby_forecast_app
+
+before_script: 
+  - cd ruby_forecast_app
+  - bundle install
+
