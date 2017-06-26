@@ -2,6 +2,9 @@ language: ruby
 rvm:
   - 2.3.3
 
+env:
+  - DEV_SECRET_KEY="d70f49af4b1b39924a058e9d80f56b40c520046ca50e5cb5b9ec47a36ed6dcbe01346647e5f639a4d79edf737a6734b7eef0c3ad14e3c70ec4e60285774f3af9"
+
 before_script: 
   - cd ruby_forecast_app
   - bundle install
