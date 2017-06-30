@@ -1,7 +1,6 @@
 {
     "version": "0.2.0",
-    "configurations": [
-        {
+    "configurations": [{
             "name": "Debug Local File",
             "type": "Ruby",
             "request": "launch",
@@ -43,7 +42,7 @@
             "type": "Ruby",
             "request": "launch",
             "cwd": "${workspaceRoot}",
-            "program": "${workspaceRoot}/bin/rspec",
+            "program": "H:/Ruby23-x64/bin/rspec",
             "args": [
                 "-I",
                 "${workspaceRoot}",
