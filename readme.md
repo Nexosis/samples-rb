@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Nexosis/samples-rb.svg?branch=master)](https://travis-ci.org/Nexosis/samples-rb)
 Rails Sample Application
 ===
 This sample application is intended as a guided tour of the Nexosis API as well as a simple way to view your own data and associated results. We'll walk through the application below and use the walkthrough to explain major concepts at work in the API and introduce you to how you can interact with it.
