@@ -1,6 +1,6 @@
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
+**/log/*
+**/tmp/*
 !/log/.keep
 !/tmp/.keep
 
@@ -12,18 +12,17 @@
 *.rbc
 capybara-*.html
 .rspec
-/tmp
-/db/*.sqlite3
-/db/*.sqlite3-journal
-/public/system
-/coverage/
-/spec/tmp
+**/db/*.sqlite3
+**/db/*.sqlite3-journal
+**/public/system
+**/coverage/
+**/spec/tmp
 *.orig
 rerun.txt
 pickle-email-*.html
-
+*.log
 # TODO Comment out this rule if you are OK with secrets being uploaded to the repo
-config/initializers/secret_token.rb
+**/config/initializers/secret_token.rb
 
 # Only include if you have production secrets in this file, which is no longer a Rails default
 # config/secrets.yml
@@ -33,8 +32,8 @@ config/initializers/secret_token.rb
 .env
 
 ## Environment normalization:
-/.bundle
-/vendor/bundle
+**/.bundle
+**/vendor/bundle
 
 # these should all be checked in to normalize the environment:
 # Gemfile.lock, .ruby-version, .ruby-gemset
@@ -51,4 +50,4 @@ bower.json
 .powenv
 
 **/.DS_Store
-/.vscode
+**/.vscode
