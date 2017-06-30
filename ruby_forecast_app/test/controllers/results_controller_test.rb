@@ -1,5 +1,5 @@
 require 'test_helper'
-require_relative '..\classes\fake_client'
+require_relative '../classes/fake_client'
 
 class ResultsControllerTest < ActionDispatch::IntegrationTest
   setup do
