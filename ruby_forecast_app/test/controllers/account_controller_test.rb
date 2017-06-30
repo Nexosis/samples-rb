@@ -1,4 +1,4 @@
-require_relative '..\test_helper'
+require 'test_helper'
 require_relative '..\classes\fake_client'
 
 class AccountControllerTest < ActionDispatch::IntegrationTest
