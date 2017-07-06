@@ -5,7 +5,7 @@ class AccountController < ApplicationController
 	def index
 		params.permit(:uploaded)
 		if(params["uploaded"])
-			@uploadMessage = "Your dataset has been uploaded. If you used S3 it may take a moment before you see the dataset below."
+			@uploadMessage = "Your dataset has been uploaded. If you used S3 it may take a few minutes before you see the dataset below."
 		end
 
 		@account_balance = @api_client.get_account_balance
@@ -25,6 +25,12 @@ class AccountController < ApplicationController
 	end
 
 	def upload
+		params.require(:fileLocation)
+		params.require(:dataset_name)
+		params.permit(:bucket)
+		params.permit(:path)
+		params.permit(:region)
+		params.permit(:datafile)
 		useS3 = params["fileLocation"] == "S3"
 		dataset_name = params["dataset_name"]
 		if(useS3)
@@ -59,13 +65,14 @@ class AccountController < ApplicationController
 		params.require(:target_column)
 		params.require(:start_date)
 		params.require(:end_date)
+		params.require(:interval)
 		params.permit(:is_estimate)
 		estimate_only = params["is_estimate"] == "on" ? true : false
 		begin
 			if(estimate_only)		
-				@forecast_result = @api_client.estimate_forecast_session params["dataset_name"], params["target_column"], params["start_date"], params["end_date"]
+				@forecast_result = @api_client.estimate_forecast_session params["dataset_name"], params["start_date"], params["end_date"], params["target_column"], params["interval"]
 			else	
-				@forecast_result = @api_client.create_forecast_session params["dataset_name"], params["target_column"], params["start_date"], params["end_date"]
+				@forecast_result = @api_client.create_forecast_session params["dataset_name"], params["start_date"], params["end_date"], params["target_column"], params["interval"]
 			end
 		rescue NexosisApi::HttpException => http_error
 			@error = http_error
@@ -84,14 +91,15 @@ class AccountController < ApplicationController
 		params.require(:start_date)
 		params.require(:end_date)
 		params.require(:event_name)
+		params.require(:interval)
 		params.permit(:is_estimate)
 		estimate_only = params["is_estimate"] == "on" ? true : false
 		@event_name = params["event_name"]
 		begin
 			if(estimate_only)
-				@impact_result = @api_client.estimate_impact_session(params["dataset_name"], params["target_column"], params["start_date"], params["end_date"] , params["event_name"])
+				@impact_result = @api_client.estimate_impact_session(params["dataset_name"], params["start_date"], params["end_date"] , params["event_name"], params["target_column"], params["interval"])
 			else
-				@impact_result = @api_client.create_impact_session(params["dataset_name"], params["target_column"], params["start_date"], params["end_date"] , params["event_name"])
+				@impact_result = @api_client.create_impact_session(params["dataset_name"], params["start_date"], params["end_date"] , params["event_name"], params["target_column"], params["interval"])
 			end
 		rescue NexosisApi::HttpException => http_error
 			@error = http_error

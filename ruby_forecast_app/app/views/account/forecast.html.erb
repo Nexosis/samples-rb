@@ -28,21 +28,42 @@
     <h4>Create a new forecast session for <%= @dataset_name %><%= @forecast_result.dataSetName unless @forecast_result.nil? %></h4>
         <%= form_tag({action: :create_forecast}) do %>  
             <input type="hidden" name="dataset_name" value="<%= @dataset_name %>">
-            <div>
+            <div class="form-group">
                 <label for="target_column">Column to predict: </label><input type="text" name="target_column" value="<%= @forecast_result.targetColumn unless @forecast_result.nil? %>">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="start_date">Prediction Start Date: </label><input type="text" name="start_date" value="<%= @forecast_result.startDate unless @forecast_result.nil? %>">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="end_date">Prediction End Date: </label><input type="text" name="end_date" value="<%= @forecast_result.endDate unless @forecast_result.nil? %>">
             </div>
-            <div>
+            <div class="form-group">
+                <label for="end_date">Prediction Interval: </label>
+                <p>Note that the observation data should be at a higher or equal interval than the selected prediction interval. ie. hourly data can be used in daily predictions, but not vice-versa.</p>
+                <select name="interval" id="predInterval">
+                    <option value="hour">Hour</option>
+                    <option selected="true" value="day">Day</option>
+                    <option value="week">Week</option>
+                    <option value="month">Month</option>
+                    <option value="year">Year</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="is_estimate">Estimate Only</label><input type="checkbox" name="is_estimate"/>
             </div>
-            <div>
+            <div class="form-group">
                 <input type="submit" text="create session">
             </div>
         <% end %>
     </div>
 <%end%>
+<% content_for :before_body_end do %>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var intervalValue = '<%= @forecast_result.result_interval unless @forecast_result.nil? %>';
+            if(intervalValue.length > 0){
+                $("#predInterval").val(intervalValue);
+            }
+        });
+    </script>
+<% end %>

@@ -73,6 +73,7 @@ $(document).ready(function(){
    var predictionData = <%= render inline: @sessionResult.data.to_json%>;
    var obsValues = [];
    var predValues = [];
+   var timestampColumn = '<%= @sessionResult.column_metadata.select{|dc| dc.role == NexosisApi::ColumnRole::TIMESTAMP}.take(1).first().name %>';
    dataKey = "<%=@sessionResult.targetColumn%>";
    
    var table = document.getElementById("dataTable");
@@ -84,9 +85,9 @@ $(document).ready(function(){
        var td1 = document.createElement('td');
        var td2 = document.createElement('td');
    
-       var text1 = document.createTextNode(new Date(record.timestamp).toLocaleDateString('en-US'));
-       predValues[i] = {x: new Date(record.timestamp), y: record.values[dataKey]};
-       var text2 = document.createTextNode(record.values[dataKey]);
+       var text1 = document.createTextNode(new Date(record[timestampColumn]).toLocaleDateString('en-US'));
+       predValues[i] = {x: new Date(record[timestampColumn]), y: record[dataKey]};
+       var text2 = document.createTextNode(record[dataKey]);
    
    
        td1.appendChild(text1);
@@ -106,9 +107,9 @@ $(document).ready(function(){
        var td1 = document.createElement('td');
        var td2 = document.createElement('td');
    
-       var text1 = document.createTextNode(new Date(record.timestamp).toLocaleDateString('en-US'));
-       obsValues[i] = {x: new Date(record.timestamp), y: record.values[dataKey]};
-       var text2 = document.createTextNode(record.values[dataKey]);
+       var text1 = document.createTextNode(new Date(record[timestampColumn]).toLocaleDateString('en-US'));
+       obsValues[i] = {x: new Date(record[timestampColumn]), y: record[dataKey]};
+       var text2 = document.createTextNode(record[dataKey]);
    
        td1.appendChild(text1);
        td2.appendChild(text2);
