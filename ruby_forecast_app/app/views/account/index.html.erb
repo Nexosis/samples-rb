@@ -29,12 +29,58 @@
 <div class="row">
    <p>Upload a csv file (for this app, file assumed to have 'timestamp' column and is assumed to have headers):</p>
    <%= form_tag({action: :upload}, multipart: true) do %>
+   <div class="form-group">
    <label for="dataset_name">Dataset Name:</label>
    <input id="dataset_name" name="dataset_name" type="text">
-   <div>
-      <%= file_field_tag 'datafile' %>
+   </div>
+   <div class="form-group">
+    <div class="btn-group">
+        <label class="btn btn-default"><input type="radio" name="fileLocation" value="S3" id="s3on"> I have a file on AWS S3</label>
+        <label class="btn btn-default **active**"><input type="radio" name="fileLocation" value="Upload" checked id="fileon"> I have a file to upload</label>
+    </div>
+   </div>
+   <div class="form-group">
+    <div id="fileupload">
+        <%= file_field_tag 'datafile' %>
+    </div>
+    <div id="s3upload" style="display:none;">
+            <label for="bucket">Bucket Name:</label>
+            <input type="text" name="bucket">
+            <label for="region">Region:</label>
+            <select name="region">
+                <option>us-east-2</option>
+                <option selected="true">us-east-1</option>
+                <option>us-west-1</option>
+                <option>us-west-2</option>
+                <option>ca-central-1</option>
+                <option>ap-south-1</option>
+                <option>ap-northeast-2</option>
+                <option>ap-southeast-1</option>
+                <option>eu-central-1</option>
+                <option>eu-west-1</option>
+                <option>eu-west-2</option>
+            </select>
+            <label for="path">Object:</label>
+            <input type="text" name="path">
+    </div>
    </div>
    <input type="submit" text="upload file">
    <% end %>
    </div>
 </div>
+<% content_for :before_body_end do %>
+    <script type="text/javascript">
+        $(document).ready(function(){
+             $('input:radio[name=fileLocation]').change(function () {
+                 if(this.value == 'S3'){
+                        $("#s3upload").slideDown();
+                        $("#fileupload").slideUp();
+                 }
+                 else{
+                        $("#s3upload").slideUp();
+                        $("#fileupload").slideDown();
+                 }
+             });
+        });
+    </script>
+<% end %>
