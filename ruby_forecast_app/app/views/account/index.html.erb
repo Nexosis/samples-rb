@@ -2,6 +2,11 @@
 <p class="lead">
    Current Balance: <%= number_to_currency(@account_balance) %>
 </p>
+<%if @error.nil? == false%>
+<div class="alert alert-danger">
+    <%= @error.message %>
+</div>
+<%end%>
 <%if @uploadMessage.nil? == false %>
 <div class="alert alert-success">
     <%= @uploadMessage %>

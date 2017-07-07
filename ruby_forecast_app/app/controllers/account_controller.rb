@@ -7,9 +7,12 @@ class AccountController < ApplicationController
 		if(params["uploaded"])
 			@uploadMessage = "Your dataset has been uploaded. If you used S3 it may take a few minutes before you see the dataset below."
 		end
-
-		@account_balance = @api_client.get_account_balance
-		@datasets = @api_client.list_datasets
+		begin
+			@account_balance = @api_client.get_account_balance
+			@datasets = @api_client.list_datasets
+		rescue NexosisApi::HttpException => http_error
+			@error = http_error
+		end
 		render
 	end
 
