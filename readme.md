@@ -36,11 +36,11 @@ rails server
 
 Datasets & Sessions
 ---
-A *dataset* in the Nexosis API is a collection of observations on which a forecast or impact analysis will be run. The API allows you to upload a dataset independent of any request to perform work on it, or to submit data at the same time as a request to perform the work. We call a request to perform the forecast or impact analysis work a *session*. With your api key placed in config/secrets.yml you're ready to interact with the API. The landing page is at http://localhost:3000/account and should look like this:
+A *dataset* in the Nexosis API is a collection of observations on which a forecast or impact analysis will be run. The API allows you to upload a dataset independent of any request to perform work on it, or to submit data at the same time as a request to perform the work. We call a request to perform the forecast or impact analysis work a *session*. With your api key placed in config/secrets.yml you're ready to interact with the API. The landing page is at http://localhost:3000/account. If you added sample data during sign up then your page should look like this:
 
 ![Landing Page](docs/landing_page.png)
 
-Note that we've read your outstanding balance from the headers on a session request wrapped in the *get_account_balance* method in the api_client.rb file
+Note that we've read your available balance from the headers on a session request wrapped in the *get_account_balance* method in the api_client.rb file
 ``` ruby
 def get_account_balance
 	session_url = '/sessions'
@@ -55,7 +55,7 @@ end
 This application helps you load a CSV file you have locally as a dataset (*the API also accepts json input*). 
 > If you don't have a dataset of your own, trying using one of our publicly available samples at https://github.com/Nexosis/sampledata
 
-In order to have a named dataset you must also provide that name. Once you have provided the name, and selected a file you can click the submit button. Again, this is a distinct operation from submitting a session request which would do work - we'll get to that soon. The api client for this application has been written to upload only 5000 lines at a time because we're sending the data as the request body and need to mind limits. We recommend using the S3 option with production datasets.
+In order to have a named dataset you must also provide that name. Once you have provided the name, and selected a file you can click the submit button. Again, this is a distinct operation from submitting a session request which would do work - we'll get to that soon. The api client for this application has been written to upload only 5000 lines at a time because we're sending the data as the request body and need to mind limits.
 ``` ruby
 csv.each do |row|
 	rowCount += 1
@@ -67,6 +67,8 @@ csv.each do |row|
 end
 ```
 You may also notice in the snippet above that the CR/LF line feed type has been forced between each line to follow the CSV specification and play nice with our underlying parser.
+>Importing from AWS S3 is recommended for production datasets. You can use the imports capability of the API directly - or within this app just select "I have a file on AWS S3" on the landing page:
+![](docs/s3upload.png)
 #### Modifying a Dataset
 Once you have a named dataset you can submit data again with the same name and either modify previously submitted data or add new. This is why we recommend using named datasets over sending data with a session request. With time series data the timestamp column will be used as the key for performing the upsert on your named dataset.
 ### Sessions
@@ -82,7 +84,7 @@ If you click on *Begin Forecast* you'll be asked for some additional data to spe
 
 ![submit forecast](docs/submitforecast.png)
 
-In the example above I have used the *Location C.csv* sample data file. You should note that the column to predict must be one of the non-timestamp columns in your file. If you load a csv without headers, you will get a header named after your first row - so best to include headers in all files. In this case the file contained both a *sales* and a *transactions* column and we've requested predictions on the sales column. The start and end dates for predictions must coincide with the dates available in the file. For example, it's ok to ask for dates within the file, or overlapping the end, or from the end to some other point. However, if you select a date beyond the end of the observations dates for your prediction start date you won't get results.  In this case we're asking for predictions to start after the last day of observations and going out two months.
+In the example above I have used the *Location A.csv* sample data file. You should note that the column to predict must be one of the non-timestamp columns in your file. If you load a csv without headers, you will get a header named after your first row - so best to include headers in all files. In this case the file contained both a *sales* and a *transactions* column and we've requested predictions on the sales column. The start and end dates for predictions must coincide with the dates available in the file. For example, it's ok to ask for dates within the file, or overlapping the end, or from the end to some other point. However, if you select a date beyond the end of the observations dates for your prediction start date you won't get results.  In this case we're asking for predictions to start after the last day of observations and going out two months.
 
 ![](docs/forecast_success.png)
 
