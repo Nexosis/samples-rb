@@ -36,7 +36,7 @@ rails server
 
 Datasets & Sessions
 ---
-A *dataset* in the Nexosis API is a collection of observations on which a forecast or impact analysis will be run. The API allows you to upload a dataset independent of any request to perform work on it, or to submit data at the same time as a request to perform the work. We call a request to perform the forecast or impact analysis work a *session*. With your api key placed in config/secrets.yml you're ready to interact with the API. The landing page is at http://localhost:3000/account. If you added sample data during sign up then your page should look like this:
+A *dataset* in the Nexosis API is a collection of observations on which a forecast or impact analysis will be run. The API allows you to upload a dataset independent of any request to perform work on it. We call a request to perform the forecast or impact analysis work a *session*. With your api key placed in config/secrets.yml you're ready to interact with the API. The landing page is at http://localhost:3000/account. If you added sample data during sign up then your page should look like this:
 
 ![Landing Page](docs/landing_page.png)
 
@@ -70,7 +70,7 @@ You may also notice in the snippet above that the CR/LF line feed type has been 
 >Importing from AWS S3 is recommended for production datasets. You can use the imports capability of the API directly - or within this app just select "I have a file on AWS S3" on the landing page:
 ![](docs/s3upload.png)
 #### Modifying a Dataset
-Once you have a named dataset you can submit data again with the same name and either modify previously submitted data or add new. This is why we recommend using named datasets over sending data with a session request. With time series data the timestamp column will be used as the key for performing the upsert on your named dataset.
+Once you have a named dataset you can submit data again with the same name and either modify previously submitted data or add new. With time series data the timestamp column will be used as the key for performing the upsert on your named dataset.
 ### Sessions
 <a name="Sessions"></a>
 Now that a dataset has been loaded you should see a new line on the */account* page such as that shown outlined in red below.
@@ -78,7 +78,6 @@ Now that a dataset has been loaded you should see a new line on the */account* p
 <img src="docs/dataset_success.png" alt="datasets" height="412" width="401"/>
 
 Notice that next to the dataset name *RubySample* there are two links - one to create a forecast and another to create an impact analysis. These activities will create sessions based on the named dataset. 
-> As mentioned previously - it is possible to send data in a session request instead. It will be given a generated name and will only be used in that one session. Everything else will be the same as demonstrated in this application.
 
 If you click on *Begin Forecast* you'll be asked for some additional data to specify the parameters of the forecast job to be run.
 
