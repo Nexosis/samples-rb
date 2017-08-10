@@ -9,9 +9,8 @@ class AccountController < ApplicationController
 		end
 		begin
 			@account_balance = @api_client.get_account_balance
-			@datasets = @api_client.list_datasets
 		rescue NexosisApi::HttpException => http_error
-			@error = http_error
+		@error = http_error
 		end
 		render
 	end
@@ -110,5 +109,14 @@ class AccountController < ApplicationController
 		render "impact"
 	end
 	
+	def delete_dataset
+		params.require(:dataset_name)
+		begin
+			@api_client.remove_dataset(params["dataset_name"],{cascade_forecast: true, cascade_sessions: true})
+		rescue NexosisApi::HttpException => http_error
+			@error = http_error
+		end
+		redirect_to action: 'index'
+	end
 end
 

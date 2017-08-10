@@ -1,0 +1,40 @@
+<%index = 0%>
+<h2><%= @dataset.dataset_name %></h2>
+<div class="container">
+<%= form_tag("/dataset/update", method: "post") do%>
+    <%= hidden_field_tag(:dataset_name, @dataset.dataset_name )%>
+    <div class="row">
+    <%@dataset.column_metadata.each do |column|%>
+    <% index = index + 1%>
+    
+        <div class="col-sm-2">
+            <div class="form-group">
+                <%= hidden_field_tag("column[#{index}]", column.name )%>
+                <label for="column">Column:</label> <%=column.name%>
+            </div>
+            <div class="form-group">
+                <label for="datatype">Datatype:</label>
+                <%= select_tag("datatype[#{index}]",options_for_select([['String','string'],['Number','numeric'],['Boolean','logical'],['Date','date'],['Measure','numericmeasure']], selected_key=column.type.to_s)) %>
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <%= select_tag("role[#{index}]",options_for_select([['Feature','feature'],['Target','target'],['None','none']], selected_key=column.role.to_s)) %>
+            </div>
+            <div class="form-group">
+                <label for="aggregation">Aggregation:</label>
+                <%= select_tag("aggregation[#{index}]",options_for_select([['Sum','sum'],['Mean','mean'],['Median','median'],['Mode','mode']], selected_key=column.aggregation.to_s)) %>
+            </div>
+            <div class="form-group">
+                <label for="imputation">Imputation:</label>
+                <%= select_tag("imputation[#{index}]",options_for_select([['Zeroes','zeroes'],['Mean','mean'],['Median','median'],['Mode','mode']], selected_key=column.imputation.to_s)) %>
+            </div>
+        </div>
+    <%end%>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <input type="submit" value="Update Metadata">
+        </div>
+    </div>
+    <%end%>
+</div>
