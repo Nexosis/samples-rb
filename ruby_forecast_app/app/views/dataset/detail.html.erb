@@ -1,6 +1,7 @@
 <%index = 0%>
 <h2><%= @dataset.dataset_name %></h2>
 <div class="container">
+<%if @dataset_data == nil %>
 <%= form_tag("/dataset/update", method: "post") do%>
     <%= hidden_field_tag(:dataset_name, @dataset.dataset_name )%>
     <div class="row">
@@ -18,15 +19,15 @@
             </div>
             <div class="form-group">
                 <label for="role">Role:</label>
-                <%= select_tag("role[#{index}]",options_for_select([['Feature','feature'],['Target','target'],['None','none']], selected_key=column.role.to_s)) %>
+                <%= select_tag("role[#{index}]",options_for_select([['Timestamp','timestamp'],['Feature','feature'],['Target','target'],['None','none']], selected_key=column.role.to_s)) %>
             </div>
             <div class="form-group">
                 <label for="aggregation">Aggregation:</label>
-                <%= select_tag("aggregation[#{index}]",options_for_select([['Sum','sum'],['Mean','mean'],['Median','median'],['Mode','mode']], selected_key=column.aggregation.to_s)) %>
+                <%= select_tag("aggregation[#{index}]",options_for_select([['Not Selected',nil],['Sum','sum'],['Mean','mean'],['Median','median'],['Mode','mode']], selected_key=column.aggregation.to_s)) %>
             </div>
             <div class="form-group">
                 <label for="imputation">Imputation:</label>
-                <%= select_tag("imputation[#{index}]",options_for_select([['Zeroes','zeroes'],['Mean','mean'],['Median','median'],['Mode','mode']], selected_key=column.imputation.to_s)) %>
+                <%= select_tag("imputation[#{index}]",options_for_select([['Not Selected',nil],['Zeroes','zeroes'],['Mean','mean'],['Median','median'],['Mode','mode']], selected_key=column.imputation.to_s)) %>
             </div>
         </div>
     <%end%>
@@ -37,4 +38,61 @@
         </div>
     </div>
     <%end%>
+  <%end%>
+    <div class="row">
+    <hr/>
+    <%if @dataset_data == nil %>
+        <a class="btn btn-primary" href="/dataset/detail/<%=@dataset.dataset_name%>?with_data=true" role="button">View Data</a>
+    <%else%>
+        <a class="btn btn-primary" href="/dataset/detail/<%=@dataset.dataset_name%>" role="button">Stop Viewing Data</a>
+    <%end%>
+    </div>
+    <div class="row">
+        <%if @dataset_data != nil %>
+        <h2>Dataset Data</h2>
+            <div id="resultTable" class="col-md-6">
+                <table id="dataTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <% @dataset.column_metadata.each do |column| %>
+                                <th><%= column.name %></th>
+                            <%end%>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @dataset_data.data.each do |row_data| %>
+                            <tr>
+                                <% row_data.keys.each do |key| %>
+                                    <td>
+                                        <%= row_data[key] %>
+                                    </td>
+                                <% end %>
+                            </tr>
+                        <% end %>
+                        <tr>
+                           <td>
+                            <ul class="pager">
+                            <%if @page.to_i > 0 %> 
+                                <li class="previous">
+                                    <a href="/dataset/detail/<%=@dataset.dataset_name%>?with_data=true&page=<%=@page -1 %>"><<</a>
+                                </li> 
+                            <%end%> 
+                            Page: <%= @page + 1 %> 
+                            <%if @rowcount >= 20 %> 
+                                <li class="next">
+                                    <a href="/dataset/detail/<%=@dataset.dataset_name%>?with_data=true&page=<%=@page + 1%>">>></a>
+                                </li> 
+                            <%end%>
+                            </ul>
+                    </td>
+                  </tbody>
+                </table>
+            </div>
+        <%end%>
+    </div>
 </div>
+<% content_for :before_body_end do %>
+<script type="text/javascript">
+
+</script>
+<%end%>

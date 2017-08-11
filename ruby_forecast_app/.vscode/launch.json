@@ -33,7 +33,7 @@
             "type": "Ruby",
             "request": "launch",
             "cwd": "${workspaceRoot}",
-            "program": "C:/Ruby23-x64/bin/rspec",
+            "program": "/Ruby23-x64/bin/rspec",
             "args": [
                 "-I",
                 "${workspaceRoot}",
@@ -47,12 +47,12 @@
             "cwd": "${workspaceRoot}",
             "program": "${workspaceRoot}/bin/cucumber"
         },
-         {
+        {
             "name": "Rails server",
             "type": "Ruby",
             "request": "launch",
             "cwd": "${workspaceRoot}",
-            "program": "C:/Ruby23-x64/bin/rails",
+            "program": "${workspaceRoot}/bin/rails",
             "args": [
                 "server"
             ]
