@@ -47,4 +47,14 @@ class DatasetController < ApplicationController
     @api_client.create_dataset_json(ds_name, columns)
     redirect_to action: 'detail', dataset_name: ds_name
   end
+
+  def delete
+		params.require(:dataset_name)
+		begin
+			@api_client.remove_dataset(params["dataset_name"],{cascade_forecast: true, cascade_sessions: true})
+		rescue NexosisApi::HttpException => http_error
+			@error = http_error
+		end
+		redirect_to action: 'index'
+	end
 end

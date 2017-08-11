@@ -11,7 +11,7 @@
          <label>Run On: </label> <%= DateTime.parse(session.statusHistory.select {|v| v.has_value? "requested"}[0]["date"]).strftime('%A, %B %d %Y %r') %>
          </span>
       </div>
-      <span><a href="/account/session/<%=URI::encode(session.sessionId)%>">See Status</a></span>
+      <span><a href="/sessions/<%=URI::encode(session.sessionId)%>">See Status</a></span>
       <%if session.statusHistory.select {|v| v.has_value? "completed"}[0].nil? == false %> | 
       <span><a href="/results/<%=URI::encode(session.sessionId)%>">See Results</a></span> | 
       <span><a href="/results/file/<%=URI::encode(session.sessionId)%>" Download>Download Results</a></span>
