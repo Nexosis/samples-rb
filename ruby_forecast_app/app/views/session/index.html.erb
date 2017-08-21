@@ -4,18 +4,19 @@
    <% @sessions.each do |session| %>
    <div class="row row-bordered">
       <div class="col-xs-3 text-left">
-         <label>For Dataset: </label> <%=session.dataSetName%>
+         <label>For Dataset: </label> <a href="/dataset/detail/<%=session.dataSetName%>"><%=session.dataSetName%></a>
       </div>
       <div class="col-xs-4">
          <span>
          <label>Run On: </label> <%= DateTime.parse(session.statusHistory.select {|v| v.has_value? "requested"}[0]["date"]).strftime('%A, %B %d %Y %r') %>
          </span>
       </div>
-      <span><a href="/sessions/<%=URI::encode(session.sessionId)%>">See Status</a></span>
-      <%if session.statusHistory.select {|v| v.has_value? "completed"}[0].nil? == false %> | 
+      <span><a href="/sessions/<%=URI::encode(session.sessionId)%>">See Status</a></span> |
+      <%if session.statusHistory.select {|v| v.has_value? "completed"}[0].nil? == false %> 
       <span><a href="/results/<%=URI::encode(session.sessionId)%>">See Results</a></span> | 
-      <span><a href="/results/file/<%=URI::encode(session.sessionId)%>" Download>Download Results</a></span>
+      <span><a href="/results/file/<%=URI::encode(session.sessionId)%>" Download>Download Results</a></span> | 
       <%end%>
+      <span><a href="/sessions/delete/<%=URI::encode(session.sessionId)%>">Delete Session</a></span>
    </div>
    <% end %>
    <%else%>

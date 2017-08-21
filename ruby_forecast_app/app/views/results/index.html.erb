@@ -118,6 +118,18 @@ $(document).ready(function(){
    
        obsTable.appendChild(tr);
    }
+
+   function getFormat(){
+       <%if(@sessionResult.result_interval == 'day')%>
+      return '%b %d'
+      <%elsif @sessionResult.result_interval == 'year'%>
+      return '%Y'
+      <%elsif @sessionResult.result_interval == 'hour'%>
+      return '%X'
+      <%end%>
+   }
+
+
    
    function getChart(){
         nv.addGraph(function() {
@@ -129,14 +141,15 @@ $(document).ready(function(){
                         .showYAxis(true)        //Show the y-axis
                         .showXAxis(true)        //Show the x-axis
         ;
-        
+        var yScale = d3.scale.linear().domain([Math.min(obsValues),Math.max(obsValues)])
+
         chart.xAxis     //Chart x-axis settings
-            .axisLabel('Time (ms)')
-            .tickFormat(function(d) { return d3.time.format('%b %d')(new Date(d)); });
+            .axisLabel('Time')
+            .tickFormat(function(d) { return d3.time.format(getFormat())(new Date(d)); });
         
         chart.yAxis     //Chart y-axis settings
             .axisLabel(dataKey)
-            .tickFormat(d3.format('10.0f'));
+            .scale(yScale);
         
         /* Done setting the chart up? Time to render it!*/
         var myData =  [{

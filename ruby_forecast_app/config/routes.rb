@@ -12,9 +12,11 @@ Rails.application.routes.draw do
   get 'sessions/impact/:dataset_name', controller: 'session', action: 'impact', :constraints => { :dataset_name => /[^\/]+/ }
   post 'sessions/forecast/:dataset_name', controller: 'session', action: 'create_forecast', :constraints => { :dataset_name => /[^\/]+/ }
   post 'sessions/impact/:dataset_name', controller: 'session', action: 'create_impact', :constraints => { :dataset_name => /[^\/]+/ }
+  get 'sessions/delete/:session_id', controller: 'session', action: 'delete'
   get 'dataset/delete/:dataset_name', controller: 'dataset', action: 'delete', :constraints => { :dataset_name => /[^\/]+/ }
   get 'dataset/', to: 'dataset#index'
   get 'dataset/detail/:dataset_name', to: 'dataset#detail', :constraints => { :dataset_name => /[^\/]+/ }
   post 'dataset/update', controller: 'dataset', action: 'update'
+  get 'views/', to: 'view#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

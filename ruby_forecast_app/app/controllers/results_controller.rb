@@ -31,7 +31,7 @@ class ResultsController < ApplicationController
   end
 
   private
-  def calc_day_interval(interval,periods)
+  def calc_day_interval(interval, periods)
     case interval
     when "week"
       periods * 7
