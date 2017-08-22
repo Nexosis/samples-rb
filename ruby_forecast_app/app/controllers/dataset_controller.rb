@@ -2,7 +2,9 @@ require 'nexosis_api'
 # Provide overview of metadata and opportunity to list data.
 class DatasetController < ApplicationController
   def index
-    @datasets = @api_client.list_datasets
+    Rails.cache.fetch('dataset_list') do
+      @datasets = @api_client.list_datasets
+    end
   end
 
   def detail
@@ -54,7 +56,8 @@ class DatasetController < ApplicationController
 			@api_client.remove_dataset(params["dataset_name"],{cascade_forecast: true, cascade_sessions: true})
 		rescue NexosisApi::HttpException => http_error
 			@error = http_error
-		end
+    end
+    Rails.cache.delete('dataset_list')
 		redirect_to action: 'index'
 	end
 end

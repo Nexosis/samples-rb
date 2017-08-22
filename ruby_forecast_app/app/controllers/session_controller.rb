@@ -3,6 +3,9 @@ class SessionController < ApplicationController
     Rails.cache.fetch('sessions-list', :expires_in => 2.minutes) do
       @sessions = @api_client.list_sessions
     end
+    Rails.cache.fetch('dataset_list') do
+      @datasets = @api_client.list_datasets
+    end
     render
   end
 

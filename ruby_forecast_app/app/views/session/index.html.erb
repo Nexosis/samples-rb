@@ -4,7 +4,13 @@
    <% @sessions.each do |session| %>
    <div class="row row-bordered">
       <div class="col-xs-3 text-left">
-         <label>For Dataset: </label> <a href="/dataset/detail/<%=session.dataSetName%>"><%=session.dataSetName%></a>
+         <label>For Datasource: </label> 
+         <% if @datasets.map { |ds| ds.dataset_name }.include?(session.datasource_name) %>
+            <a href="/dataset/detail/<%=session.datasource_name%>">
+         <%else%>
+            <a href="/views/detail/<%=session.datasource_name%>">
+         <%end%>
+         <%=session.datasource_name%></a>
       </div>
       <div class="col-xs-4">
          <span>

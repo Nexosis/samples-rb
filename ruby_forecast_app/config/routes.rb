@@ -18,5 +18,10 @@ Rails.application.routes.draw do
   get 'dataset/detail/:dataset_name', to: 'dataset#detail', :constraints => { :dataset_name => /[^\/]+/ }
   post 'dataset/update', controller: 'dataset', action: 'update'
   get 'views/', to: 'view#index'
+  get 'views/detail/:view_name', to: 'view#detail', :constraints => { :view_name => /[^\/]+/ }
+  post 'views/update', controller: 'view', action: 'update'
+  get 'views/delete/:view_name', controller: 'view', action: 'delete', :constraints => { :view_name => /[^\/]+/ }
+  get 'views/create', to: 'view#create'
+  post 'views/create_view', to: 'view#create_view'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
