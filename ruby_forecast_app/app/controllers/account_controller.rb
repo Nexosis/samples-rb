@@ -17,7 +17,7 @@ class AccountController < ApplicationController
 	end
 
 	def sessions
-		@sessions = @api_client.list_sessions({},0,100)
+		@sessions = @api_client.list_sessions({})
 		render
 	end
 
