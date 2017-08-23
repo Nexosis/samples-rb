@@ -1,4 +1,4 @@
-<h2><%= @dataset.dataset_name %></h2>
+<h2>Dataset - <%= @dataset.dataset_name %></h2>
 <div class="container">
 <%if @dataset_data == nil %>
 <%= form_tag("/dataset/update", method: "post") do%>
@@ -6,7 +6,7 @@
     <%= render partial: 'shared/columns', locals: {datasource: @dataset} %>
     <div class="row">
         <div class="form-group">
-            <input type="submit" value="Update Metadata">
+            <input type="submit" value="Update Metadata" class="btn btn-primary">
         </div>
     </div>
     <%end%>

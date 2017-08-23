@@ -10,11 +10,11 @@
         </div>
         <div class="form-group">
             <label for="datatype">Datatype:</label>
-            <%= select_tag("datatype[#{index}]",options_for_select([['String','string'],['Number','numeric'],['Boolean','logical'],['Date','date'],['Measure','numericmeasure']], selected_key=column.type.to_s)) %>
+            <%= select_tag("datatype[#{index}]",options_for_select([['Not Selected',nil],['String','string'],['Number','numeric'],['Boolean','logical'],['Date','date'],['Measure','numericmeasure']], selected_key=column.type.to_s)) %>
         </div>
         <div class="form-group">
             <label for="role">Role:</label>
-            <%= select_tag("role[#{index}]",options_for_select([['Timestamp','timestamp'],['Feature','feature'],['Target','target'],['None','none']], selected_key=column.role.to_s)) %>
+            <%= select_tag("role[#{index}]",options_for_select([['Not Selected',nil],['Timestamp','timestamp'],['Feature','feature'],['Target','target'],['None','none']], selected_key=column.role.to_s)) %>
         </div>
         <div class="form-group">
             <label for="aggregation">Aggregation:</label>

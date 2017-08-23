@@ -1,6 +1,5 @@
 class ViewController < ApplicationController
   def index
-    params.permit(:error)
     @error = params[:error]
     Rails.cache.fetch('dataset_list') do
       @datasets = @api_client.list_datasets
@@ -12,8 +11,6 @@ class ViewController < ApplicationController
 
   def detail
     params.require(:view_name)
-    params.permit(:with_data)
-    params.permit(:page)
     vw_name = params['view_name']
     @page = 0
     if(params['with_data'])
@@ -47,7 +44,7 @@ class ViewController < ApplicationController
 
     @view.column_metadata = parameter_hash['column'].map do |index, column|
       details = {}
-      details.store 'datatype', parameter_hash['datatype'][index]
+      details.store 'dataType', parameter_hash['datatype'][index]
       details.store 'role', parameter_hash['role'][index]
       details.store 'imputation', parameter_hash['imputation'][index]
       details.store 'aggregation', parameter_hash['aggregation'][index]
@@ -56,7 +53,7 @@ class ViewController < ApplicationController
 
     Rails.cache.delete("view-#{vw_name}")
     @api_client.create_view_by_def @view
-    redirect_to action: 'detail', dataset_name: vw_name
+    redirect_to action: 'detail', view_name: vw_name
   end
 
   def delete
@@ -94,6 +91,6 @@ class ViewController < ApplicationController
       return
     end
     Rails.cache.delete('dataset_list')
-    redirect_to :index
+    redirect_to 'index'
   end
 end

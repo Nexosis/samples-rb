@@ -1,4 +1,4 @@
-<h2><%= @view.view_name %></h2>
+<h2>View - <%= @view.view_name %></h2>
 <div class="row">
   <div>
     <label for="dataset_name">Dataset: </label>
@@ -9,15 +9,15 @@
     <%= @view.joins[0].dataset_name %>
   </div>
 </div>
-<hr/>
 <div class="container">
 <%if @view_data == nil %>
+<hr/>
 <%= form_tag("/views/update", method: "post") do%>
   <%= hidden_field_tag(:view_name, @view.view_name )%>
   <%= render partial: 'shared/columns', locals: {datasource: @view} %>
   <div class="row">
       <div class="form-group">
-          <input type="submit" value="Update Metadata">
+          <input type="submit" value="Update Metadata" class="btn btn-primary">
       </div>
   </div>
   <%end%>

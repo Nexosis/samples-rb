@@ -36,13 +36,13 @@ class DatasetController < ApplicationController
     params.require(:aggregation)
     params.require(:column)
     parameter_hash = params.to_unsafe_h
-    columns = {"columns" => {}}
-    parameter_hash["column"].each do |index,column|
-      columns["columns"][column] = {}
-      columns["columns"][column].store "datatype", parameter_hash["datatype"][index]
-      columns["columns"][column].store "role", parameter_hash["role"][index]
-      columns["columns"][column].store "imputation", parameter_hash["imputation"][index]
-      columns["columns"][column].store "aggregation", parameter_hash["aggregation"][index]
+    columns = { 'columns' => {} }
+    parameter_hash['column'].each do |index, column|
+      columns['columns'][column] = {}
+      columns['columns'][column].store('dataType', parameter_hash['datatype'][index])
+      columns['columns'][column].store('role', parameter_hash['role'][index])
+      columns['columns'][column].store('imputation', parameter_hash['imputation'][index])
+      columns['columns'][column].store('aggregation', parameter_hash['aggregation'][index])
     end
     ds_name = params['dataset_name']
     Rails.cache.delete("dataset-#{ds_name}")
@@ -53,7 +53,7 @@ class DatasetController < ApplicationController
   def delete
 		params.require(:dataset_name)
 		begin
-			@api_client.remove_dataset(params["dataset_name"],{cascade_forecast: true, cascade_sessions: true})
+			@api_client.remove_dataset(params['dataset_name'],{cascade_forecast: true, cascade_sessions: true})
 		rescue NexosisApi::HttpException => http_error
 			@error = http_error
     end
