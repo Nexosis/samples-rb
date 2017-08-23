@@ -20,7 +20,7 @@ class ViewController < ApplicationController
       @page = params['page'].to_i unless params['page'].nil?
       page_size = 20
       Rails.cache.fetch("viewdata-#{vw_name}-#{@page}", :expires_in => 2.minutes) do
-        @view_data = @api_client.get_view vw_name, params['page'], page_size
+        @view_data = @api_client.get_view vw_name, @page, page_size
       end
       @rowcount = @view_data.data.length
       

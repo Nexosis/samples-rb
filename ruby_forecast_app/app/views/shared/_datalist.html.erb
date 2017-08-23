@@ -1,14 +1,14 @@
 <div class="row">
   <hr/>
-  <%if @dataset_data == nil %>
+  <%if datasource_data == nil %>
      <a class="btn btn-primary" href="<%=request.path%>?with_data=true" role="button">View Data</a>
   <%else%>
      <a class="btn btn-primary" href="<%=request.path%>" role="button">Stop Viewing Data</a>
   <%end%>
 </div>
 <div class="row">
-    <%if @dataset_data != nil %>
-    <h2>Dataset Data</h2>
+    <%if datasource_data != nil %>
+    <h2>Datasource Data</h2>
         <div id="resultTable" class="col-md-6">
             <table id="dataTable" class="table table-striped">
                 <thead>
