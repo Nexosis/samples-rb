@@ -91,6 +91,6 @@ class ViewController < ApplicationController
       return
     end
     Rails.cache.delete('dataset_list')
-    redirect_to 'index'
+    redirect_to action: 'index'
   end
 end

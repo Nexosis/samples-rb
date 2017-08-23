@@ -68,8 +68,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-   var observations = <%= render inline: @observations.to_json%>;
-   var observationData = observations.data;
+   var observationData = <%= render inline: @observations.data.to_json%>;
    var predictionData = <%= render inline: @sessionResult.data.to_json%>;
    var obsValues = [];
    var predValues = [];
