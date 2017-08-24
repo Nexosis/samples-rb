@@ -12,9 +12,9 @@
         <div id="resultTable" class="col-md-6">
             <table id="dataTable" class="table table-striped">
                 <thead>
-                    <tr>
-                        <% datasource.column_metadata.each do |column| %>
-                            <th><%= column.name %></th>
+                    <tr><%#column_metadata not in same order as data keys wihin data hash%>
+                        <% datasource_data.data[0].each do |key,value| %>
+                            <th><%= key %></th>
                         <%end%>
                     </tr>
                 </thead>
