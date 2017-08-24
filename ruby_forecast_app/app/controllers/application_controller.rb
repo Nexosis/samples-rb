@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   attr_accessor :api_client
 
-  def initialize_client(service = NexosisApi.client(:base_uri => 'https://api.uat.nexosisdev.com/v1', :api_key => Rails.application.secrets.api_key))
+  def initialize_client(service = NexosisApi.client(:api_key => Rails.application.secrets.api_key))
     @api_client = @@factory.call service
   end
 

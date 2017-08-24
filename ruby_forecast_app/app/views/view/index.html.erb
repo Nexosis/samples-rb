@@ -1,0 +1,22 @@
+<h2>Views</h2>
+<div class="container">
+    <% if @views.nil? == false && @views.length > 0 %>
+    <div class="row">
+        <h4>Existing Views</h4>
+        <%if(@views.is_a? String)%>
+            There was a problem retrieving data sets for this account.
+            <p>@views</p>
+        <%else%>
+        <% @views.each do |vw| %>
+            <div>
+            <%= vw.view_name %> <a href="/views/detail/<%= URI::encode(vw.view_name) %>">View Details</a>  | <a href="/sessions/forecast/<%= URI::encode(vw.view_name) %>">Begin Forecast</a>  | <a href="/sessions/impact/<%= URI::encode(vw.view_name) %>">Begin Impact Analysis</a> | <a href="/views/delete/<%= URI::encode(vw.view_name) %>">Delete View</a>
+            </div>
+        <% end %>
+        <%end%>
+    </div>
+    <%end%>
+    <hr/>
+    <div class="row">
+        <a href="/views/create">Create New View</a>
+    </div>
+</div>

@@ -12,7 +12,7 @@ class AccountControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get sessions" do
-    get '/account/sessions/'
+    get '/sessions/'
     assert_response :success
   end
 

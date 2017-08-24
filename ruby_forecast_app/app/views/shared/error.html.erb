@@ -1,0 +1,8 @@
+A severe error occurred while attempting your last action.
+<div class="alert alert-warning">
+  <%= @action %>
+  <h2>Error Message: </h2>
+<% if !@error.nil? %>
+    <div class="alert alert-danger"><%=@error.message%></div>
+<%end%>
+</div>
