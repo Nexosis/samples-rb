@@ -1,0 +1,18 @@
+<h2>Datasets</h2>
+<div class="container">
+    <% if @datasets.nil? == false && @datasets.length > 0 %>
+    <div class="row">
+        <h4>Existing Datasets</h4>
+        <%if(@datasets.is_a? String)%>
+            There was a problem retrieving data sets for this account.
+            <p>@datasets</p>
+        <%else%>
+        <% @datasets.each do |ds| %>
+            <div>
+                <%= ds.dataset_name %> <a href="/dataset/detail/<%= URI::encode(ds.dataset_name) %>">View Details</a>  | <a href="/sessions/forecast/<%= URI::encode(ds.dataset_name) %>">Begin Forecast</a>  | <a href="/sessions/impact/<%= URI::encode(ds.dataset_name) %>">Begin Impact Analysis</a> | <a href="/dataset/delete/<%= URI::encode(ds.dataset_name) %>">Delete Dataset</a>
+            </div>
+        <% end %>
+        <%end%>
+    </div>
+    <%end%>
+</div>

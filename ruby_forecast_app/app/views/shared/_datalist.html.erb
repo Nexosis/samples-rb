@@ -1,0 +1,51 @@
+<div class="row">
+  <hr/>
+  <%if datasource_data == nil %>
+     <a class="btn btn-primary" href="<%=request.path%>?with_data=true" role="button">View Data</a>
+  <%else%>
+     <a class="btn btn-primary" href="<%=request.path%>" role="button">Stop Viewing Data</a>
+  <%end%>
+</div>
+<div class="row">
+    <%if datasource_data != nil %>
+    <h2>Datasource Data</h2>
+        <div id="resultTable" class="col-md-6">
+            <table id="dataTable" class="table table-striped">
+                <thead>
+                    <tr><%#column_metadata not in same order as data keys wihin data hash%>
+                        <% datasource_data.data[0].each do |key,value| %>
+                            <th><%= key %></th>
+                        <%end%>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% datasource_data.data.each do |row_data| %>
+                        <tr>
+                            <% row_data.keys.each do |key| %>
+                                <td>
+                                    <%= row_data[key] %>
+                                </td>
+                            <% end %>
+                        </tr>
+                    <% end %>
+                    <tr>
+                        <td>
+                        <ul class="pager">
+                        <%if page.to_i > 0 %> 
+                            <li class="previous">
+                                <a href="<%=request.path%>?with_data=true&page=<%=page -1 %>"><<</a>
+                            </li> 
+                        <%end%> 
+                        Page: <%= page + 1 %> 
+                        <%if rowcount >= 20 %> 
+                            <li class="next">
+                                <a href="<%=request.path%>?with_data=true&page=<%=page + 1%>">>></a>
+                            </li> 
+                        <%end%>
+                        </ul>
+                </td>
+              </tbody>
+            </table>
+        </div>
+    <%end%>
+</div>

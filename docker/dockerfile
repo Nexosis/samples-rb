@@ -8,9 +8,9 @@ RUN apt-get update && apt-get install -y git nodejs
 RUN mkdir /app && \
     mkdir /src && \
     cd /src && \
-    git clone https://github.com/Nexosis/samples.git
+    git clone https://github.com/Nexosis/samples-rb.git
 
-RUN cp -r /src/samples/ruby-sample/ruby_forecast_app/* /app && \
+RUN cp -r /src/samples-rb/ruby_forecast_app/* /app && \
     cd /app && gem install bundler && \
     bundle install
 

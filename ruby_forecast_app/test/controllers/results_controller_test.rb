@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 require_relative '../classes/fake_client'
 
 class ResultsControllerTest < ActionDispatch::IntegrationTest
