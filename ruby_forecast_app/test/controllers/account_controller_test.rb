@@ -10,10 +10,4 @@ class AccountControllerTest < ActionDispatch::IntegrationTest
     get '/account/'
     assert_response :success
   end
-
-  test "should get sessions" do
-    get '/sessions/'
-    assert_response :success
-  end
-
 end

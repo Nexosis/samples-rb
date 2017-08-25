@@ -33,7 +33,8 @@
             "type": "Ruby",
             "request": "launch",
             "cwd": "${workspaceRoot}",
-            "program": "/Ruby23-x64/bin/rspec",
+            "on-windows": "/Ruby23-x64/bin/rspec",
+            "program": "/usr/local/bin/rspec",
             "args": [
                 "-I",
                 "${workspaceRoot}",

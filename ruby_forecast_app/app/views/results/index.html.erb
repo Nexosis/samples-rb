@@ -3,6 +3,11 @@
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
 <%end%>
+<% if @session_result.nil? || @observations.nil?%>
+    <div class="alert alert-warning">
+        No data was loaded for the session. Please double check the link and try again.
+    </div>
+<%else%>
 <h1>Session Information for <%= @session_result.sessionId %></h1>
 <p class="lead">Datasource used: <%=@session_result.datasource_name%></p>
 <div class="row">
@@ -177,4 +182,5 @@ $(document).ready(function(){
    setTimeout(getChart, 500);
 });
 </script>
+<%end%>
 <%end%>

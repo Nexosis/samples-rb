@@ -9,40 +9,41 @@ class ResultsController < ApplicationController
     end
     
     @session_result = @api_client.get_session_results(params[:sessionId]);
-    is_dataset = @datasets.map(&:dataset_name).include? @session_result.datasource_name
-    #TODO: cannot determine pages from API - need dataset information to be more specific
-    if @session_result.type == "forecast"
-      #timestamp_col = @session_result.column_metadata.select{|dc| dc.role == NexosisApi::ColumnRole::TIMESTAMP}.take(1).first().name
-      firstPred = Date.parse(@session_result.startDate)
-      lastObs =  firstPred - calc_day_interval(@session_result.result_interval,1)
-      firstObs = firstPred - calc_day_interval(@session_result.result_interval,30)
-      if is_dataset
-        @observations = @api_client.get_dataset(@session_result.datasource_name, 0, 30, {:start_date => firstObs, :end_date => lastObs})
+    if !@session_result.nil? && !@datasets.nil?
+      is_dataset = @datasets.map(&:dataset_name).include? @session_result.datasource_name
+      #TODO: cannot determine pages from API - need dataset information to be more specific
+      if @session_result.type == "forecast"
+        #timestamp_col = @session_result.column_metadata.select{|dc| dc.role == NexosisApi::ColumnRole::TIMESTAMP}.take(1).first().name
+        firstPred = Date.parse(@session_result.startDate)
+        lastObs =  firstPred - calc_day_interval(@session_result.result_interval,1)
+        firstObs = firstPred - calc_day_interval(@session_result.result_interval,30)
+        if is_dataset
+          @observations = @api_client.get_dataset(@session_result.datasource_name, 0, 30, {:start_date => firstObs, :end_date => lastObs})
+        else
+          @observations = @api_client.get_view(@session_result.datasource_name, 0, 30, {:start_date => firstObs, :end_date => lastObs})
+        end
       else
-        @observations = @api_client.get_view(@session_result.datasource_name, 0, 30, {:start_date => firstObs, :end_date => lastObs})
+        firstObs = Date.parse(@session_result.startDate) - 15
+        lastObs = Date.parse(@session_result.endDate) + 15
+        totalEventDays = (Date.parse(@session_result.endDate) - Date.parse(@session_result.startDate)).to_i
+        if is_dataset
+          @observations = @api_client.get_dataset(@session_result.datasource_name, 0, totalEventDays + 30, {:start_date => firstObs, :end_date => lastObs})
+        else
+          @observations = @api_client.get_view(@session_result.datasource_name, 0, totalEventDays + 30, {:start_date => firstObs, :end_date => lastObs})
+        end
       end
-    else
-      firstObs = Date.parse(@session_result.startDate) - 15
-      lastObs = Date.parse(@session_result.endDate) + 15
-      totalEventDays = (Date.parse(@session_result.endDate) - Date.parse(@session_result.startDate)).to_i
-      if is_dataset
-        @observations = @api_client.get_dataset(@session_result.datasource_name, 0, totalEventDays + 30, {:start_date => firstObs, :end_date => lastObs})
-      else
-        @observations = @api_client.get_view(@session_result.datasource_name, 0, totalEventDays + 30, {:start_date => firstObs, :end_date => lastObs})
+      #HACK: need to make sure can reference target no matter how specified session, datasset, view
+      @observations.data = @observations.data.map do |data_hash|
+        new_hash = {}
+        data_hash.each { |k, v| new_hash.store k.downcase, v }
+        new_hash
+      end
+      @session_result.data = @session_result.data.map do |data_hash|
+        new_hash = {}
+        data_hash.each { |k, v| new_hash.store k.downcase, v }
+        new_hash
       end
     end
-    #HACK: need to make sure can reference target no matter how specified session, datasset, view
-    @observations.data = @observations.data.map do |data_hash|
-      new_hash = {}
-      data_hash.each { |k, v| new_hash.store k.downcase, v }
-      new_hash
-    end
-    @session_result.data = @session_result.data.map do |data_hash|
-      new_hash = {}
-      data_hash.each { |k, v| new_hash.store k.downcase, v }
-      new_hash
-    end
-    render
   end
 
   def file

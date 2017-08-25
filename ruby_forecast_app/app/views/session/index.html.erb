@@ -1,6 +1,6 @@
 <h2>All sessions</h2>
 <div class="container">
-<%if @sessions.nil? == false %>
+<%if !@sessions.nil? && !@datasets.nil? %>
    <% @sessions.each do |session| %>
    <div class="row row-bordered">
       <div class="col-xs-3 text-left">
