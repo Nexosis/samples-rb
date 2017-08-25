@@ -1,10 +1,12 @@
 [![Build Status](https://travis-ci.org/Nexosis/samples-rb.svg?branch=master)](https://travis-ci.org/Nexosis/samples-rb)
+
 Rails Sample Application
 ===
 This sample application is intended as a guided tour of the Nexosis API as well as a simple way to view your own data and associated results. We'll walk through the application below and use the walkthrough to explain major concepts at work in the API and introduce you to how you can interact with it.
 
 #### Concepts Covered
 * [Datasets](#Datasets)
+* [Views](#Views) - *introduced August 2017*
 * [Sessions](#Sessions)
 * [Processing Results](#Results)
 * [Impact Analysis](#Impact)
@@ -36,9 +38,9 @@ rails server
 
 Datasets & Sessions
 ---
-A *dataset* in the Nexosis API is a collection of observations on which a forecast or impact analysis will be run. The API allows you to upload a dataset independent of any request to perform work on it. We call a request to perform the forecast or impact analysis work a *session*. With your api key placed in config/secrets.yml you're ready to interact with the API. The landing page is at http://localhost:3000/account. If you added sample data during sign up then your page should look like this:
+A *dataset* in the Nexosis API is a collection of observations on which a forecast or impact analysis will be run. The API allows you to upload a dataset independent of any request to perform work on it. We call a request to perform the forecast or impact analysis work a *session*. With your api key placed in config/secrets.yml you're ready to interact with the API. The landing page is at http://localhost:3000/account. When you first open the sample your page should look like this:
 
-![Landing Page](docs/landing_page.png)
+![account information](docs/account_info.png)
 
 Note that we've read your available balance from the headers on a session request wrapped in the *get_account_balance* method in the api_client.rb file
 ``` ruby
@@ -54,6 +56,10 @@ end
 <a name="Datasets"></a>
 This application helps you load a CSV file you have locally as a dataset (*the API also accepts json input*). 
 > If you don't have a dataset of your own, trying using one of our publicly available samples at https://github.com/Nexosis/sampledata
+
+If you have loaded the sample data on sign-up, or uploaded any datasets then you can navigate to the datasets area of the site and see them listed.
+
+![datasets](docs/datasets.png)
 
 In order to have a named dataset you must also provide that name. Once you have provided the name, and selected a file you can click the submit button. Again, this is a distinct operation from submitting a session request which would do work - we'll get to that soon. The api client for this application has been written to upload only 5000 lines at a time because we're sending the data as the request body and need to mind limits.
 ``` ruby
@@ -71,13 +77,21 @@ You may also notice in the snippet above that the CR/LF line feed type has been 
 ![](docs/s3upload.png)
 #### Modifying a Dataset
 Once you have a named dataset you can submit data again with the same name and either modify previously submitted data or add new. With time series data the timestamp column will be used as the key for performing the upsert on your named dataset.
+
+> Column Metadata play an important role in how your data will be used by the Nexosis API. You can see the defaults, and even modify it by clicking on the 'View Details' link next to any dataset. 
+![metadata editor](docs/dataset_metadata.png)
+This is where you tell the API which columns are features, what the datatype is (if it wasn't figured out already), etc.
+
+### Views
+<a name="Views"></a>
+The sample app will now also allow you to interact with Views with the introduction of Views in the API. A view is a join of one or more different datasets. A view can be useful if you have different data sources loading to the API, or perhaps a set of features that is updated on a different schedule from the core observations dataset. In any case if you want to create one you can now go the "Views" link at the top and click "Create View"
+![create a view](docs/create_view.png)
+Many of the same concepts discussed for Datasets are entirely relevant to Views. You can modify column metadata and use Views in sessions. One primary difference is that you don't upload or edit view data. You create and edit view definitions.
 ### Sessions
 <a name="Sessions"></a>
-Now that a dataset has been loaded you should see a new line on the */account* page such as that shown outlined in red below.
+Now that a dataset has been loaded you'll see it on the dataset index page.
 
-<img src="docs/dataset_success.png" alt="datasets" height="412" width="401"/>
-
-Notice that next to the dataset name *RubySample* there are two links - one to create a forecast and another to create an impact analysis. These activities will create sessions based on the named dataset. 
+Notice that next to the dataset name there are two links - one to create a forecast and another to create an impact analysis. These activities will create sessions based on the named dataset. 
 
 If you click on *Begin Forecast* you'll be asked for some additional data to specify the parameters of the forecast job to be run.
 
