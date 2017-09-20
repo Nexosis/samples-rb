@@ -33,7 +33,7 @@
 <div class="col-xs-12">
    <hr>
 </div>
-<div class="col-md-8">
+<div class="col-md-10">
 <div id="chart" style="height:400px">
    <svg><text x="100" y="100" font-family="sans-serif" font-size="10px" fill="red">If no chart, try refreshing the page</text></svg>
 </div>
@@ -73,13 +73,14 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+   var predictionInterval = '<%=@session_result.result_interval%>';
    var observationData = <%= render inline: @observations.data.to_json%>;
    var predictionData = <%= render inline: @session_result.data.to_json%>;
-   var obsValues = [];
+   var observations = [];
    var predValues = [];
    var timestampColumn = '<%= @session_result.column_metadata.select{|dc| dc.role == NexosisApi::ColumnRole::TIMESTAMP}.take(1).first().name.downcase %>';
    dataKey = "<%=@session_result.targetColumn.downcase%>";
-   
+   var tzOption = {timeZone: "UTC"};
    var table = document.getElementById("dataTable");
    for (var i = 0; i < predictionData.length; i++) 
    {
@@ -89,8 +90,12 @@ $(document).ready(function(){
        var td1 = document.createElement('td');
        var td2 = document.createElement('td');
    
-       var text1 = document.createTextNode(new Date(record[timestampColumn]).toLocaleDateString('en-US'));
-       predValues[i] = {x: new Date(record[timestampColumn]), y: record[dataKey]};
+       var predDate = new Date(record[timestampColumn]);
+       var text1Text = predDate.toLocaleDateString('en-US', tzOption);
+       if(predictionInterval === 'hour')
+            text1Text += ' ' + predDate.toLocaleTimeString('en-US', tzOption);
+       var text1 = document.createTextNode(text1Text);
+       predValues[i] = {x: new Date(record[timestampColumn]), y: parseInt(record[dataKey],10)};
        var text2 = document.createTextNode(record[dataKey]);
    
    
@@ -111,8 +116,12 @@ $(document).ready(function(){
        var td1 = document.createElement('td');
        var td2 = document.createElement('td');
    
-       var text1 = document.createTextNode(new Date(record[timestampColumn]).toLocaleDateString('en-US'));
-       obsValues[i] = {x: new Date(record[timestampColumn]), y: record[dataKey]};
+       var obsDate = new Date(record[timestampColumn]);
+       var text1Text = obsDate.toLocaleDateString('en-US', tzOption);
+       if(predictionInterval === 'hour')
+            text1Text += ' ' + obsDate.toLocaleTimeString('en-US', tzOption);
+       var text1 = document.createTextNode(text1Text);
+       observations[i] = {x: new Date(record[timestampColumn]), y: parseInt(record[dataKey],10)};
        var text2 = document.createTextNode(record[dataKey]);
    
        td1.appendChild(text1);
@@ -124,13 +133,16 @@ $(document).ready(function(){
    }
 
    function getFormat(){
-       <%if(@session_result.result_interval == 'day')%>
-      return '%b %d'
-      <%elsif @session_result.result_interval == 'year'%>
-      return '%Y'
-      <%elsif @session_result.result_interval == 'hour'%>
-      return '%X'
-      <%end%>
+      if(predictionInterval === 'day')
+        return '%b %d'
+      else if (predictionInterval === 'year')
+        return '%Y'
+      else if(predictionInterval === 'hour')
+        return '%X'
+      else if(predictionInterval === 'month')
+        return '%b'
+      else
+        return '%U'
    }
 
 
@@ -145,19 +157,29 @@ $(document).ready(function(){
                         .showYAxis(true)        //Show the y-axis
                         .showXAxis(true)        //Show the x-axis
         ;
-        var yScale = d3.scale.linear().domain([Math.min(obsValues),Math.max(obsValues)])
 
-        chart.xAxis     //Chart x-axis settings
-            .axisLabel('Time')
-            .tickFormat(function(d) { return d3.time.format(getFormat())(new Date(d)); });
-        
+        observedValues = observations.map(function(c){return parseInt(c.y,10);});
+        predictedValues = predValues.map(function(c){return parseInt(c.y,10);});
+        minY = d3.min(observedValues);
+        maxY = d3.max(observedValues);
+        minPredY = d3.min(predictedValues);
+        maxPredY = d3.max(predictedValues);
+        var yScale = d3.scale.linear().domain([minPredY,maxPredY]);
         chart.yAxis     //Chart y-axis settings
             .axisLabel(dataKey)
-            .scale(yScale);
+            .scale(yScale)
+            .tickFormat(d3.format(',f'));
+        
+        var xScale = d3.time.scale().range([0,300]);
+
+        chart.xAxis     //Chart x-axis settings
+            .axisLabel(predictionInterval)
+            .tickFormat(function(d) { return d3.time.format(getFormat())(new Date(d)); })
+            .scale(xScale);
         
         /* Done setting the chart up? Time to render it!*/
         var myData =  [{
-            values: obsValues,
+            values: observations,
             key: dataKey + " observed",
             color: '#ff7f0e'
         },{
@@ -165,8 +187,8 @@ $(document).ready(function(){
             key: dataKey + " predicted",
             color: '#2ca02c'
         }
-        ] 
-        
+        ]; 
+
         var chartSvg = d3.select('#chart svg');
         chartSvg.selectAll("*").remove(); //remove the text node warning of content problems.
         d3.select('#chart svg')    //Select the <svg> element you want to render the chart in.   
