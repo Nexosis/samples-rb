@@ -8,11 +8,14 @@ Rails.application.routes.draw do
   get 'results/:sessionId', to: 'results#index'
   get 'results/champion/:dataset_name/:target_column', controller: 'results', action: 'champion'
   get 'results/file/:sessionId', to: 'results#file'
+  get 'results/model/:model_id', to: 'results#model'
   get 'sessions/forecast/:dataset_name', controller: 'session', action: 'forecast', :constraints => { :dataset_name => /[^\/]+/ }
   get 'sessions/impact/:dataset_name', controller: 'session', action: 'impact', :constraints => { :dataset_name => /[^\/]+/ }
   post 'sessions/forecast/:dataset_name', controller: 'session', action: 'create_forecast', :constraints => { :dataset_name => /[^\/]+/ }
   post 'sessions/impact/:dataset_name', controller: 'session', action: 'create_impact', :constraints => { :dataset_name => /[^\/]+/ }
   get 'sessions/delete/:session_id', controller: 'session', action: 'delete'
+  get 'sessions/model/:dataset_name', controller: 'session', action: 'model', :constraints => { :dataset_name => /[^\/]+/ }
+  post 'sessions/model', controller: 'session', action: 'create_model'
   get 'dataset/delete/:dataset_name', controller: 'dataset', action: 'delete', :constraints => { :dataset_name => /[^\/]+/ }
   get 'dataset/', to: 'dataset#index'
   get 'dataset/detail/:dataset_name', to: 'dataset#detail', :constraints => { :dataset_name => /[^\/]+/ }
@@ -23,5 +26,9 @@ Rails.application.routes.draw do
   get 'views/delete/:view_name', controller: 'view', action: 'delete', :constraints => { :view_name => /[^\/]+/ }
   get 'views/create', to: 'view#create'
   post 'views/create_view', to: 'view#create_view'
+  get 'models/', to: 'model#index'
+  get 'models/:model_id', to: 'model#model'
+  get 'models/delete/:model_id', to: 'model#delete'
+  get 'models/predict/:model_id', to: 'model#predict'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

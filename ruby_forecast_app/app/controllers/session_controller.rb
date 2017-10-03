@@ -75,4 +75,20 @@ class SessionController < ApplicationController
     Rails.cache.delete 'sessions-list'
     redirect_to action: 'index'
   end
+
+  def model
+    params.require(:dataset_name)
+    params.permit(:dataset_name)
+    @dataset_name = params['dataset_name']
+    render
+  end
+
+  def create_model
+    params.permit(:dataset_name)
+    params.permit(:target_column)
+    Rails.cache.delete 'model-list'
+    Rails.cache.delete 'sessions-list'
+    session = @api_client.create_model params['dataset_name'], params['target_column']
+    redirect_to action: 'session_status', session_id: session.sessionId
+  end
 end

@@ -19,7 +19,11 @@
       </div>
       <span><a href="/sessions/<%=URI::encode(session.sessionId)%>">See Status</a></span> |
       <%if session.statusHistory.select {|v| v.has_value? "completed"}[0].nil? == false %> 
-      <span><a href="/results/<%=URI::encode(session.sessionId)%>">See Results</a></span> | 
+      <%if session.model_id.nil?%>
+            <a href="/results/<%=URI::encode(session.sessionId)%>">See Results</a>
+        <%else%>
+            <a href="/results/model/<%=URI::encode(session.model_id)%>?session_id=<%=URI::encode(session.sessionId)%>">See Results</a>
+        <%end%> |
       <span><a href="/results/file/<%=URI::encode(session.sessionId)%>" Download>Download Results</a></span> | 
       <%end%>
       <span><a href="/sessions/delete/<%=URI::encode(session.sessionId)%>">Delete Session</a></span>

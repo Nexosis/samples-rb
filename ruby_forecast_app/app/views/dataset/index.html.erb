@@ -9,7 +9,7 @@
         <%else%>
         <% @datasets.each do |ds| %>
             <div>
-                <%= ds.dataset_name %> <a href="/dataset/detail/<%= URI::encode(ds.dataset_name) %>">View Details</a>  | <a href="/sessions/forecast/<%= URI::encode(ds.dataset_name) %>">Begin Forecast</a>  | <a href="/sessions/impact/<%= URI::encode(ds.dataset_name) %>">Begin Impact Analysis</a> | <a href="/dataset/delete/<%= URI::encode(ds.dataset_name) %>">Delete Dataset</a>
+                <%= ds.dataset_name %> <a href="/dataset/detail/<%= URI::encode(ds.dataset_name) %>">View Details</a> <%if ds.timeseries?%> | <a href="/sessions/forecast/<%= URI::encode(ds.dataset_name) %>">Begin Forecast</a>  | <a href="/sessions/impact/<%= URI::encode(ds.dataset_name) %>">Begin Impact Analysis</a> <%end%>| <a href="/sessions/model/<%= URI::encode(ds.dataset_name) %>">Create Model</a> | <a href="/dataset/delete/<%= URI::encode(ds.dataset_name) %>">Delete Dataset</a>
             </div>
         <% end %>
         <%end%>

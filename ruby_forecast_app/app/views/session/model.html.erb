@@ -1,0 +1,16 @@
+<div class="row">
+    <h4>Create a new model creation session for <%= @dataset_name %><%= @model_result.dataSetName unless @model_result.nil? %></h4>
+    <p>
+      Once your model has been created (session has 'completed' status) you can use that model to make predictions. Unlike forecasts, the result of a session is not the results of a prediction. Instead, a prediction endpoint is created for your model to which you can submit features to get the target column values as predictions.
+      <em>Please make sure that your dataset is </em>
+    </p>
+        <%= form_tag({action: :create_model}) do %>  
+            <input type="hidden" name="dataset_name" value="<%= @dataset_name %>">
+            <div class="form-group">
+                <label for="target_column">Column to predict: </label><input type="text" name="target_column" value="<%= @model_result.targetColumn unless @model_result.nil? %>">
+            </div>
+            <div class="form-group">
+                <input type="submit" text="create session">
+            </div>
+        <% end %>
+    </div>

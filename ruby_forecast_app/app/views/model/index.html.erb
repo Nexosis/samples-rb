@@ -1,0 +1,20 @@
+<h2>All models</h2>
+<div class="container">
+  <%if @models.nil? == false && @models.empty? == false%>
+    <% @models.each do |model| %>
+        <div class="row row-bordered">
+          <div class="col-xs-4 text-left">
+            <label>For Model: </label> <%= model.model_id%> 
+          </div>
+          <label>Datasource: </label> <%= model.data_source_name%>
+           | <a href="/models/<%=URI::encode(model.model_id)%>">Details</a>
+           | <a href="/models/predict/<%=URI::encode(model.model_id)%>">Predict</a>
+           | <a href="/models/delete/<%=URI::encode(model.model_id)%>">Delete</a>
+        </div>
+    <%end%>
+  <%else%>
+  <div class="alert alert-warning">
+      No models could be located.
+  </div>
+  <%end%>
+</div>

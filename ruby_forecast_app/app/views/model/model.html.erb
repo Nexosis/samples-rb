@@ -1,0 +1,28 @@
+<%if @model.nil?%>
+  <div>
+    There was a problem getting your model. The session which created it may exist while the model has been removed.
+    <div class="alert alert-warning">
+      <%=@message%>%
+    </div>
+  </div>
+<%else%>
+    <h2>Details for model <%=@model.model_id%></h2>
+  <div class="row">
+    <label for="prediction_domain">Model Type: </label>
+    <span><%=@model.prediction_domain%></span>
+  </div>
+  <div class="row">
+    <label for="data_source_name">Data Source: </label>
+    <span><%=@model.data_source_name%></span>
+  </div>
+  <div class="row">
+    <label for="algorithm">Algorithm Used: </label>
+    <span><%=@model.algorithm.name%> (<%=@model.algorithm.description%>)</span>
+  </div>
+  <% @model.metrics.each do |metric| %>
+  <div class="row">
+    <label><%=metric.name%></label>
+    <span><%=number_with_precision(metric.value, precision: 5)%></span>
+  </div>
+  <%end%>
+<%end%>

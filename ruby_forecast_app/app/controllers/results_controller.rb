@@ -62,7 +62,7 @@ class ResultsController < ApplicationController
           @observations.data.map { |obs| DateTime.parse(obs[@timestamp_column]) }
         )
       @observations.data = summarize_observations(observation_interval, @session_result.result_interval) if observation_interval != @session_result.result_interval
-      # HACK: need to make sure can reference target no matter how specified session, datasset, view
+      # HACK: need to make sure can reference target no matter how specified session, dataset, view
       @observations.data = @observations.data.map do |data_hash|
         new_hash = {}
         data_hash.each { |k, v| new_hash.store k.downcase, v }
@@ -79,10 +79,25 @@ class ResultsController < ApplicationController
   def file
     params.require(:sessionId)
     client = NexosisApi.client(Rails.application.secrets.api_key)
-    @session_result = client.get_session_results(params[:sessionId], true);
+    @session_result = client.get_session_results(params[:sessionId], true)
     filename = "#{params[:sessionId]}.csv"
     response.headers['Content-Disposition'] = "attachment;filename=#{filename}"
     render inline: @session_result, content_type: 'text/csv'
+  end
+
+  def model
+    params.require(:model_id)
+    params.require(:session_id)
+    Rails.cache.fetch(params['session_id'], expires_in: 5.minutes) do
+      @session = @api_client.get_session_results params['session_id']
+      begin
+        @model = @api_client.get_model params['model_id']
+      rescue NexosisApi::HttpException => ex_http
+        @model = nil
+        @message = ex_http.message
+        @error_code = ex_http.code
+      end
+    end
   end
 
   private
