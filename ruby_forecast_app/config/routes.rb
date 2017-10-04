@@ -30,5 +30,9 @@ Rails.application.routes.draw do
   get 'models/:model_id', to: 'model#model'
   get 'models/delete/:model_id', to: 'model#delete'
   get 'models/predict/:model_id', to: 'model#predict'
+  post 'models/upload', to: 'model#upload'
+  post 'models/results', to: 'model#results'
+  get 'imports/', to: 'import#index'
+  get 'imports/:import_id', to: 'import#detail'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

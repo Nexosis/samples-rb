@@ -1,0 +1,28 @@
+<h2>All Imports</h2>
+<div class="container">
+<%if !@imports.nil? && !@datasets.nil? %>
+   <% @imports.each do |file_import| %>
+   <div class="row row-bordered">
+      <div class="col-xs-3 text-left">
+         <label>For Datasource: </label> 
+         <% if @datasets.map { |ds| ds.dataset_name }.include?(file_import.datasource_name) %>
+            <a href="/dataset/detail/<%=file_import.datasource_name%>">
+         <%else%>
+            <a href="/views/detail/<%=file_import.datasource_name%>">
+         <%end%>
+         <%=file_import.datasource_name%></a>
+      </div>
+      <div class="col-xs-4">
+         <span>
+         <label>Run On: </label> <%= DateTime.parse(file_import.statusHistory.select {|v| v.has_value? "requested"}[0]["date"]).strftime('%A, %B %d %Y %r') %>
+         </span>
+      </div>
+      <span><a href="/imports/<%=URI::encode(file_import.import_id)%>">See Status</a></span>
+   </div>
+   <% end %>
+   <%else%>
+    <div class="alert alert-warning">
+        No imports could be located.
+    </div>
+   <%end%>
+</div>

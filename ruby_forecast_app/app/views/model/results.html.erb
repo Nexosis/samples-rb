@@ -1,0 +1,18 @@
+<%if !@message.nil? %>
+  Something went wrong while trying to submit your prediction request:
+  <div class="alert alert-danger">
+    <%=@message%>
+  </div>
+<%else%>
+<h3>Prediction Results</h3>
+<div class="row">
+<table class="table">
+  <th><%=@target%></th>
+  <% @predictions.each do |row|%>
+    <tr>
+    <td><%= row[@target]%></td>
+    </tr>
+  <%end%>
+  </table>
+</div>
+<%end%>

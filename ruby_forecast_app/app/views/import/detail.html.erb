@@ -1,0 +1,41 @@
+<%if @import.nil? == false%>
+<div class="row">
+   <div><label>Import: </label><%= "#{@import.type} retrieval for #{@import.datasource_name}" %></div>
+     <div><label>Import Requested Date: </label> <%= DateTime.rfc3339(@import.requested_date).strftime("%m/%d/%Y %I:%M%p") %></div>
+   <div class="col-md-4">
+      <table id="statusTable" class="table">
+         <tr>
+            <th>Date</th>
+            <th>Status</th>
+         </tr>
+         <%@import.statusHistory.each do |sh|%>
+         <tr>
+            <td><%= DateTime.rfc3339(sh["date"]).strftime("%m/%d/%Y %I:%M:%S%p") %></td>
+            <td><%= sh["status"] %></td>
+         </tr>
+         <%end%>
+      </table>
+   </div>
+</div>
+    <%if @import.statusHistory.select {|v| v.has_value? "completed"}[0].nil? == false %>
+        <div class="row">
+          <a href="/dataset/<%=URI::encode(@import.datasource_name)%>">See Dataset</a>
+        </div>
+    <%end%>
+<%unless @import.messages.nil? || @import.messages.empty?%>
+  <h3>Messages</h3>
+  <%@import.messages.each do |message|%>
+    <%if message['severity'] == 'error'%>
+      <div class="alert alert-danger">
+    <%else%>
+      <div class="alert alert-information">
+    <%end%>
+      <%=message['message']%>
+    </div>
+  <%end%>
+<%end%>
+<%else%>
+<div class="alert alert-warning">
+   No import was found
+</div>
+<%end%>

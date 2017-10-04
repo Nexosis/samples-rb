@@ -1,0 +1,33 @@
+<H2>Generate Predictions</H2>
+<div>
+Predictions will be based on model: <%=@model.model_id%> which is a <%=@model.prediction_domain%> model created by a <%=@model.algorithm.name%> algorithm.
+<p class="text-info">
+Note that in order to predict you must provide a value for every feature you included in the data source on which the model was built.
+</p>
+</div>
+<br/>
+<div class="row">
+<h3>Batch predict by file</h3>
+<p>Uploading a json file with an array of data objects will create a set of predictions on the target column.</p>
+<pre><code>[
+    {
+      "feature1" : 243.22,
+      "feature2" : 34.344
+    },
+    {
+      "feature1" : 431.4452,
+      "feature2" : 89.63
+    }
+  ]</code></pre>
+</div>
+<div class="row">
+  <%= form_tag({action: :upload}, multipart: true) do %>
+   <div class="form-group">
+   <input type="hidden" name="model_id" value="<%=@model.model_id%>">
+    <div id="fileupload">
+        <%= file_field_tag 'datafile' %>
+    </div>
+    </div>
+   <input type="submit" text="upload file">
+   <% end %>
+</div>

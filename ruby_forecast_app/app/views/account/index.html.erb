@@ -2,14 +2,14 @@
 <p class="lead">
    Current Balance: <%= number_to_currency(@account_balance) %>
 </p>
-<%if @error.nil? == false%>
+<%if !@error.nil?%>
 <div class="alert alert-danger">
     <%= @error.message %>
 </div>
 <%end%>
-<%if @upload_message .nil? == false %>
+<%if !@upload_message.nil? %>
 <div class="alert alert-success">
-    <%= @uploadMessage %>
+    <%= @upload_message %>
 </div>
 <%end%>
 <div class="col-xs-12">
