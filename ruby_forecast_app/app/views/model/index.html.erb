@@ -6,7 +6,7 @@
           <div class="col-xs-4 text-left">
             <label>For Model: </label> <%= model.model_id%> 
           </div>
-          <label>Datasource: </label> <%= model.data_source_name%>
+          <label>Datasource: </label> <%= model.datasource_name%>
            | <a href="/models/<%=URI::encode(model.model_id)%>">Details</a>
            | <a href="/models/predict/<%=URI::encode(model.model_id)%>">Predict</a>
            | <a href="/models/delete/<%=URI::encode(model.model_id)%>">Delete</a>

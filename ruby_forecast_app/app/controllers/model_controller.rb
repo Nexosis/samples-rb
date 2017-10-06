@@ -45,23 +45,40 @@ class ModelController < ApplicationController
     params.permit(:datafile)
     params.permit(:model_id)
     uploaded_io = params['datafile']
-    Rails.cache.fetch("model-detail-#{params['model_id']}", expires_in: 3.minutes) do
-      @model = @api_client.get_model params['model_id']
-    end
-    @target = @model.column_metadata.select{|col| col.role == :target}.first.name
     begin
       json = JSON.parse(uploaded_io.read)
-      @response = @api_client.predict params['model_id'], json
-      @predictions = @response.predictions
+      do_prediction params['model_id'], json
     rescue StandardError => excep
       @message = excep.message
     end
     render 'results'
   end
 
-  def results
-    params.require(:data)
-    #@predictions = params['data']
+  def prediction
+    params.require(:model_id)
+    model_id = params['model_id']
+    Rails.cache.fetch("model-detail-#{model_id}", expires_in: 3.minutes) do
+      @model = @api_client.get_model model_id
+    end
+    values = @model.column_metadata.select { |c| c.role == :feature }.map { |col| [col.name, params[col.name]] }
+    json = [values.to_h].to_json
+    do_prediction params['model_id'], JSON.parse(json)
+    render 'results'
+  end
+
+  private
+
+  def do_prediction model_id, json
+    Rails.cache.fetch("model-detail-#{model_id}", expires_in: 3.minutes) do
+      @model = @api_client.get_model model_id
+    end
+    @target = @model.column_metadata.select { |col| col.role == :target }.first.name
+    begin
+      @response = @api_client.predict model_id, json
+      @predictions = @response.predictions
+    rescue StandardError => excep
+      @message = excep.message
+    end
   end
 
 end

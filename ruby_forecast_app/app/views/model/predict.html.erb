@@ -6,6 +6,7 @@ Note that in order to predict you must provide a value for every feature you inc
 </p>
 </div>
 <br/>
+<div id="filepredict">
 <div class="row">
 <h3>Batch predict by file</h3>
 <p>Uploading a json file with an array of data objects will create a set of predictions on the target column.</p>
@@ -31,3 +32,40 @@ Note that in order to predict you must provide a value for every feature you inc
    <input type="submit" text="upload file">
    <% end %>
 </div>
+</div>
+  <div class="row">
+    <a name="single">Send a single set of values</a>
+  </div>
+<div class="row" id="inputpredict">
+<h3>Send a single prediction request</h3>
+<%= form_tag({action: :prediction}) do%>
+ <input type="hidden" name="model_id" value="<%=@model.model_id%>">
+ <%@model.column_metadata.each do |column|%>
+    <%next if column.role != :feature %>
+    <div class="form-group">
+      <label for="<%=column.name%>"><%=column.name%> (<%=column.type%>)</label>
+      <input type="text" name="<%=column.name%>"/>
+    </div>
+ <%end%>
+ <input type="submit" text="Get Prediction">
+<% end %>
+</div>
+<% content_for :before_body_end do %>
+    <script type="text/javascript">
+        $(document).ready(function(){
+             $("#inputpredict").slideUp();
+             $('a[name=single]').click(function () {
+                 if($("#inputpredict").is(':visible')){
+                        $("#inputpredict").slideUp();
+                        $("#filepredict").slideDown();
+                        $(this).text('Send a single prediction request')
+                 }
+                 else{
+                        $("#inputpredict").slideDown();
+                        $("#filepredict").slideUp();
+                        $(this).text('Send a batch file')
+                 }
+             });
+        });
+    </script>
+<% end %>

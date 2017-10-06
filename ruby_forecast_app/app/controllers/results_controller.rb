@@ -7,7 +7,9 @@ class ResultsController < ApplicationController
     Rails.cache.fetch('dataset_list') do
       @datasets = @api_client.list_datasets
     end
-    
+    Rails.cache.fetch("session-#{params[:sessionId]}") do
+      @session = @api_client.get_session params[:sessionId]
+    end
     @session_result = @api_client.get_session_results(params[:sessionId])
     if !@session_result.nil? && !@datasets.nil?
       set_column_names
@@ -92,6 +94,9 @@ class ResultsController < ApplicationController
       @session = @api_client.get_session_results params['session_id']
       begin
         @model = @api_client.get_model params['model_id']
+        @result_data = @session.data.map { |h| h.select { |k, _v| k == @session.targetColumn } }
+        @actual = @session.data.map { |h| h.select { |k, _v| k.end_with? ':actual' } }
+        render
       rescue NexosisApi::HttpException => ex_http
         @model = nil
         @message = ex_http.message
@@ -102,10 +107,10 @@ class ResultsController < ApplicationController
 
   private
   def set_column_names
-    @timestamp_column = @session_result.column_metadata.select { |dc|
+    @timestamp_column = @session.column_metadata.select { |dc|
       dc.role == NexosisApi::ColumnRole::TIMESTAMP
     }.take(1).first().name
-    @target_column = @session_result.column_metadata.select { |dc|
+    @target_column = @session.column_metadata.select { |dc|
       dc.role == NexosisApi::ColumnRole::TARGET
     }.take(1).first().name
   end
@@ -143,7 +148,7 @@ class ResultsController < ApplicationController
 
   def summarize_observations(current_interval, target_interval)
     grouping = get_observation_grouping(current_interval, target_interval)
-    strategy = @session_result.column_metadata.find do |cm|
+    strategy = @session.column_metadata.find do |cm|
       cm.name == @target_column
     end.aggregation
     aggregation_algo = get_aggregation_algo(strategy)

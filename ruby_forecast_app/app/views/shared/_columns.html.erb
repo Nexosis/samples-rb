@@ -17,7 +17,7 @@
         <div class="form-group">
             <label for="role">Role:</label>
             <div>
-            <%= select_tag("role[#{index}]",options_for_select([['Not Selected',nil],['Timestamp','timestamp'],['Feature','feature'],['Target','target'],['None','none']], selected_key=column.role.to_s)) %>
+            <%= select_tag("role[#{index}]",options_for_select([['Not Selected',nil],['Key','key'],['Timestamp','timestamp'],['Feature','feature'],['Target','target'],['None','none']], selected_key=column.role.to_s)) %>
             </div>
         </div>
         <div class="form-group">

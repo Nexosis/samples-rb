@@ -19,7 +19,7 @@
 </div>
     <%if @import.statusHistory.select {|v| v.has_value? "completed"}[0].nil? == false %>
         <div class="row">
-          <a href="/dataset/<%=URI::encode(@import.datasource_name)%>">See Dataset</a>
+          <a href="/dataset/detail/<%=URI::encode(@import.datasource_name)%>">See Dataset</a>
         </div>
     <%end%>
 <%unless @import.messages.nil? || @import.messages.empty?%>

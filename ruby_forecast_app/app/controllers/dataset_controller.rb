@@ -53,7 +53,7 @@ class DatasetController < ApplicationController
   def delete
 		params.require(:dataset_name)
 		begin
-			@api_client.remove_dataset(params['dataset_name'],{cascade_forecast: true, cascade_sessions: true})
+			@api_client.remove_dataset(params['dataset_name'],{cascade: true})
 		rescue NexosisApi::HttpException => http_error
 			@error = http_error
     end

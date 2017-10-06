@@ -9,7 +9,7 @@
         <%else%>
         <% @views.each do |vw| %>
             <div>
-            <%= vw.view_name %> <a href="/views/detail/<%= URI::encode(vw.view_name) %>">View Details</a>  | <a href="/sessions/forecast/<%= URI::encode(vw.view_name) %>">Begin Forecast</a>  | <a href="/sessions/impact/<%= URI::encode(vw.view_name) %>">Begin Impact Analysis</a> | <a href="/views/delete/<%= URI::encode(vw.view_name) %>">Delete View</a>
+            <%= vw.view_name %> <a href="/views/detail/<%= URI::encode(vw.view_name) %>">View Details</a>  | <%if vw.timeseries?%><a href="/sessions/forecast/<%= URI::encode(vw.view_name) %>">Begin Forecast</a>  | <a href="/sessions/impact/<%= URI::encode(vw.view_name) %>">Begin Impact Analysis</a> | <%end%> <a href="/sessions/model/<%= URI::encode(vw.view_name) %>">Create Model</a> | <a href="/views/delete/<%= URI::encode(vw.view_name) %>">Delete View</a>
             </div>
         <% end %>
         <%end%>
