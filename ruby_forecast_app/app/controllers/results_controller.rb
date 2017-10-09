@@ -11,7 +11,7 @@ class ResultsController < ApplicationController
       @session = @api_client.get_session params[:sessionId]
     end
     @session_result = @api_client.get_session_results(params[:sessionId])
-    if !@session_result.nil? && !@datasets.nil?
+    if !@session_result.nil? && !@datasets.nil? && !@session.nil?
       set_column_names
       is_dataset = @datasets.map(&:dataset_name).include? @session_result.datasource_name
       # TODO: cannot determine pages from API - need dataset information to be more specific
