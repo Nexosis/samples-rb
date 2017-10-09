@@ -28,7 +28,7 @@
   <div id="chart" style="height:400px">
     <svg><text x="100" y="100" font-family="sans-serif" font-size="10px" fill="red">If no chart, try refreshing the page</text></svg>
   </div>
-</div>
+ </div>
 <%end%>
 <div>
 <%index = 0%>
@@ -62,67 +62,85 @@
 </table>
 </div>
 <% content_for :before_body_end do %>
-
+<script type="text/javascript" src="<%= asset_path('regression.js') %>"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-   var predValues = <%= render inline: @result_data.map { |r| r["#{@session.targetColumn}"] }.to_json%>;
-   var observations = <%= render inline: @actual.map { |a| a["#{@session.targetColumn}:actual"] }.to_json %>;
-   var dataKey = '<%=@session.targetColumn%>';
-    function getChart(){
-        nv.addGraph(function() {
-                var chart = nv.models.scatterChart()
-                        .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
-                        .duration(350)  //how fast do you want the lines to transition?
-                        .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
-                        .showYAxis(true)        //Show the y-axis
-                        .showXAxis(true)        //Show the x-axis
-        ;
+  var predValues = <%= render inline: @result_data.map { |r| r["#{@session.targetColumn}"] }.to_json%>;
+  var observations = <%= render inline: @actual.map { |a| a["#{@session.targetColumn}:actual"] }.to_json %>;
+  var dataKey = '<%=@session.targetColumn%>';
+  observedValues = observations.map(function(c){if(c === ""){ return 0; } else { return parseFloat(c);}});
+  predictedValues = predValues.map(function(c){return parseFloat(c);});
+  graphValues = [];
+  baseline = [];
+  for (var i = 0; i < observedValues.length; i++) 
+  {
+      graphValues.push({
+          x:  observedValues[i]
+        ,y:  predictedValues[i]
+      });
+      baseline.push({x: observedValues[i], y: observedValues[i]});
+  }
+  regression = linearRegression.calculate(predictedValues, observedValues);
 
-        observedValues = observations.map(function(c){if(c === ""){ return 0; } else { return parseFloat(c);}});
-        predictedValues = predValues.map(function(c){return parseFloat(c);});
-        graphValues = [];
-        for (var i = 0; i < observedValues.length; i++) 
-        {
-            graphValues.push({
-               x:  observedValues[i]
-              ,y:  predictedValues[i]
-            });
-        }
-        minY = d3.min(observedValues);
-        maxY = d3.max(observedValues);
-        minPredY = d3.min(predictedValues);
-        maxPredY = d3.max(predictedValues);
-        var yScale = d3.scale.linear().domain([minPredY,maxPredY]);
-        chart.yAxis     //Chart y-axis settings
-            .axisLabel(dataKey + "predicted")
-            .scale(yScale)
-            .tickFormat(d3.format(',f'));
-        
-        var xScale = d3.scale.linear;
+  function getChart(){
+      nv.addGraph(function() {
+              var chart = nv.models.scatterChart()
+                      .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
+                      .duration(350)  //how fast do you want the lines to transition?
+                      .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+                      .showYAxis(true)        //Show the y-axis
+                      .showXAxis(true)        //Show the x-axis
+      ;
 
-        chart.xAxis     //Chart x-axis settings
-            .axisLabel(dataKey + " observed")
-            .scale(xScale);
-        
-        /* Done setting the chart up? Time to render it!*/
-        var myData =  [{
-            values: graphValues,
-            key: dataKey
-        }
-        ]; 
+      minY = d3.min(observedValues);
+      maxY = d3.max(observedValues);
+      minPredY = d3.min(predictedValues);
+      maxPredY = d3.max(predictedValues);
+      var yScale = d3.scale.linear().domain([minPredY,maxPredY]);
+      chart.yAxis     //Chart y-axis settings
+          .axisLabel(dataKey + " predicted")
+          .scale(yScale)
+          .tickFormat(d3.format(',f'));
+      
+      var xScale = d3.scale.linear;
 
-        var chartSvg = d3.select('#chart svg');
-        chartSvg.selectAll("*").remove(); //remove the text node warning of content problems.
-        d3.select('#chart svg')    //Select the <svg> element you want to render the chart in.   
-            .datum(myData)         //Populate the <svg> element with chart data...
-            .call(chart);          //Finally, render the chart!
-        
-        //Update the chart when window resizes.
-        nv.utils.windowResize(function() { chart.update() });
-            return chart;
-        });
-   }
-   setTimeout(getChart, 500);
+      chart.xAxis     //Chart x-axis settings
+          .axisLabel(dataKey + " observed")
+          .scale(xScale);
+      
+      /* Done setting the chart up? Time to render it!*/
+      var myData =  [{
+          values: graphValues
+          ,key: dataKey
+          ,shape: 'circle'
+          ,type: 'scatter'
+      }
+      ,{
+        values: regression
+        ,key: 'regression line'
+        ,type: 'line'
+        ,color: '#990000'
+       }
+       ,{
+         values: baseline
+         ,key: '1:1 baseline'
+         ,type: 'line'
+         ,color: '#04850d'
+       }
+      ]; 
+
+      var chartSvg = d3.select('#chart svg');
+      chartSvg.selectAll("*").remove(); //remove the text node warning of content problems.
+      d3.select('#chart svg')    //Select the <svg> element you want to render the chart in.   
+          .datum(myData)         //Populate the <svg> element with chart data...
+          .call(chart);          //Finally, render the chart!
+      
+      //Update the chart when window resizes.
+      nv.utils.windowResize(function() { chart.update() });
+          return chart;
+      });
+  }
+  setTimeout(getChart, 500);
 })
 </script>
 <%end%>
