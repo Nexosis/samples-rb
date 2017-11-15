@@ -30,7 +30,7 @@
 </div>
 <%if @session.prediction_domain == 'classification'%>
 <div>
-<label>Accuracy:</label> <%= "%.3f" % (@session.metrics.select { |m| m.name == 'macroAverageF1Score' }.first.value * 100) %>%
+<label>Accuracy:</label> <%= @accuracy %>%
 </div>
 <%end%>
 <h3>Results Visualization</h3>
