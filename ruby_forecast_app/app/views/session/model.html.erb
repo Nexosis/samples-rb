@@ -7,11 +7,14 @@
         <%= form_tag({action: :create_model}) do %>  
             <input type="hidden" name="dataset_name" value="<%= @dataset_name %>">
             <div class="form-group">
-                <label for="target_column">Column to predict: </label><input type="text" name="target_column" value="<%= @model_result.target_column unless @model_result.nil? %>">
+                <label for="target_column">Column to predict: </label><input type="text" name="target_column" value="<%= @model_result.target_column unless @model_result.nil? %>"/>
             </div>
             <div class="form-group">
                 <label for="prediction_domain">Model Type: </label>
                  <%= select_tag('prediction_domain',options_for_select([['Regression','Regression'],['Classification','Classification']], selected_key='Regression')) %>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="balance" checked="true" name="balance"> balance labels? (classification only) </input>
             </div>
             <div class="form-group">
                 <input type="submit" text="create session">
