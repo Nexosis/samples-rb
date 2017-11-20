@@ -15,7 +15,7 @@ RUN cp -r /src/samples-rb/ruby_forecast_app/* /app && \
     bundle install
 
 ARG NEXOSIS_API_KEY
-ARG NEXOSIS_BASE_URL
+ENV NEXOSIS_BASE_URL=https://ml.nexosis.com/v1
 
 EXPOSE 3000
 
