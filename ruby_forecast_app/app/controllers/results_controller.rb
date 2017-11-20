@@ -92,6 +92,17 @@ class ResultsController < ApplicationController
     params.require(:session_id)
     Rails.cache.fetch(params['session_id'], expires_in: 5.minutes) do
       @session = @api_client.get_session_results params['session_id']
+      if (@session.prediction_domain == 'classification')
+        @class_results = @api_client.get_confusion_matrix(@session.session_id)
+        @matrix = @class_results.confusion_matrix.each_with_index.map do |arr, outer_index|
+          arr.each_with_index.map do |value, inner_index|
+            { value: value, color: get_color(arr.max, value, outer_index == inner_index) }
+          end
+        end
+        acc ||= @session.metrics.select { |m| m.name == 'macroAverageF1Score' }.first
+        acc ||= @session.metrics.select { |m| m.name == 'rocAreaUnderCurve' }.first
+        @accuracy = "%.3f" % (acc.value * 100)
+      end
       begin
         @model = @api_client.get_model params['model_id']
         @result_data = @session.data.map { |h| h.select { |k, _v| k == @session.targetColumn } }
@@ -106,6 +117,23 @@ class ResultsController < ApplicationController
   end
 
   private
+  def get_color(max, value, is_target)
+    case ((value.to_r / max.to_r) * 100).to_i
+    when 0
+      return '#CABDBD' unless is_target
+      '#F23131'
+    when 1..33
+      '#EFE975'
+    when 34..65
+      '#FFB01D'
+    when 66..100
+      return '#F23131' unless is_target
+      '#2DB71D'
+    else
+      '#4CFFFC'
+    end
+  end
+
   def set_column_names
     @timestamp_column = @session.column_metadata.select { |dc|
       dc.role == NexosisApi::ColumnRole::TIMESTAMP

@@ -2,6 +2,13 @@
 <link rel="stylesheet" href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css">
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
+<style>
+.header,
+.footer td{
+  min-width: 55px;
+  background-color: #EFEFEF;
+}
+</style>
 <%end%>
 <H2>Session: <%=@session.sessionId%></H2>
 <H4>Model: <%=@session.model_id%></H4>
@@ -21,16 +28,47 @@
 <div>
 <label>MAPE:</label> <%= "%.3f" % (@session.metrics.select { |m| m.name == 'meanAbsolutePercentError' }.first.value * 100) %>%
 </div>
-<h3>Test Data</h3>  
+<%if @session.prediction_domain == 'classification'%>
+<div>
+<label>Accuracy:</label> <%= @accuracy %>%
+</div>
+<%end%>
+<h3>Results Visualization</h3>
 <%unless @actual.nil?%>
 <div class="row">
   <div class="col-md-10">
-  <div id="chart" style="height:400px">
+  <%if @session.prediction_domain == 'classification'%>
+   <table>
+      <%@class_results.classes.sort.each_with_index do |c, i|%>
+        <tr>
+           <td class="header"><%=c%></td>
+           <%@matrix[i].each do |valhash|%>
+              <td style="width:55px;padding:5px;align:center;background-color:<%=valhash[:color]%>">
+                 <%=valhash[:value]%>
+              </td>
+           <%end%>
+        </tr>
+      <%end%>
+      <tr class="footer">
+        <td></td>
+         <%@class_results.classes.sort.each do |c|%>
+         <td>
+          <%=c%>
+         </td>
+         <%end%>
+      </tr>
+    </table>
+    </div>
+  <%else%>
+   <div id="chart" style="height:400px">
     <svg><text x="100" y="100" font-family="sans-serif" font-size="10px" fill="red">If no chart, try refreshing the page</text></svg>
-  </div>
- </div>
+   </div>
+  <%end%>
 <%end%>
-<div>
+</div>
+<hr/>
+<div class="row">
+<h3>Test Data</h3> 
 <%index = 0%>
 <table class="table table-striped">
     <th>
@@ -143,4 +181,4 @@ $(document).ready(function(){
   setTimeout(getChart, 500);
 })
 </script>
-<%end%>
+<%end if @session.prediction_domain == 'regression'%>

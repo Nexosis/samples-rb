@@ -86,9 +86,18 @@ class SessionController < ApplicationController
   def create_model
     params.permit(:dataset_name)
     params.permit(:target_column)
+    params.permit(:prediction_domain)
+    params.permit(:balance)
     Rails.cache.delete 'model-list'
     Rails.cache.delete 'sessions-list'
-    session = @api_client.create_model params['dataset_name'], params['target_column']
+    options = { prediction_domain: params['prediction_domain'] }
+    if params['prediction_domain'] == 'Classification' && params[:balance].nil?
+      options.store(:balance, false)
+    end
+    session = @api_client.create_model params['dataset_name'],
+                                       params['target_column'],
+                                       {},
+                                       options
     redirect_to action: 'session_status', session_id: session.sessionId
   end
 end
