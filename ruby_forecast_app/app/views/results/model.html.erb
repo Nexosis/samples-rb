@@ -58,7 +58,6 @@
          <%end%>
       </tr>
     </table>
-    </div>
   <%else%>
    <div id="chart" style="height:400px">
     <svg><text x="100" y="100" font-family="sans-serif" font-size="10px" fill="red">If no chart, try refreshing the page</text></svg>
@@ -66,11 +65,12 @@
   <%end%>
 <%end%>
 </div>
+</div>
 <hr/>
 <div class="row">
 <h3>Test Data</h3> 
-<%index = 0%>
-<table class="table table-striped">
+  <%index = 0%>
+  <table class="table table-striped">
     <th>
       <%=@session.targetColumn%> - Actual
     </th>
@@ -97,7 +97,8 @@
      
     </tr>
   <%end%>
-</table>
+  </table>
+  </div>
 </div>
 <% content_for :before_body_end do %>
 <script type="text/javascript" src="<%= asset_path('regression.js') %>"></script>

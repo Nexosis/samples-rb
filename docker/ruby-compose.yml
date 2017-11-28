@@ -6,5 +6,6 @@ services:
     container_name: nexosis_ruby
     environment:
       - NEXOSIS_API_KEY
+      - NEXOSIS_BASE_URL=https://api.uat.nexosisdev.com/v1
     ports:
       - "3000:3000"
