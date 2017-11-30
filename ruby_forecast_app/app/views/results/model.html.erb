@@ -25,9 +25,11 @@
 <div>
 <label>Algorithm:</label> <%= @model.algorithm.name %>
 </div>
+<% @session.metrics.each do |m|%>
 <div>
-<label>MAPE:</label> <%= "%.3f" % (@session.metrics.select { |m| m.name == 'meanAbsolutePercentError' }.first.value * 100) %>%
+  <label><%=m.name%></label> <%= "%.3f" % m.value %>
 </div>
+<%end%>
 <%if @session.prediction_domain == 'classification'%>
 <div>
 <label>Accuracy:</label> <%= @accuracy %>%
@@ -42,10 +44,12 @@
       <%@class_results.classes.sort.each_with_index do |c, i|%>
         <tr>
            <td class="header"><%=c%></td>
-           <%@matrix[i].each do |valhash|%>
-              <td style="width:55px;padding:5px;align:center;background-color:<%=valhash[:color]%>">
-                 <%=valhash[:value]%>
-              </td>
+           <%unless @matrix[i].nil?%>
+            <%@matrix[i].each do |valhash|%>
+                <td style="width:55px;padding:5px;align:center;background-color:<%=valhash[:color]%>">
+                  <%=valhash[:value]%>
+                </td>
+            <%end%>
            <%end%>
         </tr>
       <%end%>

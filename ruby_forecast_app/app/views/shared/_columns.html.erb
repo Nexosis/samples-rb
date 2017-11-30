@@ -1,8 +1,6 @@
 <%index = 0%>
 <div class="row">
-<%datasource.column_metadata.each do |column|%>
-<% index = index + 1%>
-
+<%datasource.column_metadata.each_with_index do |column, index|%>
     <div class="col-md-2 col-sm-4">
         <div class="form-group">
             <%= hidden_field_tag("column[#{index}]", column.name )%>
