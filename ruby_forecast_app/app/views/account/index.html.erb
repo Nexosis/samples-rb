@@ -1,6 +1,11 @@
 <h1>Account Information</h1>
 <p class="lead">
-   Current Balance: <%= number_to_currency(@account_balance) %>
+    <h3>Quota Usage</h3>
+  <% @quota_balance.each do |k, v|%>
+     <div>
+        <label><%=k%>:</label><span style="text-align: center;padding: 5px;"><%=v[0]%></span>
+     </div>
+  <%end%>
 </p>
 <%if !@error.nil?%>
 <div class="alert alert-danger">
@@ -15,17 +20,19 @@
 <div class="col-xs-12">
 <hr/>
 </div>
-<div class="row col-md-4">
+<div class="row col-md-6">
    <p>Upload a csv file (for this app, file assumed to have 'timestamp' column and is assumed to have headers):</p>
    <%= form_tag({action: :upload}, multipart: true) do %>
    <div class="form-group">
-   <label for="dataset_name">Dataset Name:</label>
-   <input id="dataset_name" name="dataset_name" type="text">
+    <label for="dataset_name">Dataset Name:</label>
+    <input id="dataset_name" name="dataset_name" type="text" />
    </div>
    <div class="form-group">
     <div class="btn-group">
-        <label class="btn btn-default"><input type="radio" name="fileLocation" value="S3" id="s3on"> I have a file on AWS S3</label>
-        <label class="btn btn-default **active**"><input type="radio" name="fileLocation" value="Upload" checked id="fileon"> I have a file to upload</label>
+        <div><label class="btn btn-default **active**"><input type="radio" name="fileLocation" value="Upload" checked id="fileon"> I have a file to upload</label>
+        <label class="btn btn-default"><input type="radio" name="fileLocation" value="url" id="urlfile"> I have a url</label></div>
+        <div><label class="btn btn-default"><input type="radio" name="fileLocation" value="azure" id="azurefile"> I have a file on Azure</label>
+        <label class="btn btn-default"><input type="radio" name="fileLocation" value="S3" id="s3on"> I have a file on AWS S3</label></div>
     </div>
    </div>
    <div class="form-group">
@@ -33,8 +40,11 @@
         <%= file_field_tag 'datafile' %>
     </div>
     <div id="s3upload" style="display:none;">
+        <div>
             <label for="bucket">Bucket Name:</label>
             <input type="text" name="bucket">
+        </div>
+        <div>
             <label for="region">Region:</label>
             <select name="region">
                 <option>us-east-2</option>
@@ -49,8 +59,40 @@
                 <option>eu-west-1</option>
                 <option>eu-west-2</option>
             </select>
+        </div>
+        <div>
             <label for="path">Object:</label>
             <input type="text" name="path">
+        </div>
+        <div>
+            <label for="accesskey">Access Key Id:*</label>
+            <input type="text" name="accesskey">
+        </div>
+        <div>
+            <label for="secretkey">Secret Key:*</label>
+            <input type="text" name="secretkey">
+        </div>
+        <div style="color:blue">
+         *optional
+        </div>
+    </div>
+    <div id="urlupload" style="display:none;">
+        <label for="fileurl">Url to file: </label>
+        <input name="fileurl" type="text" />
+    </div>
+    <div id="azureupload" style="display:none;">
+     <div>
+            <label for="azconnstring">Connection String:</label>
+            <input type="text" name="azconnstring"/>
+        </div>
+        <div>
+            <label for="azcontainer">Container:</label>
+            <input type="text" name="azcontainer"/>
+        </div>
+        <div>
+            <label for="blobpath">Path:</label>
+            <input type="text" name="blobpath"/>
+        </div>
     </div>
    </div>
    <input type="submit" text="upload file">
@@ -64,10 +106,27 @@
                  if(this.value == 'S3'){
                         $("#s3upload").slideDown();
                         $("#fileupload").slideUp();
+                        $("#urlupload").slideUp();
+                        $("#azureupload").slideUp();
+                 }
+                 else if(this.value == 'azure'){
+                        $("#s3upload").slideUp();
+                        $("#fileupload").slideUp();
+                        $("#urlupload").slideUp();
+                        $("#azureupload").slideDown();  
+                 }
+                 else if(this.value == 'url')
+                 {
+                        $("#s3upload").slideUp();
+                        $("#fileupload").slideUp();
+                        $("#urlupload").slideDown();
+                        $("#azureupload").slideUp();
                  }
                  else{
                         $("#s3upload").slideUp();
                         $("#fileupload").slideDown();
+                        $("#urlupload").slideUp();
+                        $("#azureupload").slideUp();
                  }
              });
         });
