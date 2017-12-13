@@ -11,6 +11,6 @@ class ApplicationController < ActionController::Base
   end
 
   def self.initialize_factory(factory)
-      @@factory = factory
+    @@factory = factory
   end
 end
