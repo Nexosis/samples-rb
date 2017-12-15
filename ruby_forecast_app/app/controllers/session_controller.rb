@@ -12,6 +12,10 @@ class SessionController < ApplicationController
   def session_status
     params.require(:session_id)
     @session = @api_client.get_session(params['session_id'])
+    Rails.cache.fetch('account-quotas', :expires_in => 5.minutes) do
+      @quotas = @api_client.get_account_quotas
+    end
+    @is_paying = @quotas['nexosis-account-datasetcount-allotted'][0].to_i > 25
     render 'session'
   end
     

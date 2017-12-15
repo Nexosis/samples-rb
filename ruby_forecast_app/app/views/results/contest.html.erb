@@ -1,0 +1,46 @@
+<%if @error_message.nil?%>
+<h2>Algorithm Contest Results for <%=@contest.session_id%></h2>
+<div class="container col-md-5">
+  <div class="row">
+    <h4>Champion Algorithm - <%=@contest.champion.algorithm.name%></h4>
+    <label>Champion chosen by :</label> <%= @contest.champion_metric%>
+  </div>
+  <%= render partial: 'shared/contestant', locals: {contestant: @contest.champion }%>
+  <h4>Contestants</h4>
+  <%@contest.contestants.reject{ |cc| cc.id == @contest.champion.id }.each do |c|%>
+    <%= render partial: 'shared/contestant', locals: {contestant: c }%>
+  <%end%>
+</div>
+<div class="container col-md-5">
+<div class="row">
+  <table class="table table-hover">
+   <thead class="thead-light">
+     <tr>
+      <th scope="col">
+        Algorithm
+      </th>
+      <th scope="col">  
+        <%= @contest.champion_metric %>
+      </th>
+     </tr> 
+    </thead>
+    <tbody>
+    <tr style="font-weight:bold">
+       <td><%= @contest.champion.algorithm.name%></td>
+       <td><%= sprintf('%.6f', @contest.champion.metrics[@contest.champion_metric])%></td>
+    </tr>
+    <%@contest.contestants.reject{ |cc| cc.id == @contest.champion.id || cc.metrics.empty? }.each do |c|%>
+      <tr>
+       <td><%= c.algorithm.name%></td>
+       <td><%= sprintf('%.6f', c.metrics[@contest.champion_metric])%></td>
+      </tr>
+    <%end%>
+    </tbody>
+  </table>
+  </div>
+</div>
+<%else%>
+  <div class="alert alert-danger">
+    <%= @error_message %>
+  </div>
+<%end%>

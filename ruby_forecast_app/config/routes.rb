@@ -5,10 +5,11 @@ Rails.application.routes.draw do
   get 'sessions/', to: 'session#index'
   get 'sessions/:session_id', controller: 'session', action: 'session_status'
   post 'account/upload'
-  get 'results/:sessionId', to: 'results#index'
+  get 'results/:session_id', to: 'results#index'
   get 'results/champion/:dataset_name/:target_column', controller: 'results', action: 'champion'
-  get 'results/file/:sessionId', to: 'results#file'
+  get 'results/file/:session_id', to: 'results#file'
   get 'results/model/:model_id', to: 'results#model'
+  get 'results/contest/:session_id', to: 'results#contest'
   get 'sessions/forecast/:dataset_name', controller: 'session', action: 'forecast', :constraints => { :dataset_name => /[^\/]+/ }
   get 'sessions/impact/:dataset_name', controller: 'session', action: 'impact', :constraints => { :dataset_name => /[^\/]+/ }
   post 'sessions/forecast/:dataset_name', controller: 'session', action: 'create_forecast', :constraints => { :dataset_name => /[^\/]+/ }

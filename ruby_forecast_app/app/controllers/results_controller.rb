@@ -23,7 +23,7 @@ class ResultsController < ApplicationController
         page_size = 50
         page_size = obs_count unless obs_count < 30
         page_size = 1000 if page_size > 1000
-        first_pred = DateTime.parse(@session_result.startDate)
+        first_pred = DateTime.parse(@session_result.start_date)
         last_obs =  first_pred + calc_day_interval(@session_result.result_interval, 1.0)
         first_obs = first_pred - obs_count
         if is_dataset
@@ -38,9 +38,9 @@ class ResultsController < ApplicationController
           @observations = @api_client.get_view(@session_result.datasource_name, 0, 30, {:start_date => first_obs, :end_date => last_obs})
         end
       else
-        first_obs = DateTime.parse(@session_result.startDate) - 15
-        last_obs = DateTime.parse(@session_result.endDate) + 15
-        total_event_days = (DateTime.parse(@session_result.endDate) - DateTime.parse(@session_result.startDate)).to_i
+        first_obs = DateTime.parse(@session_result.start_date) - 15
+        last_obs = DateTime.parse(@session_result.end_date) + 15
+        total_event_days = (DateTime.parse(@session_result.end_date) - DateTime.parse(@session_result.start_date)).to_i
         if is_dataset
           @observations = @api_client.get_dataset(
             @session_result.datasource_name,
@@ -88,31 +88,50 @@ class ResultsController < ApplicationController
   end
 
   def model
-    params.require(:model_id)
     params.require(:session_id)
-    Rails.cache.fetch(params['session_id'], expires_in: 5.minutes) do
+    params.require(:model_id)
+    model_output params['session_id']
+    begin
+      @model = @api_client.get_model params['model_id']
+      @result_data = @session.data.map { |h| h.select { |k, _v| k == @session.target_column } }
+      @actual = @session.data.map { |h| h.select { |k, _v| k.end_with? ':actual' } }
+      render
+    rescue NexosisApi::HttpException => ex_http
+      @model = nil
+      @message = ex_http.message
+      @error_code = ex_http.code
+    end
+  end
+
+  def model_output session_id
+    Rails.cache.fetch(params["#{session_id}-results"], expires_in: 5.minutes) do
       @session = @api_client.get_session_results params['session_id']
-      if (@session.prediction_domain == 'classification')
+    end
+    if (@session.prediction_domain == 'classification')
+      Rails.cache.fetch(params["#{session_id}-confusionmatrix"], expires_in: 5.minutes) do
         @class_results = @api_client.get_confusion_matrix(@session.session_id)
-        @matrix = @class_results.confusion_matrix.each_with_index.map do |arr, outer_index|
-          arr.each_with_index.map do |value, inner_index|
-            { value: value, color: get_color(arr.max, value, outer_index == inner_index) }
-          end
+      end
+      @matrix = @class_results.confusion_matrix.each_with_index.map do |arr, outer_index|
+        arr.each_with_index.map do |value, inner_index|
+          { value: value, color: get_color(arr.max, value, outer_index == inner_index) }
         end
-        acc ||= @session.metrics.select { |m| m.name == 'macroAverageF1Score' }.first
-        acc ||= @session.metrics.select { |m| m.name == 'rocAreaUnderCurve' }.first
-        @accuracy = "%.3f" % (acc.value * 100)
       end
-      begin
-        @model = @api_client.get_model params['model_id']
-        @result_data = @session.data.map { |h| h.select { |k, _v| k == @session.target_column } }
-        @actual = @session.data.map { |h| h.select { |k, _v| k.end_with? ':actual' } }
-        render
-      rescue NexosisApi::HttpException => ex_http
-        @model = nil
-        @message = ex_http.message
-        @error_code = ex_http.code
-      end
+      acc ||= @session.metrics.select { |m| m.name == 'macroAverageF1Score' }.first
+      acc ||= @session.metrics.select { |m| m.name == 'rocAreaUnderCurve' }.first
+      @accuracy = "%.3f" % (acc.value * 100)
+    end
+  end
+
+  def contest
+    Rails.cache.fetch('account-quotas', :expires_in => 5.minutes) do
+      @quotas = @api_client.get_account_quotas
+    end
+    if @quotas['nexosis-account-datasetcount-allotted'][0].to_i <= 25
+      @error_message = 'You must have a paid account plan to access contest results'
+      return
+    end
+    Rails.cache.fetch("contest-results-#{params[:session_id]}") do
+      @contest = @api_client.get_session_contest params[:session_id]
     end
   end
 
