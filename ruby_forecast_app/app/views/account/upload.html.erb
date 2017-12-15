@@ -1,7 +1,8 @@
-<%if(@message.nil?)%>
+<%if(@error_message.nil?)%>
 You have reached this page in error. Perhaps you wanted /account?
 <%else%>
-<div class="error">
-   <%=@message%>
+<div class="alert alert-danger">
+   <%=@error_message%>
 </div>
+<a href="/account">Return and try again</a>
 <%end%>

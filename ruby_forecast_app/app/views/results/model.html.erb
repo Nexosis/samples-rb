@@ -10,7 +10,7 @@
 }
 </style>
 <%end%>
-<H2>Session: <%=@session.sessionId%></H2>
+<H2>Session: <%=@session.session_id%></H2>
 <H4>Model: <%=@session.model_id%></H4>
 <%if @model.nil?%>
   <div>
@@ -21,7 +21,7 @@
   </div>
 <%end%>
 <H4>Data Source: <%=@session.datasource_name%></H4>
-<label>Target column: </label><%=@session.targetColumn%>
+<label>Target column: </label><%=@session.target_column%>
 <div>
 <label>Algorithm:</label> <%= @model.algorithm.name %>
 </div>
@@ -76,7 +76,7 @@
   <%index = 0%>
   <table class="table table-striped">
     <th>
-      <%=@session.targetColumn%> - Actual
+      <%=@session.target_column%> - Actual
     </th>
   <%@result_data.first.each do |k, _v|%>
     <th>
@@ -89,7 +89,7 @@
         <%if @actual.nil? || @actual.empty?%>
           No actual available
         <%else%>
-          <%= @actual[index]["#{@session.targetColumn}:actual"] %>
+          <%= @actual[index]["#{@session.target_column}:actual"] %>
         <%end%>
         <%index = index + 1%>
       </td>
@@ -108,9 +108,9 @@
 <script type="text/javascript" src="<%= asset_path('regression.js') %>"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-  var predValues = <%= render inline: @result_data.map { |r| r["#{@session.targetColumn}"] }.to_json%>;
-  var observations = <%= render inline: @actual.map { |a| a["#{@session.targetColumn}:actual"] }.to_json %>;
-  var dataKey = '<%=@session.targetColumn%>';
+  var predValues = <%= render inline: @result_data.map { |r| r["#{@session.target_column}"] }.to_json%>;
+  var observations = <%= render inline: @actual.map { |a| a["#{@session.target_column}:actual"] }.to_json %>;
+  var dataKey = '<%=@session.target_column%>';
   observedValues = observations.map(function(c){if(c === ""){ return 0; } else { return parseFloat(c);}});
   predictedValues = predValues.map(function(c){return parseFloat(c);});
   graphValues = [];

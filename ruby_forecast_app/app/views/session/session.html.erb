@@ -1,9 +1,9 @@
 <%if @session.nil? == false%>
 <div class="row">
-   <div><label>Session: </label><%= "#{@session.type} of column #{@session.targetColumn} on #{@session.dataSetName}" %></div>
-   <%if !@session.startDate.nil?%>
-     <div><label>Prediction Start Date: </label> <%= DateTime.iso8601(@session.startDate).strftime("%m/%d/%Y %I:%M%p") %></div>
-     <div><label>Prediction End Date: </label> <%= DateTime.iso8601(@session.endDate).strftime("%m/%d/%Y %I:%M%p") %></div>
+   <div><label>Session: </label><%= "#{@session.type} of column #{@session.target_column} on #{@session.datasource_name}" %></div>
+   <%if !@session.start_date.nil?%>
+     <div><label>Prediction Start Date: </label> <%= DateTime.iso8601(@session.start_date).strftime("%m/%d/%Y %I:%M%p") %></div>
+     <div><label>Prediction End Date: </label> <%= DateTime.iso8601(@session.end_date).strftime("%m/%d/%Y %I:%M%p") %></div>
    <%end%>
    <%if !@session.model_id.nil? %>
      <div><label>Model Id: </label> <%= @session.model_id %></div>
@@ -15,7 +15,7 @@
             <th>Date</th>
             <th>Status</th>
          </tr>
-         <%@session.statusHistory.each do |sh|%>
+         <%@session.status_history.each do |sh|%>
          <tr>
             <td><%= DateTime.rfc3339(sh["date"]).strftime("%m/%d/%Y %I:%M:%S%p") %></td>
             <td><%= sh["status"] %></td>
@@ -24,12 +24,12 @@
       </table>
    </div>
 </div>
-    <%if @session.statusHistory.select {|v| v.has_value? "completed"}[0].nil? == false %>
+    <%if @session.status_history.select {|v| v.has_value? "completed"}[0].nil? == false %>
         <div class="row">
          <%if @session.model_id.nil?%>
-            <a href="/results/<%=URI::encode(@session.sessionId)%>">See Results</a>
+            <a href="/results/<%=URI::encode(@session.session_id)%>">See Results</a>
         <%else%>
-            <a href="/results/model/<%=URI::encode(@session.model_id)%>?session_id=<%=URI::encode(@session.sessionId)%>">See Results</a>
+            <a href="/results/model/<%=URI::encode(@session.model_id)%>?session_id=<%=URI::encode(@session.session_id)%>">See Results</a>
         <%end%>
         </div>
     <%end%>

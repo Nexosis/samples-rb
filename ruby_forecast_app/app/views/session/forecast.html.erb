@@ -1,11 +1,11 @@
 <%if @forecast_result.nil? == false && @forecast_result.status != "estimated"%>
     <div class="alert alert-success">
-        <%= "Your forecast request has been submitted. This job cost $#{@forecast_result.cost}. Your remaining balance is now $#{@forecast_result.account_balance}." %>
+        Your forecast request has been submitted.
         <div>
-            <a href="/sessions/forecast/<%= @forecast_result.dataSetName %>">Submit another session</a>
+            <a href="/sessions/forecast/<%= @forecast_result.datasource_name %>">Submit another session</a>
             </div>
             <div>
-            <a href="/sessions/<%= @forecast_result.sessionId %>">See session status</a>
+            <a href="/sessions/<%= @forecast_result.session_id %>">See session status</a>
         </div>
     </div>
 <%else%>
@@ -25,7 +25,7 @@
     </div>
     <%end%>
     <div class="row">
-    <h4>Create a new forecast session for <%= @dataset_name %><%= @forecast_result.dataSetName unless @forecast_result.nil? %></h4>
+    <h4>Create a new forecast session for <%= @dataset_name %><%= @forecast_result.datasource_name unless @forecast_result.nil? %></h4>
         <%= form_tag({action: :create_forecast}) do %>  
             <input type="hidden" name="dataset_name" value="<%= @dataset_name %>">
             <div class="form-group">

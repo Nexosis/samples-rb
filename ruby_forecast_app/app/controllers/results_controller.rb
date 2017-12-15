@@ -3,14 +3,14 @@ require 'nexosis_api'
 class ResultsController < ApplicationController
 
   def index
-    params.require(:sessionId)
+    params.require(:session_id)
     Rails.cache.fetch('dataset_list') do
       @datasets = @api_client.list_datasets
     end
-    Rails.cache.fetch("session-#{params[:sessionId]}") do
-      @session = @api_client.get_session params[:sessionId]
+    Rails.cache.fetch("session-#{params[:session_id]}") do
+      @session = @api_client.get_session params[:session_id]
     end
-    @session_result = @api_client.get_session_results(params[:sessionId])
+    @session_result = @api_client.get_session_results(params[:session_id])
     if !@session_result.nil? && !@datasets.nil? && !@session.nil?
       set_column_names
       is_dataset = @datasets.map(&:dataset_name).include? @session_result.datasource_name
@@ -79,10 +79,10 @@ class ResultsController < ApplicationController
   end
 
   def file
-    params.require(:sessionId)
+    params.require(:session_id)
     client = NexosisApi.client(Rails.application.secrets.api_key)
-    @session_result = client.get_session_results(params[:sessionId], true)
-    filename = "#{params[:sessionId]}.csv"
+    @session_result = client.get_session_results(params[:session_id], true)
+    filename = "#{params[:session_id]}.csv"
     response.headers['Content-Disposition'] = "attachment;filename=#{filename}"
     render inline: @session_result, content_type: 'text/csv'
   end
@@ -105,7 +105,7 @@ class ResultsController < ApplicationController
       end
       begin
         @model = @api_client.get_model params['model_id']
-        @result_data = @session.data.map { |h| h.select { |k, _v| k == @session.targetColumn } }
+        @result_data = @session.data.map { |h| h.select { |k, _v| k == @session.target_column } }
         @actual = @session.data.map { |h| h.select { |k, _v| k.end_with? ':actual' } }
         render
       rescue NexosisApi::HttpException => ex_http

@@ -98,6 +98,6 @@ class SessionController < ApplicationController
                                        params['target_column'],
                                        {},
                                        options
-    redirect_to action: 'session_status', session_id: session.sessionId
+    redirect_to action: 'session_status', session_id: session.session_id
   end
 end

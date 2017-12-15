@@ -22,15 +22,10 @@ class AccountController < ApplicationController
 
   def upload
     params.require(:fileLocation)
-    params.require(:dataset_name)
-    params.permit(:bucket)
-    params.permit(:path)
-    params.permit(:region)
-    params.permit(:datafile)
-    params.permit(:azconnstring)
-    params.permit(:azcontainer)
-    params.permit(:blobpath)
-    params.permit(:fileurl)
+    if params['dataset_name'].empty?
+      @error_message = 'cannot upload a dataset without a dataset name'
+      return
+    end
     use_s3 = params['fileLocation'] == 'S3'
     use_url = params['fileLocation'] == 'url'
     use_azure = params['fileLocation'] == 'azure'
@@ -41,7 +36,8 @@ class AccountController < ApplicationController
       bucket = params['bucket']
       path = params['path']
       region = params['region']
-      @api_client.import_from_s3(dataset_name, bucket, path, region)
+      creds =  {access_key_id: params['accesskey'], secret_access_key: params['secretkey']} unless params['accesskey'].empty?
+      @api_client.import_from_s3(dataset_name, bucket, path, region, creds)
     elsif use_url
       method = 'url'
       url = params['fileurl']
