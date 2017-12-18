@@ -1,11 +1,15 @@
 <h1>Account Information</h1>
 <p class="lead">
-    <h3>Quota Usage</h3>
-  <% @quota_balance.each do |k, v|%>
+    <h3>Quota Usage (used/allotted)</h3>
      <div>
-        <label><%=k%>:</label><span style="text-align: center;padding: 5px;"><%=v[0]%></span>
+        <label>Datasets:</label><span style="text-align: center;padding: 5px;"><%=@quota_balance.select {|k,_v| k.to_s.start_with? 'Dataset' }.to_a.flatten[3]%>/<%=@quota_balance.select {|k,_v| k.to_s.start_with? 'Dataset' }.to_a.flatten[1]%></span>
      </div>
-  <%end%>
+     <div>
+        <label>Predictions:</label><span style="text-align: center;padding: 5px;"><%=@quota_balance.select {|k,_v| k.to_s.start_with? 'Predict' }.to_a.flatten[3]%>/<%=@quota_balance.select {|k,_v| k.to_s.start_with? 'Predict' }.to_a.flatten[1]%></span>
+     </div>
+     <div>
+        <label>Sessions:</label><span style="text-align: center;padding: 5px;"><%=@quota_balance.select {|k,_v| k.to_s.start_with? 'Session' }.to_a.flatten[3]%>/<%=@quota_balance.select {|k,_v| k.to_s.start_with? 'Session' }.to_a.flatten[1]%></span>
+     </div>
 </p>
 <%if !@error.nil?%>
 <div class="alert alert-danger">

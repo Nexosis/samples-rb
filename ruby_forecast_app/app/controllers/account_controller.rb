@@ -85,8 +85,8 @@ class AccountController < ApplicationController
   end
 
   def quota_hash(headers)
-    arr = headers.map do |k, v|
-      { k.sub(/nexosis-account-(?<name>[a-z]+)count-current/, '\k<name>s').capitalize => v}.flatten
+    arr = headers.reject { |key, _val| key == 'nexosis-account-balance' }.map do |k, v|
+      { k.sub(/nexosis-account-(?<name>[a-z]+)count-(?<type>current|allotted)/, '\k<name>s \k<type>').capitalize => v}.flatten
     end
     arr.to_h
   end
