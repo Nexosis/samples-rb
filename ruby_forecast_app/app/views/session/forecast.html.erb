@@ -17,13 +17,6 @@
             </div>
         </div>
     <%end%>
-    <%if @forecast_result.nil? == false && @forecast_result.status == "estimated"%>
-    <div class="row">
-        <div class="alert alert-success">
-            This job will cost $<%=@forecast_result.cost%>.
-        </div>
-    </div>
-    <%end%>
     <div class="row">
     <h4>Create a new forecast session for <%= @dataset_name %><%= @forecast_result.datasource_name unless @forecast_result.nil? %></h4>
         <%= form_tag({action: :create_forecast}) do %>  
@@ -47,9 +40,6 @@
                     <option value="month">Month</option>
                     <option value="year">Year</option>
                 </select>
-            </div>
-            <div class="form-group">
-                <label for="is_estimate">Estimate Only</label><input type="checkbox" name="is_estimate"/>
             </div>
             <div class="form-group">
                 <input type="submit" text="create session">

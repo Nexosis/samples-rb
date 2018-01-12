@@ -104,11 +104,11 @@ class ResultsController < ApplicationController
   end
 
   def model_output session_id
-    Rails.cache.fetch(params["#{session_id}-results"], expires_in: 5.minutes) do
+    Rails.cache.fetch("#{session_id}-results", expires_in: 5.minutes) do
       @session = @api_client.get_session_results params['session_id']
     end
     if (@session.prediction_domain == 'classification')
-      Rails.cache.fetch(params["#{session_id}-confusionmatrix"], expires_in: 5.minutes) do
+      Rails.cache.fetch("#{session_id}-confusionmatrix", expires_in: 5.minutes) do
         @class_results = @api_client.get_confusion_matrix(@session.session_id)
       end
       @matrix = @class_results.confusion_matrix.each_with_index.map do |arr, outer_index|
@@ -133,6 +133,23 @@ class ResultsController < ApplicationController
     Rails.cache.fetch("contest-results-#{params[:session_id]}") do
       @contest = @api_client.get_session_contest params[:session_id]
     end
+  end
+
+  def anomaly
+    session_id = params[:session_id]
+    page_size = 500
+    Rails.cache.fetch("#{session_id}-results-#{page_size}", expires_in: 5.minutes) do
+      @anomalies = @api_client.get_session_result_data(params['session_id'], 0, page_size, as_csv: true)
+    end
+    Rails.cache.fetch("anomaly-scores-#{session_id}", :expires_in => 5.minutes) do
+      begin
+        @data = @api_client.get_anomaly_scores session_id, 0, 500
+      rescue NexosisApi::HttpException => e
+        @data = nil
+        @message = e.message
+      end
+    end
+    render
   end
 
   private

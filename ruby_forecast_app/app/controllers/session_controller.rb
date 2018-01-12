@@ -98,6 +98,7 @@ class SessionController < ApplicationController
     if params['prediction_domain'] == 'Classification' && params[:balance].nil?
       options.store(:balance, false)
     end
+    
     session = @api_client.create_model params['dataset_name'],
                                        params['target_column'],
                                        {},

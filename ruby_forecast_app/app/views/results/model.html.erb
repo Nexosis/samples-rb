@@ -19,7 +19,7 @@
       <%=@message%>%
     </div>
   </div>
-<%end%>
+<%else%>
 <H4>Data Source: <%=@session.datasource_name%></H4>
 <label>Target column: </label><%=@session.target_column%>
 <div>
@@ -28,11 +28,6 @@
 <% @session.metrics.each do |m|%>
 <div>
   <label><%=m.name%></label> <%= "%.3f" % m.value %>
-</div>
-<%end%>
-<%if @session.prediction_domain == 'classification'%>
-<div>
-<label>Accuracy:</label> <%= @accuracy %>%
 </div>
 <%end%>
 <h3>Results Visualization</h3>
@@ -187,3 +182,4 @@ $(document).ready(function(){
 })
 </script>
 <%end if @session.prediction_domain == 'regression'%>
+<%end%>

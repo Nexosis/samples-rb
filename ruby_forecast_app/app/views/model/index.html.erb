@@ -3,8 +3,8 @@
   <%if @models.nil? == false && @models.empty? == false%>
     <% @models.each do |model| %>
         <div class="row row-bordered">
-          <div class="col-xs-4 text-left">
-            <label>For Model: </label> <%= model.model_id%> 
+          <div class="col-xs-5 text-left">
+            <label>For <%=model.prediction_domain.capitalize%> Model: </label> <%= model.model_id%> 
           </div>
           <label>Datasource: </label> <%= model.datasource_name%>
            | <a href="/models/<%=URI::encode(model.model_id)%>">Details</a>

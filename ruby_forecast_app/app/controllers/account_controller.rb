@@ -68,6 +68,18 @@ class AccountController < ApplicationController
     redirect_to action: 'index', :uploaded => true, method: method
   end
 
+  def set_session_key
+    @api_client.api_key params['api-key']
+    begin
+      # make sure it works otherwise recovery will require server restart
+      @api_client.list_sessions({},0,1)
+    rescue Exception => e
+      @api_client.api_key Rails.application.secrets.api_key
+    end
+
+    redirect_to action: 'index'
+  end
+
   private
 
   # @private

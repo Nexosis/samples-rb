@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'results/file/:session_id', to: 'results#file'
   get 'results/model/:model_id', to: 'results#model'
   get 'results/contest/:session_id', to: 'results#contest'
+  get 'results/anomaly/:session_id', to: 'results#anomaly'
   get 'sessions/forecast/:dataset_name', controller: 'session', action: 'forecast', :constraints => { :dataset_name => /[^\/]+/ }
   get 'sessions/impact/:dataset_name', controller: 'session', action: 'impact', :constraints => { :dataset_name => /[^\/]+/ }
   post 'sessions/forecast/:dataset_name', controller: 'session', action: 'create_forecast', :constraints => { :dataset_name => /[^\/]+/ }
@@ -35,5 +36,6 @@ Rails.application.routes.draw do
   post 'models/prediction', to: 'model#prediction'
   get 'imports/', to: 'import#index'
   get 'imports/:import_id', to: 'import#detail'
+  post 'account/set_session_key', to: 'account#set_session_key'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

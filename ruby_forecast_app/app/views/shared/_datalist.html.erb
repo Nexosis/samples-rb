@@ -6,9 +6,15 @@
      <a class="btn btn-primary" href="<%=request.path%>" role="button">Stop Viewing Data</a>
   <%end%>
 </div>
-<div class="row">
-    <%if datasource_data != nil %>
-    <h2>Datasource Data</h2>
+
+<%if datasource_data != nil %>
+<h2>Datasource Data</h2>
+    <div class="row">
+        <div class="col-sm-4">
+            <label>Total Records: </label><%=datasource_data.data.item_total%>
+        </div>
+    </div>
+    <div class="row">
         <div id="resultTable" class="col-md-6">
             <table id="dataTable" class="table table-striped">
                 <thead>
@@ -44,8 +50,8 @@
                         <%end%>
                         </ul>
                 </td>
-              </tbody>
+            </tbody>
             </table>
         </div>
-    <%end%>
-</div>
+    </div>
+<%end%>

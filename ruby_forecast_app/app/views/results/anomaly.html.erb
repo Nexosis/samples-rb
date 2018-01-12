@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css">
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
+    <style>
+        text {
+            font: 12px sans-serif;
+        }
+        svg {
+            display: block;
+        }
+        html, body, #chart1, svg {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+  <div class="row">
+    <div class="gallery" id="chart1">
+      <svg></svg>
+    </div>
+  <div>
+  <div class="row">
+    <%if @data.nil? %>
+      <div class="">
+        <%=@message%>
+      </div>
+    <%else%>
+      <% @data.data.each do |d|%>
+        <%=d%>
+      <%end%>
+    <%end%>
+  </div>
+</div>
+<script>
+    nv.addGraph(function() {
+      var chart = nv.models.boxPlotChart()
+          .x(function(d) { return d.label })
+          .staggerLabels(true)
+          .maxBoxWidth(75) // prevent boxes from being incredibly wide
+          .yDomain([0, 500])
+          ;
+      d3.select('#chart1 svg')
+          .datum(exampleData())
+          .call(chart);
+      nv.utils.windowResize(chart.update);
+      return chart;
+    });
+    function exampleData() {
+     return  [
+        {
+          label: "Sample A",
+          values: {
+            Q1: 120,
+            Q2: 150,
+            Q3: 200,
+            whisker_low: 115,
+            whisker_high: 210,
+            outliers: [50,101,103,115 ,100, 225, 250, 284]
+          }
+        }
+      ];
+    }
+</script>
+
+</body>
+</html>

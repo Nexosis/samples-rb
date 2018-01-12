@@ -7,6 +7,7 @@
   </div>
 <%else%>
     <h2>Details for model <%=@model.model_id%></h2>
+    <h4>From Session: <%=@model.session_id%></h4>
   <div class="row">
     <label for="prediction_domain">Model Type: </label>
     <span><%=@model.prediction_domain%></span>

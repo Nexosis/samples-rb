@@ -1,9 +1,11 @@
 <%if @error_message.nil?%>
 <h2>Algorithm Contest Results for <%=@contest.session_id%></h2>
+ <%if @contest.prediction_domain != 'anomalies'%>
 <div class="container col-md-5">
   <div class="row">
     <h4>Champion Algorithm - <%=@contest.champion.algorithm.name%></h4>
     <label>Champion chosen by :</label> <%= @contest.champion_metric%>
+    
   </div>
   <%= render partial: 'shared/contestant', locals: {contestant: @contest.champion }%>
   <h4>Contestants</h4>
@@ -39,6 +41,13 @@
   </table>
   </div>
 </div>
+<%else%>
+  <div class="container col-md-5">
+    <div class="row">
+      <%= render partial: 'shared/contestant', locals: {contestant: @contest.champion }%>
+    </div>
+  </div>
+<%end%>
 <%else%>
   <div class="alert alert-danger">
     <%= @error_message %>
