@@ -33,6 +33,9 @@
           <table class="table">
           <thead>
             <tr>
+              <%@session.column_metadata.select{|col| col.role == NexosisApi::ColumnRole::KEY }.each do |col| %>
+                <th scope="col"><%=col.name%></th>
+              <%end%>
               <th scope="col">Anomaly</th>
               <%@session.column_metadata.select{|k| k.role == NexosisApi::ColumnRole::FEATURE }.each do |c|%>
               <th scope="col">
@@ -44,8 +47,8 @@
           <tbody>
           <%@session_results.data.each do |d|%>
             <tr>
-              <%d.each do |_k,v|%>
-                <td><%= "%.10g" % ("%.6f"  %  v) %></td>
+              <%d.reject{|key,_v| key.to_s.ends_with? ':actual'}.each do |_k,v|%>
+                <td><%= "%.10g" % ("%.6f"  %  v) rescue v %></td>
               <%end%>
             </tr>
           <%end%>

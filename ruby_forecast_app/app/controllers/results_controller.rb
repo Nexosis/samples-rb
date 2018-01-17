@@ -139,18 +139,16 @@ class ResultsController < ApplicationController
     session_id = params[:session_id]
     page_size = 500
     Rails.cache.fetch("session-#{session_id}") do
-      #TODO: getting the session so we have metadata. Some values may not be numbers and cannot be used in distance metric
       @session = @api_client.get_session session_id
     end
     Rails.cache.fetch("#{session_id}-results-#{page_size}", expires_in: 5.minutes) do
       @session_results = @api_client.get_session_result_data(params['session_id'], 0, page_size)
-      #@session_results = results.data.map { |d| d.reject { |k, _v| k == 'anomaly' }.values.map(&:to_f) }
     end
     Rails.cache.fetch("anomaly-scores-#{session_id}", expires_in: 5.minutes) do
       begin
         scores = @api_client.get_anomaly_scores session_id, 0, 500
-        @data_rows = scores.data.map { |d| d.reject { |k, _v| k == 'anomaly' }.values.map(&:to_f) }
-        @anomalies = scores.data.map { |d| d.select { |k, _v| k == 'anomaly' }.values.map(&:to_f) }.flatten
+        @data_rows = scores.data.map { |d| d.reject { |k, _v| k == 'anomaly' }.values.map{ |v| v.to_f } }
+        @anomalies = scores.data.map { |d| d.select { |k, _v| k == 'anomaly' || k == @session.target_column }.values.map{ |v| v.to_f } }.flatten
       rescue NexosisApi::HttpException => e
         @data = nil
         @message = e.message
