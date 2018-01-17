@@ -1,51 +1,83 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css">
-    <script src="https://d3js.org/d3.v3.min.js"></script>
-    <script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
+<% content_for :header do %>
+<link rel="stylesheet" href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css">
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
     <style>
         text {
             font: 12px sans-serif;
         }
-        svg {
-            display: block;
-        }
-        html, body, #chart1, svg {
-            margin: 0px;
-            padding: 0px;
-            height: 100%;
-            width: 100%;
-        }
     </style>
-</head>
-
-<body>
+<%end%>
 <div class="container">
   <div class="row">
-    <div class="gallery" id="chart1">
-      <svg></svg>
+    <div class="col-md-4">
+      <div class="gallery" id="chart1">
+        <svg></svg>
+      </div>
     </div>
-  <div>
+    <div class="col-md-4">
+      <div class="gallery" id="chart2">
+        <svg></svg>
+      </div>
+    </div>
+  </div>
   <div class="row">
-    <%if @data.nil? %>
+    <%if @session_results.data.nil? %>
       <div class="">
         <%=@message%>
       </div>
     <%else%>
-      <% @data.data.each do |d|%>
-        <%=d%>
-      <%end%>
+      <div id="outliers">
+        <h3>Outliers</h3>
+        <div class="row">
+          <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Anomaly</th>
+              <%@session.column_metadata.select{|k| k.role == NexosisApi::ColumnRole::FEATURE }.each do |c|%>
+              <th scope="col">
+               <%=c.name%>
+              </th>
+              <%end%>
+            </tr>
+          </thead>
+          <tbody>
+          <%@session_results.data.each do |d|%>
+            <tr>
+              <%d.each do |_k,v|%>
+                <td><%= "%.10g" % ("%.6f"  %  v) %></td>
+              <%end%>
+            </tr>
+          <%end%>
+          </tbody>
+          </table>
+        </div>
+      </div>  
     <%end%>
   </div>
 </div>
+<% content_for :before_body_end do %>
 <script>
+
+    var anomaly_scores = <%=render inline: @anomalies.to_json %>;
+    var data_rows = <%=render inline: @data_rows.to_json %>;
+    var distance_metric = mahalanobis(data_rows);
+    var outliers = [];
+    var inliers = []
+    for(var index = 0; index < distance_metric.length ; index++){
+      if(anomaly_scores[index] < 0)
+        outliers.push(distance_metric[index]);
+      else
+        inliers.push(distance_metric[index]);
+    }
+    $('#distance').html();
+    
     nv.addGraph(function() {
       var chart = nv.models.boxPlotChart()
           .x(function(d) { return d.label })
           .staggerLabels(true)
           .maxBoxWidth(75) // prevent boxes from being incredibly wide
-          .yDomain([0, 500])
+          .yDomain([arrayMin(distance_metric), arrayMax(distance_metric)])
           ;
       d3.select('#chart1 svg')
           .datum(exampleData())
@@ -54,21 +86,90 @@
       return chart;
     });
     function exampleData() {
+    q = quartiles(outliers);
      return  [
         {
-          label: "Sample A",
+          label: "Outliers",
           values: {
-            Q1: 120,
-            Q2: 150,
-            Q3: 200,
-            whisker_low: 115,
-            whisker_high: 210,
-            outliers: [50,101,103,115 ,100, 225, 250, 284]
+            Q1: q[0],
+            Q2: q[1],
+            Q3: q[2],
+            whisker_low: q[1] - arrayMin(outliers),
+            whisker_high: q[2] - arrayMin(outliers),
+            outliers: outliers
           }
         }
       ];
     }
-</script>
 
-</body>
-</html>
+    nv.addGraph(function() {
+      var chart = nv.models.boxPlotChart()
+          .x(function(d) { return d.label })
+          .staggerLabels(true)
+          .maxBoxWidth(75) // prevent boxes from being incredibly wide
+          .yDomain([arrayMin(distance_metric), arrayMax(distance_metric)])
+          ;
+      d3.select('#chart2 svg')
+          .datum(exampleData2())
+          .call(chart);
+      nv.utils.windowResize(chart.update);
+      return chart;
+    });
+    function exampleData2() {
+     q = quartiles(inliers);
+     return  [
+        {
+          label: "Inliers",
+          values: {
+            Q1: q[0],
+            Q2: q[1],
+            Q3: q[2],
+            whisker_low: q[1] - arrayMin(inliers),
+            whisker_high: q[2] - arrayMin(inliers),
+            outliers: inliers
+          }
+        }
+      ];
+    }
+
+    function quartiles(value_arr){
+      values = value_arr.slice();
+      values.sort( function(a,b) {return a - b;} );
+      var half = Math.floor(values.length/2);
+      q2 = median(values);
+      q1 = median(values.slice(0,half));
+      q3 = median(values.slice(half + 1, values.length));
+      return [q1,q2,q3];
+    }
+
+    function median(values){
+      values.sort( function(a,b) {return a - b;} );
+      var half = Math.floor(values.length/2);
+      if(values.length % 2)
+        return values[half];
+      else
+        return (values[half-1] + values[half]) / 2.0;
+    };
+
+    function arrayMin(arr) {
+      var len = arr.length, min = Infinity;
+      while (len--) {
+        if (arr[len] < min) {
+          min = arr[len];
+        }
+      }
+      return min;
+    };
+
+    function arrayMax(arr) {
+      var len = arr.length, max = -Infinity;
+      while (len--) {
+        if (arr[len] > max) {
+          max = arr[len];
+        }
+      }
+      return max;
+    };
+</script>
+<script src="<%= asset_path('mahalanobis.js')%>" type="text/javascript" />
+<%end%>

@@ -28,6 +28,8 @@
         <div class="row">
          <%if @session.model_id.nil?%>
             <a href="/results/<%=URI::encode(@session.session_id)%>">See Results</a>
+        <%elsif @session.prediction_domain == 'anomalies'%>
+            <a href="/results/anomaly/<%=URI::encode(@session.session_id)%>">See Results</a>
         <%else%>
             <a href="/results/model/<%=URI::encode(@session.model_id)%>?session_id=<%=URI::encode(@session.session_id)%>">See Results</a>
         <%end%>
