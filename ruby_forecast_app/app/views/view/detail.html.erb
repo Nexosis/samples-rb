@@ -1,20 +1,20 @@
-<h2>View - <%= @view.view_name %></h2>
+<h2>View - <%= @view.first.view_name %></h2>
 <div class="row">
   <div>
     <label for="dataset_name">Dataset: </label>
-    <%= @view.dataset_name %>
+    <%= @view.first.dataset_name %>
   </div>
   <div>
-    <label for="join_dataset">Joined Dataset: </label>
-    <%= @view.joins[0].join_target.dataset_name %>
+    <label for="join_dataset">Joined Target: </label>
+    <%= @view.first.joins[0].join_target.dataset_name rescue @view.first.joins[0].join_target.name%>
   </div>
 </div>
 <div class="container">
 <%if @view_data == nil %>
 <hr/>
 <%= form_tag("/views/update", method: "post") do%>
-  <%= hidden_field_tag(:view_name, @view.view_name )%>
-  <%= render partial: 'shared/columns', locals: {datasource: @view} %>
+  <%= hidden_field_tag(:view_name, @view.first.view_name )%>
+  <%= render partial: 'shared/columns', locals: {datasource: @view.first} %>
   <div class="row">
       <div class="form-group">
           <input type="submit" value="Update Metadata" class="btn btn-primary">
@@ -22,5 +22,5 @@
   </div>
   <%end%>
 <%end%>
-  <%= render partial: 'shared/datalist', locals: {datasource: @view, datasource_data: @view_data, datasource_name: @view.view_name, page: @page, rowcount: @rowcount}%>
+  <%= render partial: 'shared/datalist', locals: {datasource: @view, datasource_data: @view_data, datasource_name: @view.first.view_name, page: @page, rowcount: @rowcount}%>
 </div>

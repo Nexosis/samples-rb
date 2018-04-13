@@ -19,11 +19,11 @@ class DatasetController < ApplicationController
       Rails.cache.fetch("datasetdata-#{ds_name}-#{@page}", :expires_in => 2.minutes) do
         @dataset_data = @api_client.get_dataset ds_name, params['page'], page_size
       end
-      @rowcount = @dataset_data.data.length
+      @rowcount = @dataset_data.data.item_total
       
     end
     Rails.cache.fetch("dataset-#{ds_name}", :expires_in => 2.minutes) do
-      result = @api_client.list_datasets ds_name
+      result = @api_client.list_datasets NexosisApi::DatasetListQuery.new({ partial_name: ds_name })
       @dataset = result.first unless result.empty?
     end
   end

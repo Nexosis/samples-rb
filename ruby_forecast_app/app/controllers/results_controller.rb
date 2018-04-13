@@ -59,11 +59,14 @@ class ResultsController < ApplicationController
           )
         end
       end
+      # metadata does not always match the case of data hash keys
+      @timestamp_column = @observations.data.first.keys.select{|k| k.downcase == @timestamp_column.downcase}.first
       observation_interval =
         get_observation_interval(
           @observations.data.map { |obs| DateTime.parse(obs[@timestamp_column]) }
         )
-      @observations.data = summarize_observations(observation_interval, @session_result.result_interval) if observation_interval != @session_result.result_interval
+      target_interval = 'day' if @session_result.result_interval.nil? else @session_result.result_interval
+      @observations.data = summarize_observations(observation_interval, @session_result.result_interval) if observation_interval != target_interval
       # HACK: need to make sure can reference target no matter how specified session, dataset, view
       @observations.data = @observations.data.map do |data_hash|
         new_hash = {}
@@ -179,10 +182,10 @@ class ResultsController < ApplicationController
   def set_column_names
     @timestamp_column = @session.column_metadata.select { |dc|
       dc.role == NexosisApi::ColumnRole::TIMESTAMP
-    }.take(1).first().name
+    }.first.name
     @target_column = @session.column_metadata.select { |dc|
       dc.role == NexosisApi::ColumnRole::TARGET
-    }.take(1).first().name
+  }.first.name
   end
 
   def calc_day_interval(interval, periods)
@@ -202,6 +205,8 @@ class ResultsController < ApplicationController
 
   def get_observation_interval(observations)
     # HACK: arbitrary to some extent. Best guess.
+    # non time-series may not be sorted properly
+    return @session.result_interval unless @observations.is_timeseries
     spacer = (observations[1] - observations[0]).to_f
     if spacer <= 0.5
       'hour'
@@ -230,6 +235,7 @@ class ResultsController < ApplicationController
   end
 
   def get_observation_grouping(current_interval, target_interval)
+    current_interval = 'day' if current_interval.nil?
     case current_interval
     when 'hour'
       return 24 if target_interval == 'day'

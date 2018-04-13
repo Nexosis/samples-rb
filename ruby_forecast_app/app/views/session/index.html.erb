@@ -3,8 +3,8 @@
 <%if !@sessions.nil? && !@datasets.nil? %>
    <% @sessions.each do |session| %>
    <div class="row row-bordered">
-      <div class="col-xs-3 text-left">
-         <label>For Datasource: </label> 
+      <div class="col-xs-4 text-left">
+         <label><%=session.prediction_domain%> For : </label> 
          <% if @datasets.map { |ds| ds.dataset_name }.include?(session.datasource_name) %>
             <a href="/dataset/detail/<%=session.datasource_name%>">
          <%else%>
@@ -12,11 +12,12 @@
          <%end%>
          <%=session.datasource_name%></a>
       </div>
-      <div class="col-xs-4">
+      <div class="col-xs-3">
          <span>
-         <label>Run On: </label> <%= DateTime.parse(session.status_history.select {|v| v.has_value? "requested"}[0]["date"]).strftime('%A, %B %d %Y %r') %>
+         <label>Run On: </label> <%= DateTime.parse(session.status_history.select {|v| v.has_value? "requested"}[0]["date"]).strftime('%a, %m/%d/%y %r') %>
          </span>
       </div>
+      <div class="col-xs-5">
       <span><a href="/sessions/<%=URI::encode(session.session_id)%>">See Status</a></span> |
       <%if session.status_history.select {|v| v.has_value? "completed"}[0].nil? == false %> 
         <%if session.model_id.nil?%>
@@ -29,6 +30,7 @@
       <span><a href="/results/file/<%=URI::encode(session.session_id)%>" Download>Download Results</a></span> | 
       <%end%>
       <span><a href="/sessions/delete/<%=URI::encode(session.session_id)%>">Delete Session</a></span>
+      </div>
    </div>
    <% end %>
    <%else%>

@@ -20,12 +20,12 @@ class ViewController < ApplicationController
         @view_data = @api_client.get_view vw_name, @page, page_size
       end
       @rowcount = @view_data.data.length
-      
     end
     Rails.cache.fetch("view-#{vw_name}", :expires_in => 2.minutes) do
       result = @api_client.list_views vw_name
-      @view = result.first unless result.empty?
+      @view = result unless result.empty?
     end
+    render
   end
 
   def update
