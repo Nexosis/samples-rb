@@ -2,8 +2,13 @@ require 'nexosis_api'
 # Provide overview of metadata and opportunity to list data.
 class DatasetController < ApplicationController
   def index
-    Rails.cache.fetch('dataset_list') do
-      @datasets = @api_client.list_datasets
+    params.permit(:page_size)
+    params.permit(:page_number)
+    page_size = params['page_size'] || 20
+    page_number = params['page_number'] || 0
+    Rails.cache.fetch("dataset_list_#{page_size}_#{page_number}") do
+      @datasets = @api_client.list_datasets(
+        NexosisApi::DatasetListQuery.new(page_size: page_size, page_number: page_number))
     end
   end
 
