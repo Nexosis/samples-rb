@@ -4,7 +4,7 @@ require 'webmock/rspec'
 
 RSpec.configure do |config|
   config.before(:each) do
-    stub_request(:any, /nexosisdev.com/).to_rack(FakeClient)
+    stub_request(:any, /nexosis/).to_rack(FakeClient)
   end
 end
 
