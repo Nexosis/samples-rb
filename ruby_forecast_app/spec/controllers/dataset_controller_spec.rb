@@ -25,6 +25,12 @@ RSpec.describe DatasetController, type: :controller do
     it 'returns a success response' do
       get :index, params: valid_attributes, session: valid_session
       expect(response).to be_success
+      expect(assigns(:datasets)).not_to be_nil
+    end
+
+    it 'uses page information to limit list' do
+      get :index, params: valid_attributes.merge(page_size: 2), session: valid_session
+      expect(assigns(:datasets).length).to eql(2)
     end
   end
 

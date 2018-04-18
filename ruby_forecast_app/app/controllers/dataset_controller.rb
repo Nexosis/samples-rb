@@ -4,12 +4,14 @@ class DatasetController < ApplicationController
   def index
     params.permit(:page_size)
     params.permit(:page_number)
-    page_size = params['page_size'] || 20
+    page_size = params['page_size'] || 25
     page_number = params['page_number'] || 0
     Rails.cache.fetch("dataset_list_#{page_size}_#{page_number}") do
       @datasets = @api_client.list_datasets(
-        NexosisApi::DatasetListQuery.new(page_size: page_size, page_number: page_number))
+        NexosisApi::DatasetListQuery.new(page_size: page_size, page_number: page_number, sort_by: 'lastModified', sort_order: 'desc'))
     end
+    @page = page_number.to_i
+    @page_size = page_size.to_i
   end
 
   def detail
