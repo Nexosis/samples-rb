@@ -1,0 +1,167 @@
+{
+  "items": [
+      {
+          "columns": {
+              "Ash": {
+                  "dataType": "numericMeasure",
+                  "role": "feature",
+                  "imputation": "mean",
+                  "aggregation": "mean"
+              },
+              "Hue": {
+                  "dataType": "numericMeasure",
+                  "role": "feature",
+                  "imputation": "mean",
+                  "aggregation": "mean"
+              },
+              "Alcohol": {
+                  "dataType": "numericMeasure",
+                  "role": "feature",
+                  "imputation": "mean",
+                  "aggregation": "mean"
+              },
+              "ODRatio": {
+                  "dataType": "numericMeasure",
+                  "role": "feature",
+                  "imputation": "mean",
+                  "aggregation": "mean"
+              },
+              "Proline": {
+                  "dataType": "numericMeasure",
+                  "role": "feature",
+                  "imputation": "mean",
+                  "aggregation": "mean"
+              },
+              "anomaly": {
+                  "dataType": "numeric",
+                  "role": "target",
+                  "imputation": "zeroes",
+                  "aggregation": "sum"
+              },
+              "Cultivar": {
+                  "dataType": "numeric",
+                  "role": "none",
+                  "imputation": "zeroes",
+                  "aggregation": "sum"
+              },
+              "Magnesium": {
+                  "dataType": "numericMeasure",
+                  "role": "feature",
+                  "imputation": "mean",
+                  "aggregation": "mean"
+              },
+              "MalicAcid": {
+                  "dataType": "numericMeasure",
+                  "role": "feature",
+                  "imputation": "mean",
+                  "aggregation": "mean"
+              },
+              "Aclalinity": {
+                  "dataType": "numericMeasure",
+                  "role": "feature",
+                  "imputation": "mean",
+                  "aggregation": "mean"
+              },
+              "Flavanoids": {
+                  "dataType": "numericMeasure",
+                  "role": "feature",
+                  "imputation": "mean",
+                  "aggregation": "mean"
+              },
+              "TotalPhenols": {
+                  "dataType": "numericMeasure",
+                  "role": "feature",
+                  "imputation": "mean",
+                  "aggregation": "mean"
+              },
+              "ColorIntensity": {
+                  "dataType": "numericMeasure",
+                  "role": "feature",
+                  "imputation": "mean",
+                  "aggregation": "mean"
+              },
+              "Proanthocyanins": {
+                  "dataType": "numericMeasure",
+                  "role": "feature",
+                  "imputation": "mean",
+                  "aggregation": "mean"
+              },
+              "NonFlavanoidPhenols": {
+                  "dataType": "numericMeasure",
+                  "role": "feature",
+                  "imputation": "mean",
+                  "aggregation": "mean"
+              }
+          },
+          "sessionId": "0162b0ff-7adb-4c38-bca0-89794b759f14",
+          "type": "model",
+          "status": "completed",
+          "predictionDomain": "anomalies",
+          "supportsFeatureImportance": false,
+          "availablePredictionIntervals": [],
+          "modelId": "5c874326-6b38-4c0e-86ef-c0b50689a1a1",
+          "requestedDate": "2018-04-10T19:19:15.894879+00:00",
+          "statusHistory": [
+              {
+                  "date": "2018-04-10T19:19:15.894879+00:00",
+                  "status": "requested"
+              },
+              {
+                  "date": "2018-04-10T19:19:16.07002+00:00",
+                  "status": "started"
+              },
+              {
+                  "date": "2018-04-10T19:19:33.1405011+00:00",
+                  "status": "completed"
+              }
+          ],
+          "extraParameters": {
+              "containsAnomalies": true
+          },
+          "messages": [
+              {
+                  "severity": "informational",
+                  "message": "178 observations were found in the dataset."
+              }
+          ],
+          "name": "Anomalies on Wine",
+          "dataSourceName": "Wine",
+          "dataSetName": "Wine",
+          "targetColumn": "anomaly",
+          "algorithm": {
+              "name": "Isolation Forest",
+              "description": "Isolation Forest Outlier Detection",
+              "key": ""
+          },
+          "isEstimate": false,
+          "links": [
+              {
+                  "rel": "self",
+                  "href": "https://api.uat.nexosisdev.com/v1/sessions/0162b0ff-7adb-4c38-bca0-89794b759f14"
+              }
+          ]
+      }
+  ],
+  "pageNumber": 0,
+  "totalPages": 23,
+  "pageSize": 1,
+  "totalCount": 23,
+  "links": [
+      {
+          "rel": "first",
+          "href": "https://api.uat.nexosisdev.com/v1/sessions?pageSize=1&page=0"
+      },
+      {
+          "rel": "next",
+          "href": "https://api.uat.nexosisdev.com/v1/sessions?pageSize=1&page=1"
+      },
+      {
+          "rel": "last",
+          "href": "https://api.uat.nexosisdev.com/v1/sessions?pageSize=1&page=22"
+      },
+      {
+          "rel": "self",
+          "href": "https://api.uat.nexosisdev.com/v1/sessions?pageSize=1"
+      }
+  ]
+}

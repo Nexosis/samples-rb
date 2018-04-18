@@ -39,6 +39,9 @@
                 "-I",
                 "${workspaceRoot}",
                 "${file}"
+            ],
+            "includes":[
+                "/usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.6.0/lib"
             ]
         },
         {

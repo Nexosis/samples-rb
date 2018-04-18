@@ -1,0 +1,61 @@
+{
+  "items": [
+      {
+          "dataSetName": "Location-A",
+          "dataSetSize": 47054,
+          "dateCreated": "2018-04-13T15:02:14.6043581+00:00",
+          "lastModified": "2018-04-13T15:02:14.6203805+00:00",
+          "rowCount": 1477,
+          "columnCount": 3,
+          "isTimeSeries": true,
+          "columns": {
+              "sales": {
+                  "dataType": "numericMeasure",
+                  "role": "feature",
+                  "imputation": "mean",
+                  "aggregation": "mean"
+              },
+              "timeStamp": {
+                  "dataType": "date",
+                  "role": "timestamp"
+              },
+              "transactions": {
+                  "dataType": "numericMeasure",
+                  "role": "feature",
+                  "imputation": "mean",
+                  "aggregation": "mean"
+              }
+          },
+          "missingValues": [],
+          "messages": [],
+          "links": [
+              {
+                  "rel": "self",
+                  "href": "https://api.uat.nexosisdev.com/v1/data/Location-A"
+              }
+          ]
+      }
+  ],
+  "pageNumber": 0,
+  "totalPages": 35,
+  "pageSize": 1,
+  "totalCount": 35,
+  "links": [
+      {
+          "rel": "first",
+          "href": "https://api.uat.nexosisdev.com/v1/data?pageSize=1&page=0"
+      },
+      {
+          "rel": "next",
+          "href": "https://api.uat.nexosisdev.com/v1/data?pageSize=1&page=1"
+      },
+      {
+          "rel": "last",
+          "href": "https://api.uat.nexosisdev.com/v1/data?pageSize=1&page=34"
+      },
+      {
+          "rel": "self",
+          "href": "https://api.uat.nexosisdev.com/v1/data?pageSize=1"
+      }
+  ]
+}
