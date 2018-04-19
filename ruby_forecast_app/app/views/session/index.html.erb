@@ -1,5 +1,12 @@
 <h2>All sessions</h2>
 <div class="container">
+<div class="row">
+<h4>Existing Sessions</h4>
+    <div class="col-sm-4">
+         <label>Total Sessions:</label> <%=@sessions.item_total%>
+    </div>
+ <%= render partial: 'shared/pagesizer', locals: {item_total: @sessions.item_total, page_size: @page_size,  page: @page} %>
+</div>
 <%if !@sessions.nil? && !@datasets.nil? %>
    <% @sessions.each do |session| %>
    <div class="row row-bordered">
@@ -33,6 +40,7 @@
       </div>
    </div>
    <% end %>
+   <%= render partial: 'shared/pager', locals: {item_total: @sessions.item_total, page_size: @page_size,  page: @page} %>
    <%else%>
     <div class="alert alert-warning">
         No sesssions could be located.
