@@ -1,0 +1,773 @@
+{
+    "items": [
+        {
+            "columns": {
+                "iris": {
+                    "dataType": "string",
+                    "role": "target",
+                    "imputation": "mode",
+                    "aggregation": "mode"
+                },
+                "petal_len": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "sepal_len": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "petal_width": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "sepal_width": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                }
+            },
+            "modelId": "f6a51b55-8e97-4fc1-a0a7-865a301f98ba",
+            "sessionId": "0162ac51-3730-4767-a83b-14cf64ed3609",
+            "predictionDomain": "classification",
+            "dataSourceName": "iris",
+            "createdDate": "2018-04-09T21:33:39.2522283+00:00",
+            "algorithm": {
+                "name": "Neural Net ReLU 2",
+                "description": "Neural Network using Rectified Linear Unit activation function with 2 hidden layers",
+                "key": "nn_relu_2_hidden_layers_classification"
+            },
+            "modelName": "Classification on iris",
+            "lastUsedDate": "2018-04-16T19:04:21.778695+00:00",
+            "metrics": {
+                "macroAverageF1Score": 1,
+                "accuracy": 1,
+                "macroAveragePrecision": 1,
+                "macroAverageRecall": 1,
+                "matthewsCorrelationCoefficient": 1
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "https://ml.nexosis.com/v1/models/f6a51b55-8e97-4fc1-a0a7-865a301f98ba"
+                }
+            ]
+        },
+        {
+            "columns": {
+                "iris": {
+                    "dataType": "string",
+                    "role": "target",
+                    "imputation": "mode",
+                    "aggregation": "mode"
+                },
+                "petal_len": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "sepal_len": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "petal_width": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "sepal_width": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                }
+            },
+            "modelId": "171a330c-e977-4286-983d-41cf7833ef8b",
+            "sessionId": "0162ac51-2a90-465f-b2d4-29187c8ba063",
+            "predictionDomain": "classification",
+            "dataSourceName": "iris",
+            "createdDate": "2018-04-09T21:33:19.0633216+00:00",
+            "algorithm": {
+                "name": "Neural Net ReLU 2",
+                "description": "Neural Network using Rectified Linear Unit activation function with 2 hidden layers",
+                "key": "nn_relu_2_hidden_layers_classification"
+            },
+            "modelName": "Classification on iris",
+            "metrics": {
+                "macroAverageF1Score": 1,
+                "accuracy": 1,
+                "macroAveragePrecision": 1,
+                "macroAverageRecall": 1,
+                "matthewsCorrelationCoefficient": 1
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "https://ml.nexosis.com/v1/models/171a330c-e977-4286-983d-41cf7833ef8b"
+                }
+            ]
+        },
+        {
+            "columns": {
+                "iris": {
+                    "dataType": "string",
+                    "role": "target",
+                    "imputation": "mode",
+                    "aggregation": "mode"
+                },
+                "petal_len": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "sepal_len": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "petal_width": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "sepal_width": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                }
+            },
+            "modelId": "94198697-c985-410b-b7b2-f20777fcb18d",
+            "sessionId": "0162ac51-156b-486e-8284-f831a20f6569",
+            "predictionDomain": "classification",
+            "dataSourceName": "iris",
+            "createdDate": "2018-04-09T21:32:04.1749866+00:00",
+            "algorithm": {
+                "name": "Neural Net ReLU 2",
+                "description": "Neural Network using Rectified Linear Unit activation function with 2 hidden layers",
+                "key": "nn_relu_2_hidden_layers_classification"
+            },
+            "modelName": "Classification on iris",
+            "metrics": {
+                "macroAverageF1Score": 1,
+                "accuracy": 1,
+                "macroAveragePrecision": 1,
+                "macroAverageRecall": 1,
+                "matthewsCorrelationCoefficient": 1
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "https://ml.nexosis.com/v1/models/94198697-c985-410b-b7b2-f20777fcb18d"
+                }
+            ]
+        },
+        {
+            "columns": {
+                "iris": {
+                    "dataType": "string",
+                    "role": "target",
+                    "imputation": "mode",
+                    "aggregation": "mode"
+                },
+                "petal_len": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "sepal_len": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "petal_width": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "sepal_width": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                }
+            },
+            "modelId": "9c13d01b-997d-4c72-96fe-3c8df4b643da",
+            "sessionId": "0162ac51-09e3-4f90-8309-6c28de60ad59",
+            "predictionDomain": "classification",
+            "dataSourceName": "iris",
+            "createdDate": "2018-04-09T21:31:44.8810464+00:00",
+            "algorithm": {
+                "name": "Neural Net ReLU 2",
+                "description": "Neural Network using Rectified Linear Unit activation function with 2 hidden layers",
+                "key": "nn_relu_2_hidden_layers_classification"
+            },
+            "modelName": "Classification on iris",
+            "metrics": {
+                "macroAverageF1Score": 1,
+                "accuracy": 1,
+                "macroAveragePrecision": 1,
+                "macroAverageRecall": 1,
+                "matthewsCorrelationCoefficient": 1
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "https://ml.nexosis.com/v1/models/9c13d01b-997d-4c72-96fe-3c8df4b643da"
+                }
+            ]
+        },
+        {
+            "columns": {
+                "iris": {
+                    "dataType": "string",
+                    "role": "target",
+                    "imputation": "mode",
+                    "aggregation": "mode"
+                },
+                "petal_len": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "sepal_len": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "petal_width": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "sepal_width": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                }
+            },
+            "modelId": "fd93957f-fb20-427b-ad0b-6d1bf70f71c3",
+            "sessionId": "0162ac4d-5f14-4a84-bfab-88dae2236ba1",
+            "predictionDomain": "classification",
+            "dataSourceName": "iris",
+            "createdDate": "2018-04-09T21:28:07.8790276+00:00",
+            "algorithm": {
+                "name": "Neural Net ReLU 2",
+                "description": "Neural Network using Rectified Linear Unit activation function with 2 hidden layers",
+                "key": "nn_relu_2_hidden_layers_classification"
+            },
+            "modelName": "TestScale2",
+            "metrics": {
+                "macroAverageF1Score": 1,
+                "accuracy": 1,
+                "macroAveragePrecision": 1,
+                "macroAverageRecall": 1,
+                "matthewsCorrelationCoefficient": 1
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "https://ml.nexosis.com/v1/models/fd93957f-fb20-427b-ad0b-6d1bf70f71c3"
+                }
+            ]
+        },
+        {
+            "columns": {
+                "iris": {
+                    "dataType": "string",
+                    "role": "target",
+                    "imputation": "mode",
+                    "aggregation": "mode"
+                },
+                "petal_len": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "sepal_len": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "petal_width": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "sepal_width": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                }
+            },
+            "modelId": "5c1d22fe-4f48-4bf6-b422-3f13fbced3dd",
+            "sessionId": "0162ac4d-34aa-4cdb-b31b-7a30b79f7a52",
+            "predictionDomain": "classification",
+            "dataSourceName": "iris",
+            "createdDate": "2018-04-09T21:27:18.6403556+00:00",
+            "algorithm": {
+                "name": "Neural Net ReLU 2",
+                "description": "Neural Network using Rectified Linear Unit activation function with 2 hidden layers",
+                "key": "nn_relu_2_hidden_layers_classification"
+            },
+            "modelName": "TestScale1",
+            "metrics": {
+                "macroAverageF1Score": 1,
+                "accuracy": 1,
+                "macroAveragePrecision": 1,
+                "macroAverageRecall": 1,
+                "matthewsCorrelationCoefficient": 1
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "https://ml.nexosis.com/v1/models/5c1d22fe-4f48-4bf6-b422-3f13fbced3dd"
+                }
+            ]
+        },
+        {
+            "columns": {
+                "iris": {
+                    "dataType": "string",
+                    "role": "target",
+                    "imputation": "mode",
+                    "aggregation": "mode"
+                },
+                "petal_len": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "sepal_len": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "petal_width": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "sepal_width": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                }
+            },
+            "modelId": "c2fa4b5f-9261-4973-b895-181bf125d12d",
+            "sessionId": "01629e05-5c55-43dd-af81-88323c2e0a51",
+            "predictionDomain": "classification",
+            "dataSourceName": "iris",
+            "createdDate": "2018-04-07T02:54:46.0415476+00:00",
+            "algorithm": {
+                "name": "Neural Net ReLU 2",
+                "description": "Neural Network using Rectified Linear Unit activation function with 2 hidden layers",
+                "key": "nn_relu_2_hidden_layers_classification"
+            },
+            "modelName": "Classification on Iris",
+            "metrics": {
+                "macroAverageF1Score": 1,
+                "accuracy": 1,
+                "macroAveragePrecision": 1,
+                "macroAverageRecall": 1,
+                "matthewsCorrelationCoefficient": 1
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "https://ml.nexosis.com/v1/models/c2fa4b5f-9261-4973-b895-181bf125d12d"
+                }
+            ]
+        },
+        {
+            "columns": {
+                "X.1": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.2": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.3": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.4": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.5": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.6": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.7": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.8": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.9": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "key": {
+                    "dataType": "numeric",
+                    "role": "key",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "X.10": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.11": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.12": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.13": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.14": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.15": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.16": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.17": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.18": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.19": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.20": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "X.21": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "target": {
+                    "dataType": "numeric",
+                    "role": "none",
+                    "imputation": "mode",
+                    "aggregation": "mode"
+                },
+                "anomaly": {
+                    "dataType": "numeric",
+                    "role": "target",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                }
+            },
+            "modelId": "eda8a6dc-a199-4edf-9a8c-ea7e26e8561f",
+            "sessionId": "01629254-fee4-481f-a65a-ade6d03a33f9",
+            "predictionDomain": "anomalies",
+            "dataSourceName": "cardio",
+            "createdDate": "2018-04-04T20:24:52.5432479+00:00",
+            "algorithm": {
+                "name": "Isolation Forest",
+                "description": "Isolation Forest Outlier Detection",
+                "key": "isolation_forest_anomalies"
+            },
+            "modelName": "Anomalies on cardio",
+            "metrics": {
+                "percentAnomalies": 0.10049153468050245
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "https://ml.nexosis.com/v1/models/eda8a6dc-a199-4edf-9a8c-ea7e26e8561f"
+                }
+            ]
+        },
+        {
+            "columns": {
+                "Ash": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "Hue": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "Alcohol": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "ODRatio": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "Proline": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "anomaly": {
+                    "dataType": "numeric",
+                    "role": "target",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "Cultivar": {
+                    "dataType": "numericMeasure",
+                    "role": "none",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "Magnesium": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "MalicAcid": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "Aclalinity": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "Flavanoids": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "TotalPhenols": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "ColorIntensity": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "Proanthocyanins": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                },
+                "NonFlavanoidPhenols": {
+                    "dataType": "numericMeasure",
+                    "role": "feature",
+                    "imputation": "mean",
+                    "aggregation": "mean"
+                }
+            },
+            "modelId": "3f983e96-c68e-4d6b-864b-4f65514d378a",
+            "sessionId": "01629252-c406-4de0-8edd-d0775fcb2003",
+            "predictionDomain": "anomalies",
+            "dataSourceName": "wine",
+            "createdDate": "2018-04-04T20:22:11.9598785+00:00",
+            "algorithm": {
+                "name": "Isolation Forest",
+                "description": "Isolation Forest Outlier Detection",
+                "key": "isolation_forest_anomalies"
+            },
+            "modelName": "Anomalies on Wine",
+            "metrics": {
+                "percentAnomalies": 0.10112359550561797
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "https://ml.nexosis.com/v1/models/3f983e96-c68e-4d6b-864b-4f65514d378a"
+                }
+            ]
+        },
+        {
+            "columns": {
+                "iris": {
+                    "dataType": "string",
+                    "role": "target",
+                    "imputation": "mode",
+                    "aggregation": "mode"
+                },
+                "petal_len": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "sepal_len": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "petal_width": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                },
+                "sepal_width": {
+                    "dataType": "numeric",
+                    "role": "feature",
+                    "imputation": "zeroes",
+                    "aggregation": "sum"
+                }
+            },
+            "modelId": "163a977a-ee04-4fd7-a459-558a1b7c26cb",
+            "sessionId": "0162924f-c545-4bef-a0dc-3781732accb4",
+            "predictionDomain": "classification",
+            "dataSourceName": "iris",
+            "createdDate": "2018-04-04T20:21:34.4717961+00:00",
+            "algorithm": {
+                "name": "Neural Net ReLU 2",
+                "description": "Neural Network using Rectified Linear Unit activation function with 2 hidden layers",
+                "key": "nn_relu_2_hidden_layers_classification"
+            },
+            "modelName": "Classification on Iris",
+            "metrics": {
+                "macroAverageF1Score": 1,
+                "accuracy": 1,
+                "macroAveragePrecision": 1,
+                "macroAverageRecall": 1,
+                "matthewsCorrelationCoefficient": 1
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "https://ml.nexosis.com/v1/models/163a977a-ee04-4fd7-a459-558a1b7c26cb"
+                }
+            ]
+        }
+    ],
+    "pageNumber": 0,
+    "totalPages": 4,
+    "pageSize": 10,
+    "totalCount": 38,
+    "links": [
+        {
+            "rel": "first",
+            "href": "https://ml.nexosis.com/v1/models?pageSize=10&page=0"
+        },
+        {
+            "rel": "next",
+            "href": "https://ml.nexosis.com/v1/models?pageSize=10&page=1"
+        },
+        {
+            "rel": "last",
+            "href": "https://ml.nexosis.com/v1/models?pageSize=10&page=3"
+        },
+        {
+            "rel": "self",
+            "href": "https://ml.nexosis.com/v1/models?pageSize=10"
+        }
+    ]
+}

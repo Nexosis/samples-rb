@@ -33,9 +33,7 @@
         <%else%>
             <a href="/results/model/<%=URI::encode(@session.model_id)%>?session_id=<%=URI::encode(@session.session_id)%>">See Results</a>
         <%end%>
-        <%if @is_paying%>
             | <a href="/results/contest/<%=URI::encode(@session.session_id)%>">See Algorithm Contestants</a>
-        <%end%>
         </div>
     <%end%>
 <%else%>

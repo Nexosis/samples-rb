@@ -1,8 +1,14 @@
 class ModelController < ApplicationController
   def index
-    Rails.cache.fetch('model-list', expires_in: 3.minutes) do
-      @models = @api_client.list_models
+    params.permit(:page_size)
+    params.permit(:page_number)
+    page_size = params['page_size'] || 25
+    page_number = params['page_number'] || 0
+    Rails.cache.fetch("model-list_#{page_size}_#{page_number}", expires_in: 3.minutes) do
+      @models = @api_client.list_models NexosisApi::ModelListQuery.new(page_size: page_size, page_number: page_number, sort_by: 'lastUsedDate', sort_order: 'desc')
     end
+    @page = page_number.to_i
+    @page_size = page_size.to_i
   end
 
   def model

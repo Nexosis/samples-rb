@@ -22,6 +22,10 @@ class FakeClient < Sinatra::Base
     body ''
   end
 
+  get '/v1/models' do
+    json_response(200,'model_list.json')
+  end
+
   def json_response(response_code, file_name)
     content_type :json
     status response_code

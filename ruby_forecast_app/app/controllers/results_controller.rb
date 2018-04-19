@@ -14,7 +14,6 @@ class ResultsController < ApplicationController
     if !@session_result.nil? && !@datasets.nil? && !@session.nil?
       set_column_names
       is_dataset = @datasets.map(&:dataset_name).include? @session_result.datasource_name
-      # TODO: cannot determine pages from API - need dataset information to be more specific
       if @session_result.type == 'forecast'
         # TODO: day basis assumption should be changed for evaluation of actual
         # This would require pulling some observations first or requesting the
@@ -126,13 +125,6 @@ class ResultsController < ApplicationController
   end
 
   def contest
-    Rails.cache.fetch('account-quotas', expires_in: 5.minutes) do
-      @quotas = @api_client.get_account_quotas
-    end
-    if @quotas['nexosis-account-datasetcount-allotted'][0].to_i <= 25
-      @error_message = 'You must have a paid account plan to access contest results'
-      return
-    end
     Rails.cache.fetch("contest-results-#{params[:session_id]}") do
       @contest = @api_client.get_session_contest params[:session_id]
     end

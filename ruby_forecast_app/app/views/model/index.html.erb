@@ -1,5 +1,12 @@
 <h2>All models</h2>
 <div class="container">
+<div class="row">
+ <h4>Existing Models</h4>
+      <div class="col-sm-4">
+          <label>Total Models:</label>   <%=@models.item_total%>
+      </div>
+          <%= render partial: 'shared/pagesizer', locals: {item_total: @models.item_total, page_size: @page_size,  page: @page} %>
+</div>
   <%if @models.nil? == false && @models.empty? == false%>
     <% @models.each do |model| %>
         <div class="row row-bordered">
@@ -12,6 +19,7 @@
            | <a href="/models/delete/<%=URI::encode(model.model_id)%>">Delete</a>
         </div>
     <%end%>
+     <%= render partial: 'shared/pager', locals: {item_total: @models.item_total, page_size: @page_size,  page: @page} %>
   <%else%>
   <div class="alert alert-warning">
       No models could be located.
