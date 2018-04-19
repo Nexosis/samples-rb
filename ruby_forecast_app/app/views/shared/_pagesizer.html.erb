@@ -1,0 +1,17 @@
+<label>Page Size:</label>
+        <%= select_tag("page_size",options_for_select([['10',10],['25',25],['50',50],['100',100]], selected_key=page_size)) %>
+<% content_for :before_body_end do %>
+    <script type="text/javascript">
+        $(document).ready(function(){
+                pageNumber = <%=page%>;
+                totalItems = <%=item_total%>;
+                $("#page_size").change(function (){
+                    pageSize = $("#page_size").val();
+                    if(totalItems < pageSize * (pageNumber + 1)){
+                        pageNumber = 0;
+                    }
+                    document.location = '<%="#{request.path}?page_number="%>' + pageNumber.toString() + '&page_size=' + pageSize.toString();
+                });
+             });
+    </script>
+<% end %>

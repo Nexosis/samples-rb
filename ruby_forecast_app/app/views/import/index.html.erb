@@ -1,6 +1,13 @@
 <h2>All Imports</h2>
 <div class="container">
 <%if !@imports.nil? && !@datasets.nil? %>
+    <div class="row">
+    <h4>Existing Imports</h4>
+        <div class="col-sm-4">
+            <label>Total Imports:</label>   <%=@imports.item_total%>
+        </div>
+            <%= render partial: 'shared/pagesizer', locals: {item_total: @imports.item_total, page_size: @page_size,  page: @page} %>
+    </div>
    <% @imports.each do |file_import| %>
    <div class="row row-bordered">
       <div class="col-xs-3 text-left">
@@ -20,6 +27,7 @@
       <span><a href="/imports/<%=URI::encode(file_import.import_id)%>">See Status</a></span>
    </div>
    <% end %>
+   <%= render partial: 'shared/pager', locals: {item_total: @imports.item_total, page_size: @page_size,  page: @page} %>
    <%else%>
     <div class="alert alert-warning">
         No imports could be located.

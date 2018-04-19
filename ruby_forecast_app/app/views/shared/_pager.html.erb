@@ -1,0 +1,19 @@
+<table>
+  <tr>
+    <td>
+    <ul class="pager">
+    <%if page > 0 %> 
+        <li class="previous">
+            <a href="<%=request.path%>?page_number=<%=page -1 %>&page_size=<%=page_size%>"><<</a>
+        </li> 
+    <%end%> 
+    Page:   <%= page + 1 %> 
+    <%if item_total > page_size * (page + 1)%> 
+        <li class="next">
+            <a href="<%=request.path%>?page_number=<%=page + 1%>&page_size=<%=page_size%>">>></a>
+        </li> 
+    <%end%>
+    </ul>
+    </td>
+  </tr>
+</table>

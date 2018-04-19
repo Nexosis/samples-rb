@@ -1,12 +1,17 @@
 class SessionController < ApplicationController
   def index
-    Rails.cache.fetch('sessions-list', :expires_in => 2.minutes) do
-      @sessions = @api_client.list_sessions
+    params.permit(:page_size)
+    params.permit(:page_number)
+    page_size = params['page_size'] || 25
+    page_number = params['page_number'] || 0
+    Rails.cache.fetch("sessions-list_#{page_number}_#{page_size}", :expires_in => 2.minutes) do
+      @sessions = @api_client.list_sessions NexosisApi::SessionListQuery.new(page_number: page_number, page_size: page_size, sort_by: 'requestedDate', sort_order: 'desc')
     end
     Rails.cache.fetch('dataset_list') do
       @datasets = @api_client.list_datasets
     end
-    render
+    @page = page_number.to_i
+    @page_size = page_size.to_i
   end
 
   def session_status

@@ -3,6 +3,8 @@ require 'fixtures/fake_models'
 
 RSpec.describe 'dataset/index', type: :view do
   before(:each) do
+    assign(:page, 0)
+    assign(:page_size,25)
     assign(:datasets,
       NexosisApi::PagedArray.new(
         {
