@@ -1,95 +1,145 @@
 {
     "featureImportance": {
-        "petal_len": 1,
-        "sepal_len": 0.46316164264616333,
-        "petal_width": 1,
-        "sepal_width": 0.24354539198588959
+        "Weight": 1,
+        "Make:hi": 0.0050026598027876294,
+        "Make:vw": 0.037289370777754925,
+        "Make:amc": 0.027274327992825583,
+        "Make:bmw": 0.000046920870652318062,
+        "Origin:1": 0.25502166852678726,
+        "Origin:2": 0.10064703906272397,
+        "Origin:3": 0.18027999558710744,
+        "Cylinders": 1,
+        "Make:audi": 0.018274135312112593,
+        "Make:fiat": 0.00797729639085069,
+        "Make:ford": 0.02663532574863392,
+        "Make:opel": 0.016534433450488998,
+        "Make:saab": 0.04148123386091955,
+        "ModelYear": 0.54797287046974619,
+        "Horsepower": 0.92113399131066509,
+        "Make:buick": 0.058057054431616774,
+        "Make:capri": 0.015554402100233384,
+        "Make:chevy": 0.014538284462062899,
+        "Make:dodge": 0.024976065179508025,
+        "Make:honda": 0.028970015853426477,
+        "Make:maxda": 0.00017383335617457787,
+        "Make:mazda": 0.025557415557763672,
+        "Make:volvo": 0.0089396791999947368,
+        "Make:datsun": 0.059972503284196968,
+        "Make:nissan": 0.0038673407452199677,
+        "Make:subaru": 0.030007390922377138,
+        "Make:toyota": 0.078996708623072648,
+        "Name:subaru": 0.0050677726691879784,
+        "Acceleration": 0.58516484689538684,
+        "Displacement": 0.972712366832125,
+        "Make:mercury": 0.0027451292875275953,
+        "Make:peugeot": 0.0042254358435080694,
+        "Make:pontiac": 0.014021804764564235,
+        "Make:renault": 0.0071615394526009747,
+        "Make:toyouta": 0.0098745962711362864,
+        "Make:triumph": 0.0046116818887895466,
+        "Make:cadillac": 0.00062821755978444149,
+        "Make:chrysler": 0.00443775871929643,
+        "Make:mercedes": 0.000099973278067325838,
+        "Make:plymouth": 0.045819225022152223,
+        "Name:audi fox": 0.0040134470523171227,
+        "Name:bmw 2002": 0.000017006629693801004,
+        "Name:bmw 320i": 0.037036310810264213,
+        "Name:capri ii": 0.00000669482210471075,
+        "Name:fiat 128": 0.019215125211806777,
+        "Name:fiat 131": 0.0083018571969546949,
+        "Name:ford ltd": 0.0086570617992500522,
+        "Name:hi 1200d": 0.00000811168739132095,
+        "Name:saab 99e": 0.0000083553793818493836
     },
     "pageNumber": 0,
-    "totalPages": 1,
+    "totalPages": 8,
     "pageSize": 50,
-    "totalCount": 4,
-    "sessionId": "0162d49f-58fc-4d80-b26b-03c1660edbc2",
+    "totalCount": 351,
+    "sessionId": "0162cfce-1ecc-4733-aaa4-02db0ce799d2",
     "type": "model",
     "status": "completed",
-    "predictionDomain": "classification",
+    "predictionDomain": "regression",
     "supportsFeatureImportance": true,
-    "availablePredictionIntervals": [],
-    "modelId": "4a458a30-cfde-4580-8a3a-a798b04219e9",
-    "requestedDate": "2018-04-17T17:20:35.368649+00:00",
+    "availablePredictionIntervals": [
+        "0.5"
+    ],
+    "modelId": "d09d6460-80e7-4d1f-8652-fb4f98e0dc36",
+    "requestedDate": "2018-04-16T18:53:34.651594+00:00",
     "statusHistory": [
         {
-            "date": "2018-04-17T17:20:35.368649+00:00",
+            "date": "2018-04-16T18:53:34.651594+00:00",
             "status": "requested"
         },
         {
-            "date": "2018-04-17T17:20:41.0222159+00:00",
+            "date": "2018-04-16T18:53:34.9220004+00:00",
             "status": "started"
         },
         {
-            "date": "2018-04-17T17:22:16.087712+00:00",
+            "date": "2018-04-16T19:16:36.3333397+00:00",
             "status": "completed"
         }
     ],
-    "extraParameters": {
-        "balance": true
-    },
+    "extraParameters": {},
     "messages": [
         {
             "severity": "informational",
-            "message": "150 observations were found in the dataset."
+            "message": "800 observations were found in the dataset."
         }
     ],
-    "name": "Classification on Iris",
-    "dataSourceName": "Iris",
-    "dataSetName": "Iris",
-    "targetColumn": "iris",
+    "name": "Regression on mpg-missing",
+    "dataSourceName": "mpg-missing",
+    "dataSetName": "mpg-missing",
+    "targetColumn": "MPG",
     "algorithm": {
-        "name": "XGBoost L2",
-        "description": "eXtreme Gradient Boosting with Ridge regularization",
+        "name": "SVR RBF",
+        "description": "Support Vector Regression using Radial Basis Function (Gaussian) kernel",
         "key": ""
     },
     "isEstimate": false,
+    "missingValues": [
+        "?",
+        "NA"
+    ],
     "links": [
         {
             "rel": "data",
-            "href": "https://api.uat.nexosisdev.com/v1/data/Iris"
+            "href": "https://api.uat.nexosisdev.com/v1/data/mpg-missing"
         },
         {
             "rel": "first",
-            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/results/featureimportance?page=0"
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162cfce-1ecc-4733-aaa4-02db0ce799d2/results/featureimportance?page=0"
+        },
+        {
+            "rel": "next",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162cfce-1ecc-4733-aaa4-02db0ce799d2/results/featureimportance?page=1"
         },
         {
             "rel": "last",
-            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/results/featureimportance?page=0"
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162cfce-1ecc-4733-aaa4-02db0ce799d2/results/featureimportance?page=7"
         },
         {
             "rel": "self",
-            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/results/featureimportance"
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162cfce-1ecc-4733-aaa4-02db0ce799d2/results/featureimportance"
+        },
+        {
+            "rel": "prediction-interval:0.5",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162cfce-1ecc-4733-aaa4-02db0ce799d2?predictionInterval=0.5"
         },
         {
             "rel": "model",
-            "href": "https://api.uat.nexosisdev.com/v1/models/4a458a30-cfde-4580-8a3a-a798b04219e9"
+            "href": "https://api.uat.nexosisdev.com/v1/models/d09d6460-80e7-4d1f-8652-fb4f98e0dc36"
         },
         {
             "rel": "contest",
-            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/contest"
-        },
-        {
-            "rel": "confusionMatrix",
-            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/results/confusionmatrix"
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162cfce-1ecc-4733-aaa4-02db0ce799d2/contest"
         },
         {
             "rel": "featureImportance",
-            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/results/featureimportance"
-        },
-        {
-            "rel": "classScores",
-            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/results/classscores"
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162cfce-1ecc-4733-aaa4-02db0ce799d2/results/featureimportance"
         },
         {
             "rel": "vocabularies",
-            "href": "https://api.uat.nexosisdev.com/v1/vocabulary?createdFromSession=0162d49f-58fc-4d80-b26b-03c1660edbc2"
+            "href": "https://api.uat.nexosisdev.com/v1/vocabulary?createdFromSession=0162cfce-1ecc-4733-aaa4-02db0ce799d2"
         }
     ]
 }

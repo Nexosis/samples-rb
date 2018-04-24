@@ -157,6 +157,24 @@ class ResultsController < ApplicationController
     render
   end
 
+  def features
+    params.require(:session_id)
+    params.permit(:page_size)
+    params.permit(:page_number)
+    session_id = params[:session_id]
+    page_number = params[:page_number] || 0
+    page_size = params[:page_size] || 10
+    begin
+      Rails.cache.fetch("featureresults-#{session_id}-#{page_number}-#{page_size}") do
+        @feature_results = @api_client.get_feature_importance(session_id, page_number, page_size)
+      end
+    rescue => http_exception
+      @message = "There was a problem getting the requested session: #{http_exception.message}"
+    end
+    @page = page_number.to_i
+    @page_size = page_size.to_i
+  end
+
   private
   def get_color(max, value, is_target)
     case ((value.to_r / max.to_r) * 100).to_i

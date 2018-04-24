@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'results/model/:model_id', to: 'results#model'
   get 'results/contest/:session_id', to: 'results#contest'
   get 'results/anomaly/:session_id', to: 'results#anomaly'
+  get 'results/featureimportance/:session_id', to: 'results#features'
   get 'sessions/forecast/:dataset_name', controller: 'session', action: 'forecast', :constraints => { :dataset_name => /[^\/]+/ }
   get 'sessions/impact/:dataset_name', controller: 'session', action: 'impact', :constraints => { :dataset_name => /[^\/]+/ }
   post 'sessions/forecast/:dataset_name', controller: 'session', action: 'create_forecast', :constraints => { :dataset_name => /[^\/]+/ }

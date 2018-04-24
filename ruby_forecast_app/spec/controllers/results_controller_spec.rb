@@ -13,4 +13,11 @@ RSpec.describe ResultsController, type: :controller do
       expect(assigns(:session_result)).not_to be_nil
     end
   end
+
+  describe 'GET #features' do
+    it 'assigns feature object' do
+      get :features, {params: {session_id: '0162cfce-1ecc-4733-aaa4-02db0ce799d2'}}
+      expect(assigns(:feature_results)).not_to be_nil
+    end
+  end
 end
