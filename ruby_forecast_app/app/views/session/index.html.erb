@@ -12,7 +12,7 @@
    <div class="row row-bordered">
       <div class="col-xs-4 text-left">
          <label><%=session.prediction_domain%> For : </label> 
-         <% if @datasets.map { |ds| ds.dataset_name }.include?(session.datasource_name) %>
+         <% if @datasets.map { |ds| ds.dataset_name.downcase }.include?(session.datasource_name.downcase) %>
             <a href="/dataset/detail/<%=session.datasource_name%>">
          <%else%>
             <a href="/views/detail/<%=session.datasource_name%>">

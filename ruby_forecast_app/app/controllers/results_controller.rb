@@ -10,11 +10,15 @@ class ResultsController < ApplicationController
     Rails.cache.fetch("session-#{params[:session_id]}") do
       @session = @api_client.get_session params[:session_id]
     end
+    if !['forecast','impact'].include? @session.prediction_domain
+      @message = 'The session id provided is not for a time-series session. It has been directed here by mistake.'
+      return
+    end
     @session_result = @api_client.get_session_results(params[:session_id])
     if !@session_result.nil? && !@datasets.nil? && !@session.nil?
       set_column_names
       is_dataset = @datasets.map(&:dataset_name).include? @session_result.datasource_name
-      if @session_result.type == 'forecast'
+      if @session_result.prediction_domain == 'forecast'
         # TODO: day basis assumption should be changed for evaluation of actual
         # This would require pulling some observations first or requesting the
         # basis from the user.

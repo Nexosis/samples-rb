@@ -8,7 +8,7 @@ class SessionController < ApplicationController
       @sessions = @api_client.list_sessions NexosisApi::SessionListQuery.new(page_number: page_number, page_size: page_size, sort_by: 'requestedDate', sort_order: 'desc')
     end
     Rails.cache.fetch('dataset_list') do
-      @datasets = @api_client.list_datasets
+      @datasets = @api_client.list_datasets NexosisApi::DatasetListQuery.new(page_number: 0, page_size: 100, sort_by: 'lastModified', sort_order: 'desc')
     end
     @page = page_number.to_i
     @page_size = page_size.to_i

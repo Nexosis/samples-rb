@@ -3,8 +3,13 @@
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
 <%end%>
-<% if @session_result.nil? || @observations.nil?%>
-    <div class="alert alert-warning">
+<% if !@message.nil?%>
+   <div class="alert alert-danger">
+       <%=@message%>
+       <p>Session type is <%=@session.prediction_domain%></p>
+    </div>
+<%elsif @session_result.nil? || @observations.nil?%>
+     <div class="alert alert-warning">
         No data was loaded for the session. Please double check the link and try again.
     </div>
 <%else%>
