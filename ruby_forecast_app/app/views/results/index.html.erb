@@ -83,8 +83,8 @@ $(document).ready(function(){
    var predictionData = <%= render inline: @session_result.data.to_json%>;
    var observations = [];
    var predValues = [];
-   var timestampColumn = '<%= @session.column_metadata.select{|dc| dc.role == NexosisApi::ColumnRole::TIMESTAMP}.take(1).first().name.downcase %>';
-   dataKey = "<%=@session_result.target_column.downcase%>";
+   var timestampColumn = '<%= @session.column_metadata.select{|dc| dc.role == NexosisApi::ColumnRole::TIMESTAMP}.take(1).first().name %>';
+   dataKey = "<%=@session_result.target_column%>";
    var tzOption = {timeZone: "UTC"};
    var table = document.getElementById("dataTable");
    for (var i = 0; i < predictionData.length; i++) 

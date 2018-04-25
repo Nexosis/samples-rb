@@ -31,7 +31,7 @@ class ResultsController < ApplicationController
         first_obs = first_pred - obs_count
         if is_dataset
           @observations = @api_client.get_dataset(
-            @session_result.datasource_name,
+            URI.escape(@session_result.datasource_name),
             0,
             page_size.to_i,
             start_date: first_obs,

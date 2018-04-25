@@ -35,7 +35,7 @@
         </tr>
       </thead>
       <tbody>
-      <%@feature_results.scores.map{|item| item.to_a.flatten}.to_h.each do |key,value|%>
+      <%@feature_results.scores.to_h.each do |key,value|%>
         <tr>
           <td><%=key.to_s.split(':')[0]%></td>
           <td><%=key.to_s.include?(':') ? key.to_s.split(':')[1] : '-' %></td>

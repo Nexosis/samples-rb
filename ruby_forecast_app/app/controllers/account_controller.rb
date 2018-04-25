@@ -70,9 +70,10 @@ class AccountController < ApplicationController
 
   def set_session_key
     @api_client.api_key params['api-key']
+    puts @api_client
     begin
       # make sure it works otherwise recovery will require server restart
-      @api_client.list_sessions({},0,1)
+      @api_client.list_sessions(NexosisApi::SessionListQuery.new(page_size: 1))
     rescue Exception => e
       @api_client.api_key Rails.application.secrets.api_key
     end

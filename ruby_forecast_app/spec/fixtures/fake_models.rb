@@ -26,14 +26,14 @@ def fake_feature_scores
   NexosisApi::FeatureImportance.new(
     {
       'featureImportance' => {
-        'col1' => 1,
-        'col2' => 0.9
+        'col1': 1,
+        'col2': 0.9
       },
-      'predictionDomain' => 'regression',
-      'name' => 'Regression on mpg-missing',
-      'dataSourceName' => 'mpg-missing',
-      'sessionId' => '0162cfce-1ecc-4733-aaa4-02db0ce799d2',
-      'modelId' => 'd09d6460-80e7-4d1f-8652-fb4f98e0dc36',
+      'predictionDomain': 'regression',
+      'name': 'Regression on mpg-missing',
+      'dataSourceName': 'mpg-missing',
+      'sessionId': '0162cfce-1ecc-4733-aaa4-02db0ce799d2',
+      'modelId': 'd09d6460-80e7-4d1f-8652-fb4f98e0dc36',
       'pageNumber': 0,
       'totalPages': 4,
       'pageSize': 100,
