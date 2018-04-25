@@ -13,20 +13,42 @@
         No data was loaded for the session. Please double check the link and try again.
     </div>
 <%else%>
-<h1>Session Information for <%= @session_result.session_id %></h1>
+<h2>Session Information for <%= @session_result.name %></h2>
 <p class="lead">Datasource used: <%=@session_result.datasource_name%></p>
 <div class="row">
-    <h5>Session Type:</h5>
-    <div class="col-sm-3"><%=@session_result.type%></div>
-</div>
-<div class="row">
-   <h5><%= @session_result.type == "forecast" ? "Prediction" : "Impact Event " %> Range:</h5>
-   <div class="col-sm-3">Start Date: <%= Date.rfc3339(@session_result.start_date).strftime("%m/%d/%Y %I:%M%p") %></div>
-   <div class="col-sm-3">End Date: <%= Date.rfc3339(@session_result.end_date).strftime("%m/%d/%Y %I:%M%p")%></div>
-</div>
-<div class="row">
-   <h5>Target Column:</h5>
-   <div class="col-sm-3"><%=@session_result.target_column%></div>
+    <div class="col-sm-4">
+        <div><label>Session Type:</label> <%=@session_result.type%>
+        </div>
+        <div>
+            <h5><%= @session_result.type == "forecast" ? "Prediction" : "Impact Event " %> Range:</h5>
+            <div class="col-md-offset-1">
+                <p>Start Date: <%= Date.rfc3339(@session_result.start_date).strftime("%m/%d/%Y %I:%M%p") %></p>
+                <p>End Date: <%= Date.rfc3339(@session_result.end_date).strftime("%m/%d/%Y %I:%M%p")%></p>
+            </div>
+        </div>
+        <div>
+            <label>Target Column:</label>
+            <%=@session_result.target_column%>
+        </div>
+        <div>
+            <label>Session Id:</label>
+            <%=@session_result.session_id%>
+        </div>
+    </div>
+    <div class="col-sm-6 pull-right">
+        <h5>Helpful Information</h5>
+        <ul>
+            <li><a href="/results/contest/<%=@session_result.session_id%>"><label>Contestant Metrics</label></a></li>
+            <%if @session_result.supports_feature_importance%>
+            <li><a href="/results/featureimportance/<%=@session_result.session_id%>"><label>Feature Importance Scores</label></a></li>
+            <%end%>
+        </ul>
+         <div>
+            <p><label>MAPE:</label> <%=(@session_result.metrics.select{|m|m.name=='meanAbsolutePercentError'}.first.value * 100).round(5)%>%</p>
+            <p><label>MASE:</label> <%=(@session_result.metrics.select{|m|m.name=='meanAbsoluteScaledError'}.first.value).round(5)%></p>
+            <p><label>MAE:</label> <%=(@session_result.metrics.select{|m|m.name=='meanAbsoluteError'}.first.value).round(5)%></p>
+        </div>
+    </div>
 </div>
 <%if @session_result.type == "impact"%>
 <div class="col-sm-4">
