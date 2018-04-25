@@ -1,0 +1,113 @@
+{
+    "columns": {
+        "iris": {
+            "dataType": "string",
+            "role": "target",
+            "imputation": "mode",
+            "aggregation": "mode"
+        },
+        "petal_len": {
+            "dataType": "numericMeasure",
+            "role": "feature",
+            "imputation": "mean",
+            "aggregation": "mean"
+        },
+        "sepal_len": {
+            "dataType": "numericMeasure",
+            "role": "feature",
+            "imputation": "mean",
+            "aggregation": "mean"
+        },
+        "petal_width": {
+            "dataType": "numericMeasure",
+            "role": "feature",
+            "imputation": "mean",
+            "aggregation": "mean"
+        },
+        "sepal_width": {
+            "dataType": "numericMeasure",
+            "role": "feature",
+            "imputation": "mean",
+            "aggregation": "mean"
+        }
+    },
+    "sessionId": "0162d49f-58fc-4d80-b26b-03c1660edbc2",
+    "type": "model",
+    "status": "completed",
+    "predictionDomain": "classification",
+    "supportsFeatureImportance": true,
+    "availablePredictionIntervals": [],
+    "modelId": "4a458a30-cfde-4580-8a3a-a798b04219e9",
+    "requestedDate": "2018-04-17T17:20:35.368649+00:00",
+    "statusHistory": [
+        {
+            "date": "2018-04-17T17:20:35.368649+00:00",
+            "status": "requested"
+        },
+        {
+            "date": "2018-04-17T17:20:41.0222159+00:00",
+            "status": "started"
+        },
+        {
+            "date": "2018-04-17T17:22:16.087712+00:00",
+            "status": "completed"
+        }
+    ],
+    "extraParameters": {
+        "balance": true
+    },
+    "messages": [
+        {
+            "severity": "informational",
+            "message": "150 observations were found in the dataset."
+        }
+    ],
+    "name": "Classification on Iris",
+    "dataSourceName": "Iris",
+    "dataSetName": "Iris",
+    "targetColumn": "iris",
+    "algorithm": {
+        "name": "XGBoost L2",
+        "description": "eXtreme Gradient Boosting with Ridge regularization",
+        "key": ""
+    },
+    "isEstimate": false,
+    "links": [
+        {
+            "rel": "data",
+            "href": "https://api.uat.nexosisdev.com/v1/data/Iris"
+        },
+        {
+            "rel": "self",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2"
+        },
+        {
+            "rel": "model",
+            "href": "https://api.uat.nexosisdev.com/v1/models/4a458a30-cfde-4580-8a3a-a798b04219e9"
+        },
+        {
+            "rel": "contest",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/contest"
+        },
+        {
+            "rel": "confusionMatrix",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/results/confusionmatrix"
+        },
+        {
+            "rel": "featureImportance",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/results/featureimportance"
+        },
+        {
+            "rel": "classScores",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/results/classscores"
+        },
+        {
+            "rel": "vocabularies",
+            "href": "https://api.uat.nexosisdev.com/v1/vocabulary?createdFromSession=0162d49f-58fc-4d80-b26b-03c1660edbc2"
+        },
+        {
+            "rel": "results",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/results"
+        }
+    ]
+}

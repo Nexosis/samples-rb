@@ -1,0 +1,325 @@
+{
+  "dataSetName": "LocationA",
+  "dataSetSize": 47022,
+  "isTimeSeries": true,
+  "dateCreated": "2018-02-28T21:34:32.863157+00:00",
+  "lastModified": "2018-04-16T12:23:51.1656176+00:00",
+  "rowCount": 1476,
+  "columns": {
+      "sales": {
+          "dataType": "numeric",
+          "role": "target",
+          "imputation": "zeroes",
+          "aggregation": "mode"
+      },
+      "timeStamp": {
+          "dataType": "date",
+          "role": "timestamp"
+      },
+      "transactions": {
+          "dataType": "numeric",
+          "role": "feature",
+          "imputation": "mode",
+          "aggregation": "sum"
+      }
+  },
+  "messages": [],
+  "data": [
+      {
+          "sales": "2922.13",
+          "timeStamp": "2012-12-31 00:00:00",
+          "transactions": "459"
+      },
+      {
+          "sales": "1500.56",
+          "timeStamp": "2013-01-01 00:00:00",
+          "transactions": "195"
+      },
+      {
+          "sales": "4078.52",
+          "timeStamp": "2013-01-02 00:00:00",
+          "transactions": "696"
+      },
+      {
+          "sales": "4545.69",
+          "timeStamp": "2013-01-03 00:00:00",
+          "transactions": "743"
+      },
+      {
+          "sales": "4872.63",
+          "timeStamp": "2013-01-04 00:00:00",
+          "transactions": "797"
+      },
+      {
+          "sales": "2420.81",
+          "timeStamp": "2013-01-05 00:00:00",
+          "transactions": "367"
+      },
+      {
+          "sales": "1664.22",
+          "timeStamp": "2013-01-06 00:00:00",
+          "transactions": "241"
+      },
+      {
+          "sales": "3693.01",
+          "timeStamp": "2013-01-07 00:00:00",
+          "transactions": "647"
+      },
+      {
+          "sales": "3874.89",
+          "timeStamp": "2013-01-08 00:00:00",
+          "transactions": "653"
+      },
+      {
+          "sales": "4134.05",
+          "timeStamp": "2013-01-09 00:00:00",
+          "transactions": "700"
+      },
+      {
+          "sales": "4314.94",
+          "timeStamp": "2013-01-10 00:00:00",
+          "transactions": "723"
+      },
+      {
+          "sales": "4496.14",
+          "timeStamp": "2013-01-11 00:00:00",
+          "transactions": "748"
+      },
+      {
+          "sales": "2740.33",
+          "timeStamp": "2013-01-12 00:00:00",
+          "transactions": "398"
+      },
+      {
+          "sales": "1846.68",
+          "timeStamp": "2013-01-13 00:00:00",
+          "transactions": "249"
+      },
+      {
+          "sales": "3616.45",
+          "timeStamp": "2013-01-14 00:00:00",
+          "transactions": "626"
+      },
+      {
+          "sales": "4020.65",
+          "timeStamp": "2013-01-15 00:00:00",
+          "transactions": "680"
+      },
+      {
+          "sales": "4099.88",
+          "timeStamp": "2013-01-16 00:00:00",
+          "transactions": "683"
+      },
+      {
+          "sales": "4065.37",
+          "timeStamp": "2013-01-17 00:00:00",
+          "transactions": "676"
+      },
+      {
+          "sales": "4431.18",
+          "timeStamp": "2013-01-18 00:00:00",
+          "transactions": "726"
+      },
+      {
+          "sales": "2887.87",
+          "timeStamp": "2013-01-19 00:00:00",
+          "transactions": "435"
+      },
+      {
+          "sales": "1921.48",
+          "timeStamp": "2013-01-20 00:00:00",
+          "transactions": "264"
+      },
+      {
+          "sales": "3707.65",
+          "timeStamp": "2013-01-21 00:00:00",
+          "transactions": "595"
+      },
+      {
+          "sales": "3769.16",
+          "timeStamp": "2013-01-22 00:00:00",
+          "transactions": "650"
+      },
+      {
+          "sales": "3779.63",
+          "timeStamp": "2013-01-23 00:00:00",
+          "transactions": "652"
+      },
+      {
+          "sales": "4019.81",
+          "timeStamp": "2013-01-24 00:00:00",
+          "transactions": "679"
+      },
+      {
+          "sales": "4466.81",
+          "timeStamp": "2013-01-25 00:00:00",
+          "transactions": "693"
+      },
+      {
+          "sales": "2283.9",
+          "timeStamp": "2013-01-26 00:00:00",
+          "transactions": "380"
+      },
+      {
+          "sales": "1651.64",
+          "timeStamp": "2013-01-27 00:00:00",
+          "transactions": "209"
+      },
+      {
+          "sales": "3750.09",
+          "timeStamp": "2013-01-28 00:00:00",
+          "transactions": "664"
+      },
+      {
+          "sales": "3763.9",
+          "timeStamp": "2013-01-29 00:00:00",
+          "transactions": "647"
+      },
+      {
+          "sales": "3829.86",
+          "timeStamp": "2013-01-30 00:00:00",
+          "transactions": "658"
+      },
+      {
+          "sales": "4048.87",
+          "timeStamp": "2013-01-31 00:00:00",
+          "transactions": "679"
+      },
+      {
+          "sales": "4620.87",
+          "timeStamp": "2013-02-01 00:00:00",
+          "transactions": "741"
+      },
+      {
+          "sales": "2391.95",
+          "timeStamp": "2013-02-02 00:00:00",
+          "transactions": "356"
+      },
+      {
+          "sales": "1464.4",
+          "timeStamp": "2013-02-03 00:00:00",
+          "transactions": "219"
+      },
+      {
+          "sales": "3744.93",
+          "timeStamp": "2013-02-04 00:00:00",
+          "transactions": "668"
+      },
+      {
+          "sales": "3585.95",
+          "timeStamp": "2013-02-05 00:00:00",
+          "transactions": "631"
+      },
+      {
+          "sales": "3830.83",
+          "timeStamp": "2013-02-06 00:00:00",
+          "transactions": "662"
+      },
+      {
+          "sales": "4118.86",
+          "timeStamp": "2013-02-07 00:00:00",
+          "transactions": "710"
+      },
+      {
+          "sales": "4507.49",
+          "timeStamp": "2013-02-08 00:00:00",
+          "transactions": "735"
+      },
+      {
+          "sales": "2744.04",
+          "timeStamp": "2013-02-09 00:00:00",
+          "transactions": "419"
+      },
+      {
+          "sales": "1789.46",
+          "timeStamp": "2013-02-10 00:00:00",
+          "transactions": "270"
+      },
+      {
+          "sales": "3634.34",
+          "timeStamp": "2013-02-11 00:00:00",
+          "transactions": "645"
+      },
+      {
+          "sales": "3487.91",
+          "timeStamp": "2013-02-12 00:00:00",
+          "transactions": "625"
+      },
+      {
+          "sales": "4074.2",
+          "timeStamp": "2013-02-13 00:00:00",
+          "transactions": "689"
+      },
+      {
+          "sales": "3870.37",
+          "timeStamp": "2013-02-14 00:00:00",
+          "transactions": "671"
+      },
+      {
+          "sales": "4405.81",
+          "timeStamp": "2013-02-15 00:00:00",
+          "transactions": "714"
+      },
+      {
+          "sales": "2765.56",
+          "timeStamp": "2013-02-16 00:00:00",
+          "transactions": "404"
+      },
+      {
+          "sales": "2270.54",
+          "timeStamp": "2013-02-17 00:00:00",
+          "transactions": "311"
+      },
+      {
+          "sales": "4066.6",
+          "timeStamp": "2013-02-18 00:00:00",
+          "transactions": "652"
+      }
+  ],
+  "pageNumber": 0,
+  "totalPages": 30,
+  "pageSize": 50,
+  "totalCount": 1476,
+  "links": [
+      {
+          "rel": "imports",
+          "href": "https://api.uat.nexosisdev.com/v1/imports?dataSetName=LocationA"
+      },
+      {
+          "rel": "views",
+          "href": "https://api.uat.nexosisdev.com/v1/views?dataSetName=LocationA"
+      },
+      {
+          "rel": "stats",
+          "href": "https://api.uat.nexosisdev.com/v1/data/LocationA/stats"
+      },
+      {
+          "rel": "sessions",
+          "href": "https://api.uat.nexosisdev.com/v1/sessions?dataSourceName=LocationA"
+      },
+      {
+          "rel": "models",
+          "href": "https://api.uat.nexosisdev.com/v1/models?dataSourceName=LocationA"
+      },
+      {
+          "rel": "vocabularies",
+          "href": "https://api.uat.nexosisdev.com/v1/vocabulary?dataSource=LocationA"
+      },
+      {
+          "rel": "first",
+          "href": "https://api.uat.nexosisdev.com/v1/data/locationa?page=0"
+      },
+      {
+          "rel": "next",
+          "href": "https://api.uat.nexosisdev.com/v1/data/locationa?page=1"
+      },
+      {
+          "rel": "last",
+          "href": "https://api.uat.nexosisdev.com/v1/data/locationa?page=29"
+      },
+      {
+          "rel": "self",
+          "href": "https://api.uat.nexosisdev.com/v1/data/locationa"
+      }
+  ]
+}

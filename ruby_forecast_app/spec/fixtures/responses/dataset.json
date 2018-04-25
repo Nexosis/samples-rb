@@ -1,0 +1,439 @@
+{
+  "dataSetName": "Iris",
+  "dataSetSize": 3658,
+  "isTimeSeries": false,
+  "dateCreated": "2018-04-16T15:43:19.171719+00:00",
+  "lastModified": "2018-04-16T15:43:19.171828+00:00",
+  "rowCount": 150,
+  "columns": {
+      "iris": {
+          "dataType": "string",
+          "role": "feature",
+          "imputation": "mode",
+          "aggregation": "mode"
+      },
+      "petal_len": {
+          "dataType": "numericMeasure",
+          "role": "feature",
+          "imputation": "mean",
+          "aggregation": "mean"
+      },
+      "sepal_len": {
+          "dataType": "numericMeasure",
+          "role": "feature",
+          "imputation": "mean",
+          "aggregation": "mean"
+      },
+      "petal_width": {
+          "dataType": "numericMeasure",
+          "role": "feature",
+          "imputation": "mean",
+          "aggregation": "mean"
+      },
+      "sepal_width": {
+          "dataType": "numericMeasure",
+          "role": "feature",
+          "imputation": "mean",
+          "aggregation": "mean"
+      }
+  },
+  "messages": [],
+  "data": [
+      {
+          "iris": "setosa",
+          "petal_len": "1.4",
+          "sepal_len": "4.9",
+          "petal_width": "0.2",
+          "sepal_width": "3"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.3",
+          "sepal_len": "4.7",
+          "petal_width": "0.2",
+          "sepal_width": "3.2"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.4",
+          "sepal_len": "5.1",
+          "petal_width": "0.2",
+          "sepal_width": "3.5"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.4",
+          "sepal_len": "4.6",
+          "petal_width": "0.3",
+          "sepal_width": "3.4"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.4",
+          "sepal_len": "5",
+          "petal_width": "0.2",
+          "sepal_width": "3.6"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.3",
+          "sepal_len": "5",
+          "petal_width": "0.3",
+          "sepal_width": "3.5"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.7",
+          "sepal_len": "5.1",
+          "petal_width": "0.5",
+          "sepal_width": "3.3"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.5",
+          "sepal_len": "4.9",
+          "petal_width": "0.1",
+          "sepal_width": "3.1"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.5",
+          "sepal_len": "4.9",
+          "petal_width": "0.1",
+          "sepal_width": "3.1"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.9",
+          "sepal_len": "4.8",
+          "petal_width": "0.2",
+          "sepal_width": "3.4"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.7",
+          "sepal_len": "5.4",
+          "petal_width": "0.4",
+          "sepal_width": "3.9"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.6",
+          "sepal_len": "4.7",
+          "petal_width": "0.2",
+          "sepal_width": "3.2"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.3",
+          "sepal_len": "5.4",
+          "petal_width": "0.4",
+          "sepal_width": "3.9"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.3",
+          "sepal_len": "4.5",
+          "petal_width": "0.3",
+          "sepal_width": "2.3"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.5",
+          "sepal_len": "5.2",
+          "petal_width": "0.2",
+          "sepal_width": "3.5"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.5",
+          "sepal_len": "5.4",
+          "petal_width": "0.4",
+          "sepal_width": "3.4"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.3",
+          "sepal_len": "4.4",
+          "petal_width": "0.2",
+          "sepal_width": "3.2"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.5",
+          "sepal_len": "4.6",
+          "petal_width": "0.2",
+          "sepal_width": "3.1"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.6",
+          "sepal_len": "5",
+          "petal_width": "0.6",
+          "sepal_width": "3.5"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1",
+          "sepal_len": "4.6",
+          "petal_width": "0.2",
+          "sepal_width": "3.6"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.2",
+          "sepal_len": "5.8",
+          "petal_width": "0.2",
+          "sepal_width": "4"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.7",
+          "sepal_len": "5.4",
+          "petal_width": "0.2",
+          "sepal_width": "3.4"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.6",
+          "sepal_len": "5",
+          "petal_width": "0.2",
+          "sepal_width": "3"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.5",
+          "sepal_len": "5.1",
+          "petal_width": "0.3",
+          "sepal_width": "3.8"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.5",
+          "sepal_len": "5.2",
+          "petal_width": "0.1",
+          "sepal_width": "4.1"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.3",
+          "sepal_len": "4.4",
+          "petal_width": "0.2",
+          "sepal_width": "3"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.5",
+          "sepal_len": "5.1",
+          "petal_width": "0.4",
+          "sepal_width": "3.7"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.5",
+          "sepal_len": "5.7",
+          "petal_width": "0.4",
+          "sepal_width": "4.4"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.3",
+          "sepal_len": "5.5",
+          "petal_width": "0.2",
+          "sepal_width": "3.5"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.6",
+          "sepal_len": "5",
+          "petal_width": "0.4",
+          "sepal_width": "3.4"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.4",
+          "sepal_len": "5.5",
+          "petal_width": "0.2",
+          "sepal_width": "4.2"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.9",
+          "sepal_len": "5.1",
+          "petal_width": "0.4",
+          "sepal_width": "3.8"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.4",
+          "sepal_len": "5.1",
+          "petal_width": "0.3",
+          "sepal_width": "3.5"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.5",
+          "sepal_len": "4.9",
+          "petal_width": "0.1",
+          "sepal_width": "3.1"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.2",
+          "sepal_len": "5",
+          "petal_width": "0.2",
+          "sepal_width": "3.2"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.6",
+          "sepal_len": "4.8",
+          "petal_width": "0.2",
+          "sepal_width": "3.1"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.6",
+          "sepal_len": "4.8",
+          "petal_width": "0.2",
+          "sepal_width": "3.4"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.4",
+          "sepal_len": "5.2",
+          "petal_width": "0.2",
+          "sepal_width": "3.4"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.5",
+          "sepal_len": "5.4",
+          "petal_width": "0.2",
+          "sepal_width": "3.7"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.5",
+          "sepal_len": "5",
+          "petal_width": "0.2",
+          "sepal_width": "3.4"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.5",
+          "sepal_len": "5.1",
+          "petal_width": "0.2",
+          "sepal_width": "3.4"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.4",
+          "sepal_len": "4.8",
+          "petal_width": "0.1",
+          "sepal_width": "3"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.7",
+          "sepal_len": "5.7",
+          "petal_width": "0.3",
+          "sepal_width": "3.8"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.1",
+          "sepal_len": "4.3",
+          "petal_width": "0.1",
+          "sepal_width": "3"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.4",
+          "sepal_len": "4.4",
+          "petal_width": "0.2",
+          "sepal_width": "2.9"
+      },
+      {
+          "iris": "setosa",
+          "petal_len": "1.4",
+          "sepal_len": "4.8",
+          "petal_width": "0.3",
+          "sepal_width": "3"
+      },
+      {
+          "iris": "versicolor",
+          "petal_len": "4.4",
+          "sepal_len": "6.7",
+          "petal_width": "1.4",
+          "sepal_width": "3.1"
+      },
+      {
+          "iris": "versicolor",
+          "petal_len": "4.5",
+          "sepal_len": "6",
+          "petal_width": "1.5",
+          "sepal_width": "2.9"
+      },
+      {
+          "iris": "versicolor",
+          "petal_len": "3.8",
+          "sepal_len": "5.5",
+          "petal_width": "1.1",
+          "sepal_width": "2.4"
+      },
+      {
+          "iris": "versicolor",
+          "petal_len": "4.7",
+          "sepal_len": "6.1",
+          "petal_width": "1.4",
+          "sepal_width": "2.9"
+      }
+  ],
+  "pageNumber": 0,
+  "totalPages": 3,
+  "pageSize": 50,
+  "totalCount": 150,
+  "links": [
+      {
+          "rel": "imports",
+          "href": "https://api.uat.nexosisdev.com/v1/imports?dataSetName=Iris"
+      },
+      {
+          "rel": "views",
+          "href": "https://api.uat.nexosisdev.com/v1/views?dataSetName=Iris"
+      },
+      {
+          "rel": "stats",
+          "href": "https://api.uat.nexosisdev.com/v1/data/Iris/stats"
+      },
+      {
+          "rel": "sessions",
+          "href": "https://api.uat.nexosisdev.com/v1/sessions?dataSourceName=Iris"
+      },
+      {
+          "rel": "models",
+          "href": "https://api.uat.nexosisdev.com/v1/models?dataSourceName=Iris"
+      },
+      {
+          "rel": "vocabularies",
+          "href": "https://api.uat.nexosisdev.com/v1/vocabulary?dataSource=Iris"
+      },
+      {
+          "rel": "first",
+          "href": "https://api.uat.nexosisdev.com/v1/data/iris?page=0"
+      },
+      {
+          "rel": "next",
+          "href": "https://api.uat.nexosisdev.com/v1/data/iris?page=1"
+      },
+      {
+          "rel": "last",
+          "href": "https://api.uat.nexosisdev.com/v1/data/iris?page=2"
+      },
+      {
+          "rel": "self",
+          "href": "https://api.uat.nexosisdev.com/v1/data/iris"
+      }
+  ]
+}

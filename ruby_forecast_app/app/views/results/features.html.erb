@@ -1,0 +1,51 @@
+<% if @feature_results.nil? %>
+  <div class="alert alert-danger">No feature importance scores could be found for this session. Be sure and check the session details and see if 'supportsFeatureImportance' is set to true before viewing scores.</div>
+  <%if !@message.nil?%>
+    <div class="alert alert-warning">
+      <%=@message%>
+    </div>
+  <%end%>
+<% else %>
+<div class="row">
+<h3>Feature Importance for <%=@feature_results.name%></h3>
+<div class="col-sm-4">
+<div><label>Dataset: </label> <%=@feature_results.datasource_name%></div>
+<div><label>Session Id: </label> <%=@feature_results.session_id%></div>
+<%if !@feature_results.model_id.nil?%>
+  <div><label>Model Id: </label> <%=@feature_results.model_id%></div>
+<%end%>
+<div><label>Session Type: </label> <%=@feature_results.prediction_domain%></div>
+</div>
+</div>
+<div class="row">
+<hr/>
+<div class="col-sm-6 col-sm-offset-1">
+  <h4>Feature Scores</h4>
+  <div class="col-sm-4">
+          <label>Total Columns:</label>   <%=@feature_results.scores.item_total%>
+      </div>
+          <%= render partial: 'shared/pagesizer', locals: {item_total: @feature_results.scores.item_total, page_size: @page_size,  page: @page} %>
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Column</th>
+          <th>Category (if any)</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+      <%@feature_results.scores.map{|item| item.to_a.flatten}.to_h.each do |key,value|%>
+        <tr>
+          <td><%=key.to_s.split(':')[0]%></td>
+          <td><%=key.to_s.include?(':') ? key.to_s.split(':')[1] : '-' %></td>
+          <td><%=value.to_f%></td>
+        </tr>
+      <%end%>
+      </tbody>
+    </table>
+  </div>
+  <%= render partial: 'shared/pager', locals: {item_total: @feature_results.scores.item_total, page_size: @page_size,  page: @page} %>
+</div>
+</div>
+<% end %>

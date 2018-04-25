@@ -10,11 +10,15 @@ class ResultsController < ApplicationController
     Rails.cache.fetch("session-#{params[:session_id]}") do
       @session = @api_client.get_session params[:session_id]
     end
+    if !['forecast','impact'].include? @session.prediction_domain
+      @message = 'The session id provided is not for a time-series session. It has been directed here by mistake.'
+      return
+    end
     @session_result = @api_client.get_session_results(params[:session_id])
     if !@session_result.nil? && !@datasets.nil? && !@session.nil?
       set_column_names
       is_dataset = @datasets.map(&:dataset_name).include? @session_result.datasource_name
-      if @session_result.type == 'forecast'
+      if @session_result.prediction_domain == 'forecast'
         # TODO: day basis assumption should be changed for evaluation of actual
         # This would require pulling some observations first or requesting the
         # basis from the user.
@@ -151,6 +155,24 @@ class ResultsController < ApplicationController
     end
 
     render
+  end
+
+  def features
+    params.require(:session_id)
+    params.permit(:page_size)
+    params.permit(:page_number)
+    session_id = params[:session_id]
+    page_number = params[:page_number] || 0
+    page_size = params[:page_size] || 10
+    begin
+      Rails.cache.fetch("featureresults-#{session_id}-#{page_number}-#{page_size}") do
+        @feature_results = @api_client.get_feature_importance(session_id, page_number, page_size)
+      end
+    rescue => http_exception
+      @message = "There was a problem getting the requested session: #{http_exception.message}"
+    end
+    @page = page_number.to_i
+    @page_size = page_size.to_i
   end
 
   private

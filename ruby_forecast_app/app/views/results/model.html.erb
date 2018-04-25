@@ -10,7 +10,7 @@
 }
 </style>
 <%end%>
-<H2>Session: <%=@session.session_id%></H2>
+<H2>Session: <%="#{@session.name} -- (#{@session.session_id})"%></H2>
 <H4>Model: <%=@session.model_id%></H4>
 <%if @model.nil?%>
   <div>
@@ -20,6 +20,9 @@
     </div>
   </div>
 <%else%>
+<div class="container">
+<div class="row">
+<div class="col-sm-6">
 <H4>Data Source: <%=@session.datasource_name%></H4>
 <label>Target column: </label><%=@session.target_column%>
 <div>
@@ -30,10 +33,20 @@
   <label><%=m.name%></label> <%= "%.3f" % m.value %>
 </div>
 <%end%>
-<h3>Results Visualization</h3>
+</div>
+<div class="col-sm-6 right">
+<h5>Helpful Information</h5>
+  <ul>
+    <li><a href="/results/contest/<%=@session.session_id%>"><label>Contestant Metrics</label></a></li>
+    <%if @session.supports_feature_importance%>
+    <li><a href="/results/featureimportance/<%=@session.session_id%>"><label>Feature Importance Scores</label></a></li>
+    <%end%>
+  </ul>
+</div>
 <%unless @actual.nil?%>
 <div class="row">
   <div class="col-md-10">
+  <h3>Results Visualization</h3>
   <%if @session.prediction_domain == 'classification'%>
    <table>
       <%@class_results.classes.sort.each_with_index do |c, i|%>
@@ -97,6 +110,7 @@
     </tr>
   <%end%>
   </table>
+  </div>
   </div>
 </div>
 <% content_for :before_body_end do %>

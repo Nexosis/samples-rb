@@ -1,0 +1,338 @@
+{
+    "metrics": {
+        "macroAverageF1Score": 1,
+        "accuracy": 1,
+        "macroAveragePrecision": 1,
+        "macroAverageRecall": 1,
+        "matthewsCorrelationCoefficient": 1
+    },
+    "data": [
+        {
+            "iris": "setosa",
+            "petal_len": "1.9",
+            "sepal_len": "4.8",
+            "iris:actual": "setosa",
+            "petal_width": "0.2",
+            "sepal_width": "3.4"
+        },
+        {
+            "iris": "setosa",
+            "petal_len": "1.6",
+            "sepal_len": "4.7",
+            "iris:actual": "setosa",
+            "petal_width": "0.2",
+            "sepal_width": "3.2"
+        },
+        {
+            "iris": "setosa",
+            "petal_len": "1",
+            "sepal_len": "4.6",
+            "iris:actual": "setosa",
+            "petal_width": "0.2",
+            "sepal_width": "3.6"
+        },
+        {
+            "iris": "setosa",
+            "petal_len": "1.3",
+            "sepal_len": "4.4",
+            "iris:actual": "setosa",
+            "petal_width": "0.2",
+            "sepal_width": "3"
+        },
+        {
+            "iris": "setosa",
+            "petal_len": "1.5",
+            "sepal_len": "5.1",
+            "iris:actual": "setosa",
+            "petal_width": "0.4",
+            "sepal_width": "3.7"
+        },
+        {
+            "iris": "setosa",
+            "petal_len": "1.6",
+            "sepal_len": "4.8",
+            "iris:actual": "setosa",
+            "petal_width": "0.2",
+            "sepal_width": "3.4"
+        },
+        {
+            "iris": "setosa",
+            "petal_len": "1.5",
+            "sepal_len": "5",
+            "iris:actual": "setosa",
+            "petal_width": "0.2",
+            "sepal_width": "3.4"
+        },
+        {
+            "iris": "setosa",
+            "petal_len": "1.5",
+            "sepal_len": "5.1",
+            "iris:actual": "setosa",
+            "petal_width": "0.2",
+            "sepal_width": "3.4"
+        },
+        {
+            "iris": "setosa",
+            "petal_len": "1.4",
+            "sepal_len": "4.8",
+            "iris:actual": "setosa",
+            "petal_width": "0.1",
+            "sepal_width": "3"
+        },
+        {
+            "iris": "versicolor",
+            "petal_len": "4.5",
+            "sepal_len": "5.4",
+            "iris:actual": "versicolor",
+            "petal_width": "1.5",
+            "sepal_width": "3"
+        },
+        {
+            "iris": "versicolor",
+            "petal_len": "4.5",
+            "sepal_len": "6",
+            "iris:actual": "versicolor",
+            "petal_width": "1.6",
+            "sepal_width": "3.4"
+        },
+        {
+            "iris": "versicolor",
+            "petal_len": "4.7",
+            "sepal_len": "6.1",
+            "iris:actual": "versicolor",
+            "petal_width": "1.2",
+            "sepal_width": "2.8"
+        },
+        {
+            "iris": "versicolor",
+            "petal_len": "3.9",
+            "sepal_len": "5.6",
+            "iris:actual": "versicolor",
+            "petal_width": "1.1",
+            "sepal_width": "2.5"
+        },
+        {
+            "iris": "versicolor",
+            "petal_len": "4.7",
+            "sepal_len": "6.3",
+            "iris:actual": "versicolor",
+            "petal_width": "1.6",
+            "sepal_width": "3.3"
+        },
+        {
+            "iris": "setosa",
+            "petal_len": "1.5",
+            "sepal_len": "5.3",
+            "iris:actual": "setosa",
+            "petal_width": "0.2",
+            "sepal_width": "3.7"
+        },
+        {
+            "iris": "versicolor",
+            "petal_len": "3",
+            "sepal_len": "5.1",
+            "iris:actual": "versicolor",
+            "petal_width": "1.1",
+            "sepal_width": "2.5"
+        },
+        {
+            "iris": "versicolor",
+            "petal_len": "4.2",
+            "sepal_len": "5.7",
+            "iris:actual": "versicolor",
+            "petal_width": "1.2",
+            "sepal_width": "3"
+        },
+        {
+            "iris": "virginica",
+            "petal_len": "6",
+            "sepal_len": "7.2",
+            "iris:actual": "virginica",
+            "petal_width": "1.8",
+            "sepal_width": "3.2"
+        },
+        {
+            "iris": "virginica",
+            "petal_len": "5.5",
+            "sepal_len": "6.8",
+            "iris:actual": "virginica",
+            "petal_width": "2.1",
+            "sepal_width": "3"
+        },
+        {
+            "iris": "versicolor",
+            "petal_len": "4.1",
+            "sepal_len": "5.6",
+            "iris:actual": "versicolor",
+            "petal_width": "1.3",
+            "sepal_width": "3"
+        },
+        {
+            "iris": "versicolor",
+            "petal_len": "3.3",
+            "sepal_len": "5",
+            "iris:actual": "versicolor",
+            "petal_width": "1",
+            "sepal_width": "2.3"
+        },
+        {
+            "iris": "virginica",
+            "petal_len": "5.6",
+            "sepal_len": "6.3",
+            "iris:actual": "virginica",
+            "petal_width": "1.8",
+            "sepal_width": "2.9"
+        },
+        {
+            "iris": "virginica",
+            "petal_len": "6.7",
+            "sepal_len": "7.7",
+            "iris:actual": "virginica",
+            "petal_width": "2",
+            "sepal_width": "2.8"
+        },
+        {
+            "iris": "virginica",
+            "petal_len": "5",
+            "sepal_len": "5.7",
+            "iris:actual": "virginica",
+            "petal_width": "2",
+            "sepal_width": "2.5"
+        },
+        {
+            "iris": "versicolor",
+            "petal_len": "4.4",
+            "sepal_len": "5.5",
+            "iris:actual": "versicolor",
+            "petal_width": "1.2",
+            "sepal_width": "2.6"
+        },
+        {
+            "iris": "virginica",
+            "petal_len": "5",
+            "sepal_len": "6.3",
+            "iris:actual": "virginica",
+            "petal_width": "1.9",
+            "sepal_width": "2.5"
+        },
+        {
+            "iris": "virginica",
+            "petal_len": "5.1",
+            "sepal_len": "5.9",
+            "iris:actual": "virginica",
+            "petal_width": "1.8",
+            "sepal_width": "3"
+        },
+        {
+            "iris": "virginica",
+            "petal_len": "5.1",
+            "sepal_len": "6.3",
+            "iris:actual": "virginica",
+            "petal_width": "1.5",
+            "sepal_width": "2.8"
+        },
+        {
+            "iris": "virginica",
+            "petal_len": "5.6",
+            "sepal_len": "6.4",
+            "iris:actual": "virginica",
+            "petal_width": "2.2",
+            "sepal_width": "2.8"
+        },
+        {
+            "iris": "virginica",
+            "petal_len": "5.8",
+            "sepal_len": "7.2",
+            "iris:actual": "virginica",
+            "petal_width": "1.6",
+            "sepal_width": "3"
+        }
+    ],
+    "pageNumber": 0,
+    "totalPages": 1,
+    "pageSize": 50,
+    "totalCount": 30,
+    "sessionId": "0162d49f-58fc-4d80-b26b-03c1660edbc2",
+    "type": "model",
+    "status": "completed",
+    "predictionDomain": "classification",
+    "supportsFeatureImportance": true,
+    "availablePredictionIntervals": [],
+    "modelId": "4a458a30-cfde-4580-8a3a-a798b04219e9",
+    "requestedDate": "2018-04-17T17:20:35.368649+00:00",
+    "statusHistory": [
+        {
+            "date": "2018-04-17T17:20:35.368649+00:00",
+            "status": "requested"
+        },
+        {
+            "date": "2018-04-17T17:20:41.0222159+00:00",
+            "status": "started"
+        },
+        {
+            "date": "2018-04-17T17:22:16.087712+00:00",
+            "status": "completed"
+        }
+    ],
+    "extraParameters": {
+        "balance": true
+    },
+    "messages": [
+        {
+            "severity": "informational",
+            "message": "150 observations were found in the dataset."
+        }
+    ],
+    "name": "Classification on Iris",
+    "dataSourceName": "Iris",
+    "dataSetName": "Iris",
+    "targetColumn": "iris",
+    "algorithm": {
+        "name": "XGBoost L2",
+        "description": "eXtreme Gradient Boosting with Ridge regularization",
+        "key": ""
+    },
+    "isEstimate": false,
+    "links": [
+        {
+            "rel": "data",
+            "href": "https://api.uat.nexosisdev.com/v1/data/Iris"
+        },
+        {
+            "rel": "first",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/results?page=0"
+        },
+        {
+            "rel": "last",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/results?page=0"
+        },
+        {
+            "rel": "self",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/results"
+        },
+        {
+            "rel": "model",
+            "href": "https://api.uat.nexosisdev.com/v1/models/4a458a30-cfde-4580-8a3a-a798b04219e9"
+        },
+        {
+            "rel": "contest",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/contest"
+        },
+        {
+            "rel": "confusionMatrix",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/results/confusionmatrix"
+        },
+        {
+            "rel": "featureImportance",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/results/featureimportance"
+        },
+        {
+            "rel": "classScores",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162d49f-58fc-4d80-b26b-03c1660edbc2/results/classscores"
+        },
+        {
+            "rel": "vocabularies",
+            "href": "https://api.uat.nexosisdev.com/v1/vocabulary?createdFromSession=0162d49f-58fc-4d80-b26b-03c1660edbc2"
+        }
+    ]
+}

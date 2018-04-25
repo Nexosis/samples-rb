@@ -1,0 +1,170 @@
+{
+    "metrics": {
+        "meanAbsoluteError": 77.987246810097687,
+        "meanAbsolutePercentError": 0.018209770591710826,
+        "meanAbsoluteScaledError": 0.078734657326420363,
+        "rootMeanSquareError": 94.903321194736563,
+        "rSquared": 0.997591860571134
+    },
+    "data": [
+        {
+            "timeStamp": "2017-01-22T00:00:00.0000000Z",
+            "sales": "2066.81503071431"
+        },
+        {
+            "timeStamp": "2017-01-23T00:00:00.0000000Z",
+            "sales": "802.981746048149"
+        },
+        {
+            "timeStamp": "2017-01-24T00:00:00.0000000Z",
+            "sales": "1112.45701766345"
+        },
+        {
+            "timeStamp": "2017-01-25T00:00:00.0000000Z",
+            "sales": "1134.0031587085"
+        },
+        {
+            "timeStamp": "2017-01-26T00:00:00.0000000Z",
+            "sales": "1751.49028875408"
+        },
+        {
+            "timeStamp": "2017-01-27T00:00:00.0000000Z",
+            "sales": "2105.06657529751"
+        },
+        {
+            "timeStamp": "2017-01-28T00:00:00.0000000Z",
+            "sales": "1458.74540706079"
+        },
+        {
+            "timeStamp": "2017-01-29T00:00:00.0000000Z",
+            "sales": "1452.11460208029"
+        },
+        {
+            "timeStamp": "2017-01-30T00:00:00.0000000Z",
+            "sales": "2736.43377762206"
+        }
+    ],
+    "pageNumber": 0,
+    "totalPages": 1,
+    "pageSize": 50,
+    "totalCount": 9,
+    "sessionId": "0162b017-328b-48b7-abcb-70406b3f480e",
+    "type": "forecast",
+    "status": "completed",
+    "predictionDomain": "forecast",
+    "supportsFeatureImportance": true,
+    "availablePredictionIntervals": [
+        "0.01",
+        "0.05",
+        "0.2",
+        "0.5",
+        "0.8",
+        "0.95",
+        "0.99"
+    ],
+    "startDate": "2017-01-22T00:00:00+00:00",
+    "endDate": "2017-01-30T00:00:00+00:00",
+    "resultInterval": "day",
+    "requestedDate": "2018-04-10T15:05:33.024901+00:00",
+    "statusHistory": [
+        {
+            "date": "2018-04-10T15:05:33.024901+00:00",
+            "status": "requested"
+        },
+        {
+            "date": "2018-04-10T15:05:33.0633488+00:00",
+            "status": "started"
+        },
+        {
+            "date": "2018-04-10T15:34:28.9317356+00:00",
+            "status": "completed"
+        }
+    ],
+    "extraParameters": {},
+    "messages": [
+        {
+            "severity": "warning",
+            "message": "You specified imputation 'mode' and aggregation 'sum' for column 'transactions'. You may wish to make these consistent"
+        },
+        {
+            "severity": "informational",
+            "message": "1476 observations were found in the dataset."
+        },
+        {
+            "severity": "informational",
+            "message": "1476 daily observations were found in the dataset before 2017-01-30T23:59:59.9999999Z."
+        }
+    ],
+    "name": "Forecast on Location-A",
+    "dataSourceName": "Location-A",
+    "dataSetName": "Location-A",
+    "targetColumn": "sales",
+    "algorithm": {
+        "name": "Autoregressive Neural Network w/ Exogenous Variables, Annual",
+        "description": "Forecasts using feed-forward neural networks with a single hidden layer and lagged inputs, with annual seasonality",
+        "key": ""
+    },
+    "isEstimate": false,
+    "links": [
+        {
+            "rel": "data",
+            "href": "https://api.uat.nexosisdev.com/v1/data/LocationA"
+        },
+        {
+            "rel": "first",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162b017-328b-48b7-abcb-70406b3f480e/results?page=0"
+        },
+        {
+            "rel": "last",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162b017-328b-48b7-abcb-70406b3f480e/results?page=0"
+        },
+        {
+            "rel": "self",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162b017-328b-48b7-abcb-70406b3f480e/results"
+        },
+        {
+            "rel": "prediction-interval:0.01",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162b017-328b-48b7-abcb-70406b3f480e?predictionInterval=0.01"
+        },
+        {
+            "rel": "prediction-interval:0.05",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162b017-328b-48b7-abcb-70406b3f480e?predictionInterval=0.05"
+        },
+        {
+            "rel": "prediction-interval:0.2",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162b017-328b-48b7-abcb-70406b3f480e?predictionInterval=0.2"
+        },
+        {
+            "rel": "prediction-interval:0.5",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162b017-328b-48b7-abcb-70406b3f480e?predictionInterval=0.5"
+        },
+        {
+            "rel": "prediction-interval:0.8",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162b017-328b-48b7-abcb-70406b3f480e?predictionInterval=0.8"
+        },
+        {
+            "rel": "prediction-interval:0.95",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162b017-328b-48b7-abcb-70406b3f480e?predictionInterval=0.95"
+        },
+        {
+            "rel": "prediction-interval:0.99",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162b017-328b-48b7-abcb-70406b3f480e?predictionInterval=0.99"
+        },
+        {
+            "rel": "contest",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162b017-328b-48b7-abcb-70406b3f480e/contest"
+        },
+        {
+            "rel": "featureImportance",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162b017-328b-48b7-abcb-70406b3f480e/results/featureimportance"
+        },
+        {
+            "rel": "outliers",
+            "href": "https://api.uat.nexosisdev.com/v1/sessions/0162b017-328b-48b7-abcb-70406b3f480e/results/outliers"
+        },
+        {
+            "rel": "vocabularies",
+            "href": "https://api.uat.nexosisdev.com/v1/vocabulary?createdFromSession=0162b017-328b-48b7-abcb-70406b3f480e"
+        }
+    ]
+}
